@@ -1,0 +1,170 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap'); */
+
+:root{
+    --text-colour:#586380;
+    --button-colour:#f5f6fa;
+    --bbutton-colour:#4255ff;
+    --dark-bbutton-colour: #1f1c8b;
+    --bg-colour:#fff;
+    --card-colour:#fff;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bolder;
+    color: var(--text-colour);
+    background-color: var(--bg-colour);
+}
+
+.container{
+    width: 100%;
+    min-height: 90vh;
+}
+
+#root{
+    flex: 1;
+    width: 100%;
+}
+
+nav{
+    position: sticky;
+    top: 12px;
+    height: 60px;
+    width: 90%;
+    max-width: 600px;
+    z-index: 1000;
+    background-color: var(--bg-colour);
+    box-shadow: 0 4px 8px 0 rgba(31, 31, 59, 0.2);
+    border-radius: 32px;
+}
+
+.card-structure{
+    width: 100%;
+    max-width: 600px;
+    padding: 20px 0px;
+    gap: 10px;
+}
+
+.card, .prop-card{
+    position: relative;
+    width: 90%;
+    max-width: 420px;
+    height: 240px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgba(31, 31, 59, 0.2);
+    background-color: var(--card-colour);
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+}
+
+.front, .back{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.card-input{
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+}
+
+.back, .card.is-flipped{
+    transform: rotateY(180deg);
+}
+
+.buttons, .ui-container{
+    width: 90%;
+    max-width: 420px;
+    margin-top: 25px;
+}
+
+input {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 8px;
+    background: #f6f7fb;
+    color: var(--text-colour);
+    transition: all 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #a8b1ff;
+    background-color: #fff;
+    box-shadow: 0 0 0 2px rgba(168,177,255,0.3);
+}
+
+input::placeholder{
+    opacity: 0.5;
+    color: var(--text-colour);
+}
+
+.r-button, .custom-file-upload{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border: none;
+    border-radius: 100%;
+    background-color: var(--card-colour);
+}
+
+.r-button:active, .custom-file-upload:active{
+    transform: scale(0.95);
+    background-color: var(--button-colour);
+}
+
+.b-button{
+    cursor: pointer;
+    border: none;
+    background-color: var(--bbutton-colour);
+    border-radius: 20px;
+    height: 40px;
+    color: var(--card-colour);
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0 10px;
+}
+
+.b-button:active{
+    transform: scale(0.95);
+    background-color: var(--dark-bbutton-colour);
+}
+
+input[type="checkbox"]{
+    accent-color: var(--bbutton-colour);
+    width: 20px;
+    height: 20px;
+}
+
+span{
+    text-align: center;
+}
+
+.input, .ui-container, .inner-nav, nav, .buttons, .b-button, .upload-container, .custom-file-upload, .card-structure, .container, #root, .front, .back, .card-input{
+    display: flex;
+}
+
+.input, .upload-container, .b-button, .custom-file-upload, .card-structure, #root, .front, .back, .card-input{
+    justify-content: center;
+}
+
+.input, .ui-container, .inner-nav, nav, .buttons, .b-button, .upload-container, .custom-file-upload, .card-structure, .container, #root, .front, .back, .card-input{
+    align-items: center;
+}
+
+.container, #root, .card-structure, .front, .back, .card-input, .upload-container, .custom-file-upload{
+    flex-direction: column;
+}
+
+.input, .ui-container, .inner-nav, nav, .b-button{
+    flex-direction: row;
+}
+
+.ui-container, .buttons, nav{
+    justify-content: space-between;
+}
