@@ -110,7 +110,8 @@ input::placeholder{
     cursor: pointer;
     border: none;
     border-radius: 100%;
-    background-color: var(--card-colour);
+    background-color: transparent;
+    margin: 0 5px;
 }
 
 .r-button:active, .custom-file-upload:active{
@@ -167,4 +168,5 @@ span{
 
 .ui-container, .buttons, nav{
     justify-content: space-between;
+
 }
