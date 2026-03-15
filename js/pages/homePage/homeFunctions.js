@@ -183,7 +183,7 @@ export const initHomePage = () => {
 
         let deltaX = e.clientX - startX;
 
-        if(Math.abs(deltaX) > 10)
+        if(Math.abs(deltaX) > 5)
             isMoving = true;
         
         if(Math.abs(deltaX) > limit)
