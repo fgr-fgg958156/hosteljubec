@@ -65,6 +65,9 @@ nav{
     background-color: var(--card-colour);
     transform-style: preserve-3d;
     transition: all 0.5s ease;
+}
+
+.card{
     touch-action: pan-y;
     user-select: none;
     touch-action: none;
