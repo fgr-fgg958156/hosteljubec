@@ -2,6 +2,7 @@ import {homePage} from "../pages/homePage/home.js"
 import {createPage} from "../pages/createPage/create.js"
 import {initCreatePage} from "../pages/createPage/createFunctions.js"
 import { initHomePage } from "../pages/homePage/homeFunctions.js";
+import { errorPage } from "../pages/errorPage/error.js";
 
 const root = document.getElementById('root');
 
@@ -13,7 +14,7 @@ const routes = {
 const render = () => {
     const path = window.location.hash.slice(1) || "/";
     const page = routes[path];
-    root.innerHTML = page ? page : "<h1>404</h1>";
+    root.innerHTML = page ? page : errorPage;
 
     if(path === "/create")
         initCreatePage();

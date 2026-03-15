@@ -29,6 +29,13 @@ body{
     width: 100%;
 }
 
+img{
+    width: 124px;
+    height: 124px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
 nav{
     position: sticky;
     top: 12px;
@@ -58,6 +65,8 @@ nav{
     background-color: var(--card-colour);
     transform-style: preserve-3d;
     transition: all 0.5s ease;
+    touch-action: pan-y;
+    user-select: none;
 }
 
 .front, .back{
@@ -168,6 +177,4 @@ span{
 
 .ui-container, .buttons, nav{
     justify-content: space-between;
-
 }
-

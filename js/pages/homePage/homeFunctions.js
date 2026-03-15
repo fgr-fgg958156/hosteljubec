@@ -1,4 +1,5 @@
-import {dataSettings, dataWords, setSettings} from '../storages.js';
+import {deadIcon} from "../../icons/icons.js"
+import {dataSettings, dataWords, /*dataIndices,*/ setSettings} from '../storages.js';
 
 export const initHomePage = () => {
     const fileArray = document.querySelector('#fileInput');
@@ -17,6 +18,10 @@ export const initHomePage = () => {
     
     let words1 = dataWords.words1 || [];
     let words2 = dataWords.words2 || [];
+    
+    //let usedIndices = dataIndices.indices || [];
+    let runnyWords1 = [...(dataWords.words1 || [])];
+    let runnyWords2 = [...(dataWords.words2 || [])];
     update();
 
     fileArray.addEventListener('change', async (e) => {
@@ -42,7 +47,7 @@ export const initHomePage = () => {
         }));
 
         setSettings(dataSettings.isRandom, 0);
-
+        resetRunnyWords();
         update();
     });
 
@@ -54,13 +59,74 @@ export const initHomePage = () => {
     function update(){
         if(!words1.length) return;
 
-        frontSpan.textContent  = words2[index];            
-        backSide.textContent  = words1[index];
+        const currentFront = isRandom ? runnyWords2[index] : words2[index] ?? '';
+
+        if(currentFront.startsWith('http://') || currentFront.startsWith('https://')){
+            const img = document.createElement('img');
+            img.src = currentFront;
+            img.alt = 'Прообраз';
+            img.loading = 'lazy';
+            img.onerror = function() {
+                this.replaceWith(deadIconWrapper());
+            };
+            img.draggable = false;
+            frontSpan.innerHTML = '';
+            frontSpan.appendChild(img);
+        } else {
+            frontSpan.textContent  = currentFront;
+        }      
+        backSide.textContent  = isRandom ? runnyWords1[index] : words1[index] ?? '';
         counter.textContent  = `${index + 1} / ${words1.length}`;
     }
 
+    function deadIconWrapper() {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'upload-container';
+        wrapper.innerHTML = `${deadIcon}<span>гепнуте покликання</span>`;
+        return wrapper;
+    }
+
+    const resetRunnyWords = () => {
+        runnyWords1 = [...(words1)];
+        runnyWords2 = [...(words2)];
+    }
+
+    // const randomDrop = () => {
+    //     if(words1.length <= usedIndices.length)
+    //         clearIndices();
+
+    //     let val;
+    //     do{
+    //         val = Math.floor(Math.random() * words1.length);
+    //     }while(usedIndices.includes(val))
+
+    //     usedIndices.push(val);
+    //     localStorage.setItem('indices', JSON.stringify({'indices' : usedIndices}));
+    //     return val;
+    // }
+
+    // const clearIndices = () => {
+    //     usedIndices = [];
+    //     localStorage.setItem('indices', JSON.stringify({'indices' : usedIndices}));
+    // }
+
+    const runnyRandom = () => {
+        if(runnyWords1.length <= 0) {
+            resetRunnyWords();
+        }
+
+        runnyWords1.splice(index, 1);
+        runnyWords2.splice(index, 1);
+
+        if(runnyWords1.length <= 0) {
+            resetRunnyWords();
+        }
+
+        return Math.floor(Math.random() * runnyWords1.length);
+    }
+
     const arithmetic = (n) => {
-        index = !isRandom ? n % words1.length : Math.floor(Math.random() * words1.length);
+        index = !isRandom ? (n + words1.length) % words1.length : runnyRandom();
 
         card.classList.remove('is-flipped');
         setSettings(isRandom, index);
@@ -71,15 +137,15 @@ export const initHomePage = () => {
 
     rightBtn.addEventListener('click', () => arithmetic(index + 1));
 
-    card.addEventListener('click', function(e){
-        if (e.target.closest('#checkInput') || e.target.closest('.checkWord')) return;
-        card.classList.toggle('is-flipped');
-    });
+    // card.addEventListener('click', function(e){
+    //     if (e.target.closest('#checkInput') || e.target.closest('.checkWord')) return;
+    //     card.classList.toggle('is-flipped');
+    // });
 
     const normalize = (str) => str.trim().toLowerCase();
 
     const checkAnswer = (input) => {
-        if(normalize(input.value) === normalize(words1[index])){
+        if(normalize(input.value) === normalize(isRandom ? runnyWords1[index] : words1[index])){
             arithmetic(index + 1);
             
             input.value = '';
@@ -96,5 +162,53 @@ export const initHomePage = () => {
         if(e.key !== 'Enter') return;
         if(e.target !== checkInput) return;
         checkAnswer(checkInput);
+    });
+
+    let startX = 0;
+    const gap = 60;
+    let isDragging = false;
+    let isMoving = false;
+
+    card.addEventListener('pointerdown', (e) => {
+        startX = e.clientX;
+        isDragging = true;
+        isMoving = false;
+        card.style.transition = 'none';
+        card.setPointerCapture(e.pointerId);
+    });
+
+    card.addEventListener('pointermove', (e) => {
+        if(!isDragging) return;
+
+        let deltaX = e.clientX - startX;
+
+        if(Math.abs(deltaX) > 10)
+            isMoving = true;
+        
+        if(Math.abs(deltaX) > 100)
+            deltaX = (deltaX>0 ? 1 : -1) * (100 + (Math.abs(deltaX) - 100) * 0.2);
+
+        card.style.transform = `translateX(${deltaX}px) rotateZ(${deltaX * 0.08}deg)`
+    });
+
+    card.addEventListener('pointerup', (e) => {
+        if(!isDragging) return;
+
+        const deltaX = e.clientX - startX;
+
+        card.style.transform = '';
+
+        if(isMoving && Math.abs(deltaX) >= gap){
+            arithmetic(index + (deltaX>0 ? 1 : -1));
+        }
+        else{
+            card.style.transition = 'transform 0.5s ease';
+            if (e.target.closest('#checkInput') || e.target.closest('.checkWord')) return;
+                card.classList.toggle('is-flipped');
+        }
+        isMoving = false;
+        isDragging= false;
+        
+        card.setPointerCapture(e.pointerId);
     });
 };
