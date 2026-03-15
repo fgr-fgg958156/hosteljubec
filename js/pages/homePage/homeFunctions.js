@@ -166,6 +166,7 @@ export const initHomePage = () => {
 
     let startX = 0;
     const gap = 60;
+    const limit = 20;
     let isDragging = false;
     let isMoving = false;
 
@@ -185,8 +186,8 @@ export const initHomePage = () => {
         if(Math.abs(deltaX) > 10)
             isMoving = true;
         
-        if(Math.abs(deltaX) > 100)
-            deltaX = (deltaX>0 ? 1 : -1) * (100 + (Math.abs(deltaX) - 100) * 0.2);
+        if(Math.abs(deltaX) > limit)
+            deltaX = (deltaX>0 ? 1 : -1) * (limit + (Math.abs(deltaX) - limit) * 0.2);
 
         card.style.transform = `translateX(${deltaX}px) rotateZ(${deltaX * 0.08}deg)`
     });
@@ -209,6 +210,6 @@ export const initHomePage = () => {
         isMoving = false;
         isDragging= false;
         
-        card.setPointerCapture(e.pointerId);
+        card.releasePointerCapture(e.pointerId);
     });
 };
