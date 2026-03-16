@@ -200,7 +200,7 @@ export const initHomePage = () => {
         card.style.transform = '';
 
         if(isMoving && Math.abs(deltaX) >= gap){
-            arithmetic(index + (deltaX>0 ? 1 : -1));
+            arithmetic(index + (deltaX>0 ? -1 : 1));
         }
         else{
             card.style.transition = 'transform 0.5s ease';
