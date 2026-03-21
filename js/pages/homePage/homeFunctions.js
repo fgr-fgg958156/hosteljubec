@@ -1,9 +1,10 @@
 import {deadIcon} from "../../icons/icons.js"
-import {dataSettings, dataWords, /*dataIndices,*/ setSettings} from '../storages.js';
+import {dataSettings, dataWords, setSettings} from '../storages.js';
 
 export const initHomePage = () => {
     const fileArray = document.querySelector('#fileInput');
     const frontSide = document.querySelector('.front');
+    const additionalSpan = document.querySelector('.additional-span');
     const frontSpan = document.querySelector('.front-span');
     const backSide = document.querySelector('.back');
     const leftBtn = document.querySelector('.left');
@@ -13,16 +14,20 @@ export const initHomePage = () => {
     const checkInput = document.querySelector('#checkInput');
     const randomCheckbox = document.getElementById('isRandom');
 
-    let index = dataSettings.index || 0;
-    let isRandom = dataSettings.isRandom || false;
+    const settings = dataSettings();
+    const words = dataWords();
+
+    let index = settings.index || 0;
+    let isRandom = settings.isRandom || false;
+    const maxChar = 50;
     
-    let words1 = dataWords.words1 || [];
-    let words2 = dataWords.words2 || [];
+    let words1 = words.words1 || [];
+    let words2 = words.words2 || [];
+    let words3 = words.words3 || [];
     
-    //let usedIndices = dataIndices.indices || [];
-    let runnyWords1 = [...(dataWords.words1 || [])];
-    let runnyWords2 = [...(dataWords.words2 || [])];
-    update();
+    let runnyWords1 = [...words1];
+    let runnyWords2 = [...words2];
+    let runnyWords3 = [...words3];
 
     fileArray.addEventListener('change', async (e) => {
         const file = e.target.files[0];
@@ -39,26 +44,34 @@ export const initHomePage = () => {
 
         words1 = data.words1;
         words2 = data.words2;
+        words3 = data.words3 || [];
         index = 0;
 
         localStorage.setItem('dataWords', JSON.stringify({
             words1: data.words1,
-            words2: data.words2
+            words2: data.words2,
+            words3: data.words3
         }));
 
-        setSettings(dataSettings.isRandom, 0);
+        const freshSettings = dataSettings();
+        setSettings(freshSettings.isRandom, 0, freshSettings.isDark);
         resetRunnyWords();
         update();
     });
 
     randomCheckbox.addEventListener('change', (e)=>{
         isRandom = e.target.checked;
-        setSettings(isRandom, index);
+        const freshSettings = dataSettings();
+        setSettings(isRandom, index, freshSettings.isDark);
     });
+    
+    function cutTheString(str, lgh) {
+        if(!str) return '';
+        return(str.slice(0, lgh));
+    }
 
     function update(){
         if(!words1.length) return;
-
         const currentFront = isRandom ? runnyWords2[index] : words2[index] ?? '';
 
         if(currentFront.startsWith('http://') || currentFront.startsWith('https://')){
@@ -73,9 +86,10 @@ export const initHomePage = () => {
             frontSpan.innerHTML = '';
             frontSpan.appendChild(img);
         } else {
-            frontSpan.textContent  = currentFront;
-        }      
-        backSide.textContent  = isRandom ? runnyWords1[index] : words1[index] ?? '';
+            frontSpan.textContent  = cutTheString(currentFront, maxChar);
+        }  
+        additionalSpan.textContent = isRandom ? cutTheString(runnyWords3[index], maxChar) : cutTheString(words3[index], maxChar) ?? '';    
+        backSide.textContent  = isRandom ? cutTheString(runnyWords1[index], maxChar) : cutTheString(words1[index], maxChar) ?? '';
         counter.textContent  = `${index + 1} / ${words1.length}`;
     }
 
@@ -89,26 +103,8 @@ export const initHomePage = () => {
     const resetRunnyWords = () => {
         runnyWords1 = [...(words1)];
         runnyWords2 = [...(words2)];
+        runnyWords3 = [...(words3)];
     }
-
-    // const randomDrop = () => {
-    //     if(words1.length <= usedIndices.length)
-    //         clearIndices();
-
-    //     let val;
-    //     do{
-    //         val = Math.floor(Math.random() * words1.length);
-    //     }while(usedIndices.includes(val))
-
-    //     usedIndices.push(val);
-    //     localStorage.setItem('indices', JSON.stringify({'indices' : usedIndices}));
-    //     return val;
-    // }
-
-    // const clearIndices = () => {
-    //     usedIndices = [];
-    //     localStorage.setItem('indices', JSON.stringify({'indices' : usedIndices}));
-    // }
 
     const runnyRandom = () => {
         if(runnyWords1.length <= 0) {
@@ -117,6 +113,7 @@ export const initHomePage = () => {
 
         runnyWords1.splice(index, 1);
         runnyWords2.splice(index, 1);
+        runnyWords3.splice(index, 1);
 
         if(runnyWords1.length <= 0) {
             resetRunnyWords();
@@ -129,18 +126,13 @@ export const initHomePage = () => {
         index = !isRandom ? (n + words1.length) % words1.length : runnyRandom();
 
         card.classList.remove('is-flipped');
-        setSettings(isRandom, index);
+        const freshSettings = dataSettings();
+        setSettings(isRandom, index, freshSettings.isDark);
         update();
     }
 
     leftBtn.addEventListener('click', () => arithmetic(index - 1 + words1.length));
-
     rightBtn.addEventListener('click', () => arithmetic(index + 1));
-
-    // card.addEventListener('click', function(e){
-    //     if (e.target.closest('#checkInput') || e.target.closest('.checkWord')) return;
-    //     card.classList.toggle('is-flipped');
-    // });
 
     const normalize = (str) => str.trim().toLowerCase();
 
@@ -171,6 +163,7 @@ export const initHomePage = () => {
     let isMoving = false;
 
     card.addEventListener('pointerdown', (e) => {
+        if (e.target.closest('input, button')) return;
         startX = e.clientX;
         isDragging = true;
         isMoving = false;
@@ -183,7 +176,7 @@ export const initHomePage = () => {
 
         let deltaX = e.clientX - startX;
 
-        if(Math.abs(deltaX) > 5)
+        if(Math.abs(deltaX) > 0)
             isMoving = true;
         
         if(Math.abs(deltaX) > limit)
@@ -193,7 +186,7 @@ export const initHomePage = () => {
     });
 
     card.addEventListener('pointerup', (e) => {
-        if(!isDragging) return;
+        if(!isDragging || e.target.closest('input, button')) return;
 
         const deltaX = e.clientX - startX;
 
@@ -204,12 +197,15 @@ export const initHomePage = () => {
         }
         else{
             card.style.transition = 'transform 0.5s ease';
-            if (e.target.closest('#checkInput') || e.target.closest('.checkWord')) return;
+            if (!e.target.closest('input, button')) {
                 card.classList.toggle('is-flipped');
+            }
         }
         isMoving = false;
         isDragging= false;
         
         card.releasePointerCapture(e.pointerId);
     });
+    
+    update();
 };

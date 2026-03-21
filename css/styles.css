@@ -2,14 +2,24 @@
 
 :root{
     --text-colour:#586380;
+    --additional-text-colour:#ACB1C0;
     --button-colour:#f5f6fa;
     --bbutton-colour:#4255ff;
     --dark-bbutton-colour: #1f1c8b;
     --bg-colour:#fff;
     --card-colour:#fff;
+    --card-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme{
+    --text-colour:#fff;
+    --bg-colour: #0d1117;
+    --card-colour: #1e242a;
+    --button-colour:#151b23;
 }
 
 body{
+    visibility: hidden;
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -17,6 +27,19 @@ body{
     font-weight: bolder;
     color: var(--text-colour);
     background-color: var(--bg-colour);
+}
+
+body[data-theme-loaded="true"] {
+    visibility: visible;
+}
+
+.none-style{
+    color: #fff;
+}
+
+.additional-span{
+    font-weight: normal;
+    color: #9198a1;
 }
 
 .container{
@@ -43,8 +66,8 @@ nav{
     width: 90%;
     max-width: 600px;
     z-index: 1000;
-    background-color: var(--bg-colour);
-    box-shadow: 0 4px 8px 0 rgba(31, 31, 59, 0.2);
+    background-color: var(--card-colour);
+    box-shadow: var(--card-shadow);
     border-radius: 32px;
 }
 
@@ -61,13 +84,12 @@ nav{
     max-width: 420px;
     height: 240px;
     border-radius: 12px;
-    box-shadow: 0 4px 8px 0 rgba(31, 31, 59, 0.2);
+    box-shadow: var(--card-shadow);
     background-color: var(--card-colour);
     transform-style: preserve-3d;
 }
 
 .card{
-    transition: all 0.5s ease;
     touch-action: pan-y;
     user-select: none;
     touch-action: none;
@@ -101,15 +123,14 @@ input {
     border: 2px solid transparent;
     border-radius: 8px;
     padding: 8px;
-    background: #f6f7fb;
+    background: var(--button-colour);
     color: var(--text-colour);
-    transition: all 0.2s ease;
 }
 
 input:focus {
     outline: none;
     border-color: #a8b1ff;
-    background-color: #fff;
+    background-color: transparent;
     box-shadow: 0 0 0 2px rgba(168,177,255,0.3);
 }
 
@@ -145,6 +166,13 @@ input::placeholder{
     padding: 0 10px;
 }
 
+.sticky-fingers{
+    position: sticky;
+    bottom: 12px;
+    background-color: var(--card-colour);
+    box-shadow: var(--card-shadow);
+}
+
 .b-button:active{
     transform: scale(0.95);
     background-color: var(--dark-bbutton-colour);
@@ -157,7 +185,9 @@ input[type="checkbox"]{
 }
 
 span{
+    margin: 0 24px;
     text-align: center;
+    word-break: break-word;
 }
 
 .input, .ui-container, .inner-nav, nav, .buttons, .b-button, .upload-container, .custom-file-upload, .card-structure, .container, #root, .front, .back, .card-input{

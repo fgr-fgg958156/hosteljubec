@@ -9,13 +9,17 @@ export const initCreatePage = () => {
     const listOfCards = {
         words1: [],
         words2: [],
+        words3: []
     };
+    
+    const words = dataWords();
 
     importBtn.addEventListener('click', () => {
-        for(let i = 0; i < dataWords.words1.length; i++){
-            cardStructure.insertAdjacentHTML('beforeend', pasteCard(i, dataWords.words1[i], dataWords.words2[i]));
-            listOfCards.words1.push(dataWords.words1[i]);
-            listOfCards.words2.push(dataWords.words2[i]);
+        for(let i = 0; i < words.words1.length; i++){
+            cardStructure.insertAdjacentHTML('beforeend', pasteCard(i, words.words1[i], words.words2[i], (words.words3 || [])[i] || ''));
+            listOfCards.words1.push(words.words1[i]);
+            listOfCards.words2.push(words.words2[i]);
+            listOfCards.words3.push((words.words3 || [])[i] || '');
         }
     });
 
@@ -30,15 +34,15 @@ export const initCreatePage = () => {
     });
 
     addBtn.addEventListener('click', () => {
-        cardStructure.insertAdjacentHTML('beforeend', pasteCard(listOfCards.words1.length, '', ''));
+        cardStructure.insertAdjacentHTML('beforeend', pasteCard(listOfCards.words1.length, '', '', ''));
     });
 
     cardStructure.addEventListener('change', (e) => {
-        if(!e.target.classList.contains('image') && !e.target.classList.contains('preimage')) return;
+        if(!e.target.classList.contains('image') && !e.target.classList.contains('preimage') && !e.target.classList.contains('addition')) return;
 
         const cardId = e.target.closest('.prop-card').id;
 
-        const field = e.target.classList.contains('image') ? 'words1' : 'words2';
+        const field = e.target.classList.contains('image') ? 'words1' : e.target.classList.contains('preimage') ? 'words2' : 'words3';
 
         listOfCards[field][cardId] = e.target.value;
         console.table(listOfCards);

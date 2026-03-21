@@ -5,7 +5,7 @@ export const createPage =
     <div class="ui-container">
         <div class="upload-container">
             <button class="r-button download">${downloadIcon}</button>
-            <span>Завантажити ЖАБАсон</span>
+            <span>Завантажити ЙаСОН</span>
         </div>
         <div class="upload-container">
             <button class="r-button import">${storageIcon}</button>
@@ -15,7 +15,5 @@ export const createPage =
     <div class="card-structure">
         
     </div>
-    <div>
-        <button class="add r-button">${addIcon}</button>
-    </div>
+    <button class="add r-button sticky-fingers">${addIcon}</button>
 `;

@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>гостелюбець</title>
     <link rel="stylesheet" href="css/styles.css">
+     <link rel="icon" type="image/x-icon" href="palm.svg">
 </head>
 <body>
     <div class="container">
         <nav>
             <div class="inner-nav">
-                <button href="/" class="nav-link r-button"><svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#586380"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
+                <button href="/" class="nav-link r-button home"></button>
                 <button href="#/create" class="nav-link b-button">
                         <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#fff"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-                        <span>Створити</span>
+                        <div class="none-style">Створити</div>
                 </button>
             </div>
-            <!-- <button class="nav-link r-button theme"><svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#586380"><path d="M480-28 346-160H160v-186L28-480l132-134v-186h186l134-132 134 132h186v186l132 134-132 134v186H614L480-28Zm141.5-310.5Q680-397 680-480t-58.5-141.5Q563-680 480-680t-141.5 58.5Q280-563 280-480t58.5 141.5Q397-280 480-280t141.5-58.5ZM480-480Zm0 340 100-100h140v-140l100-100-100-100v-140H580L480-820 380-720H240v140L140-480l100 100v140h140l100 100Zm0-340Z"/></svg></svg></button> -->
+            <button class="nav-link r-button theme"></button>
         </nav>
         <div id="root">
         </div>
     </div>
     <script type="module" src="js/router/router.js"></script>
+    <script type="module" src="js/router/themes.js"></script>
 </body>
 </html>
