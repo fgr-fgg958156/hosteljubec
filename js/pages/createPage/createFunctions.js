@@ -49,13 +49,21 @@ export const initCreatePage = () => {
     });
 
     addBtn.addEventListener('click', () => {
-        cardStructure.insertAdjacentHTML('beforeend', pasteCard(listOfCards.words1.length, '', '', ''));
+
+        const newIndex = listOfCards.words1.length;
+
+        listOfCards.words1.push('');
+        listOfCards.words2.push('');
+        listOfCards.words3.push('');
+
+        cardStructure.insertAdjacentHTML('beforeend', pasteCard(newIndex, '', '', ''));
     });
 
     cardStructure.addEventListener('change', (e) => {
         if(!e.target.classList.contains('image') && !e.target.classList.contains('preimage') && !e.target.classList.contains('addition')) return;
 
-        const cardId = e.target.closest('.prop-card').id;
+        const card = e.target.closest('.prop-card');
+        const cardId = [...cardStructure.children].indexOf(card);
 
         const field = e.target.classList.contains('image') ? 'words1' : e.target.classList.contains('preimage') ? 'words2' : 'words3';
 

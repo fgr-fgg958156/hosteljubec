@@ -2,6 +2,7 @@ import { deleteIcon } from "../../icons/icons.js";
 
 export const pasteCard = (id, image, preimage, addition) => `
     <div class="prop-card" id='${id}'>
+        <div class="number">${id + 1}</div>
         <div class="ui-container">
             <div class="card-input">
                 <input type="text" placeholder="Прообраз (чоло)" class="preimage" value="${preimage}">
