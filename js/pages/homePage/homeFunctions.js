@@ -63,6 +63,8 @@ export const initHomePage = () => {
         isRandom = e.target.checked;
         const freshSettings = dataSettings();
         setSettings(isRandom, index, freshSettings.isDark);
+        resetRunnyWords();
+        update();
     });
     
     function cutTheString(str, lgh) {
@@ -90,7 +92,7 @@ export const initHomePage = () => {
         }  
         additionalSpan.textContent = isRandom ? cutTheString(runnyWords3[index], maxChar) : cutTheString(words3[index], maxChar) ?? '';    
         backSide.textContent  = isRandom ? cutTheString(runnyWords1[index], maxChar) : cutTheString(words1[index], maxChar) ?? '';
-        counter.textContent  = `${index + 1} / ${words1.length}`;
+        counter.textContent  = isRandom ? `кількість : ${runnyWords1.length}` :`${index + 1} / ${words1.length}`;
     }
 
     function deadIconWrapper() {
@@ -193,7 +195,7 @@ export const initHomePage = () => {
         card.style.transform = '';
 
         if(isMoving && Math.abs(deltaX) >= gap){
-            arithmetic(index + (deltaX>0 ? -1 : 1));
+                arithmetic(index + (deltaX>0 ? -1 : 1));
         }
         else{
             card.style.transition = 'transform 0.5s ease';
