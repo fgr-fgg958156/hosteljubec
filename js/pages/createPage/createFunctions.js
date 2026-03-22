@@ -6,6 +6,7 @@ export const initCreatePage = () => {
     const cardStructure = document.querySelector('.card-structure');
     const downloadBtn = document.querySelector('.download');
     const importBtn = document.querySelector('.import');
+    const fileName = document.querySelector('#fileName');
     const listOfCards = {
         words1: [],
         words2: [],
@@ -23,13 +24,27 @@ export const initCreatePage = () => {
         }
     });
 
+    cardStructure.addEventListener('click', (e) => {
+        const deleteBtn = e.target.closest('.delete-card');
+        if (!deleteBtn) return;
+
+        const card = e.target.closest('.prop-card');
+        const cardId = [...cardStructure.children].indexOf(card);
+
+        listOfCards.words1.splice(cardId, 1);
+        listOfCards.words2.splice(cardId, 1);
+        listOfCards.words3.splice(cardId, 1);
+
+        card.remove();
+    });
+
     downloadBtn.addEventListener('click', () => {
         const jsonStr = JSON.stringify(listOfCards, null, 2);
 
         const blob = new Blob([jsonStr], {type: "application/json"});
 
         const url = URL.createObjectURL(blob);
-        Object.assign(document.createElement('a'), {href: url, download: `${listOfCards.words1[0]}-${listOfCards.words1.length}`}).click();
+        Object.assign(document.createElement('a'), {href: url, download: fileName.value ? fileName.value : `${listOfCards.words1[0]}-${listOfCards.words1.length}-${Date.now()}`}).click();
         URL.revokeObjectURL(url);
     });
 

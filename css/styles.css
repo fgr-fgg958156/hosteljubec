@@ -33,6 +33,10 @@ body[data-theme-loaded="true"] {
     visibility: visible;
 }
 
+.top-padding{
+    padding-top: 20px;
+}
+
 .none-style{
     color: #fff;
 }
@@ -116,15 +120,30 @@ nav{
 .buttons, .ui-container{
     width: 90%;
     max-width: 420px;
-    margin-top: 25px;
+    /*margin-top: 25px;*/
 }
 
 input {
+    caret-color: var(--text-colour);
     border: 2px solid transparent;
     border-radius: 8px;
     padding: 8px;
     background: var(--button-colour);
     color: var(--text-colour);
+}
+
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 
+        0 0 0 1000px transparent inset,
+        0 0 0 2px rgba(168,177,255,0.3) !important;
+    -webkit-text-fill-color: var(--text-colour) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill{
+    -webkit-box-shadow: 0 0 0 1000px var(--button-colour) inset !important;
+    -webkit-text-fill-color: var(--text-colour) !important;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 input:focus {
@@ -190,15 +209,15 @@ span{
     word-break: break-word;
 }
 
-.input, .ui-container, .inner-nav, nav, .buttons, .b-button, .upload-container, .custom-file-upload, .card-structure, .container, #root, .front, .back, .card-input{
+.input, .prop-card, .ui-container, .inner-nav, nav, .buttons, .b-button, .upload-container, .custom-file-upload, .card-structure, .container, #root, .front, .back, .card-input{
     display: flex;
 }
 
-.input, .upload-container, .b-button, .custom-file-upload, .card-structure, #root, .front, .back, .card-input{
+.input, .prop-card, .upload-container, .b-button, .custom-file-upload, .card-structure, #root, .front, .back, .card-input{
     justify-content: center;
 }
 
-.input, .ui-container, .inner-nav, nav, .buttons, .b-button, .upload-container, .custom-file-upload, .card-structure, .container, #root, .front, .back, .card-input{
+.input, .prop-card, .ui-container, .inner-nav, nav, .buttons, .b-button, .upload-container, .custom-file-upload, .card-structure, .container, #root, .front, .back, .card-input{
     align-items: center;
 }
 
