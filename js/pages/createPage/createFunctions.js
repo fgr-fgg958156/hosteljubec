@@ -24,6 +24,13 @@ export const initCreatePage = () => {
         }
     });
 
+    const updateCardIds = () => {
+        [...cardStructure.children].forEach((card, index) => {
+            card.id = index;
+            card.querySelector('.number').textContent = index + 1;
+        });
+    };
+
     cardStructure.addEventListener('click', (e) => {
         const deleteBtn = e.target.closest('.delete-card');
         if (!deleteBtn) return;
@@ -36,6 +43,7 @@ export const initCreatePage = () => {
         listOfCards.words3.splice(cardId, 1);
 
         card.remove();
+        updateCardIds();
     });
 
     downloadBtn.addEventListener('click', () => {
