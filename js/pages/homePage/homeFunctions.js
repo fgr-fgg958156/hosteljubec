@@ -6,7 +6,7 @@ export const initHomePage = () => {
     const frontSide = document.querySelector('.front');
     const additionalSpan = document.querySelector('.additional-span');
     const frontSpan = document.querySelector('.front-span');
-    const backSide = document.querySelector('.back');
+    const backSpan = document.querySelector('.back-span');
     const leftBtn = document.querySelector('.left');
     const rightBtn = document.querySelector('.right');
     const counter = document.querySelector('.counter');
@@ -20,6 +20,7 @@ export const initHomePage = () => {
     let index = settings.index || 0;
     let isRandom = settings.isRandom || false;
     const maxChar = 200;
+    const maxChar2 = 50;
     
     let words1 = words.words1 || [];
     let words2 = words.words2 || [];
@@ -90,8 +91,8 @@ export const initHomePage = () => {
         } else {
             frontSpan.textContent  = cutTheString(currentFront, maxChar);
         }  
-        additionalSpan.textContent = isRandom ? cutTheString(runnyWords3[index], maxChar) : cutTheString(words3[index], maxChar) ?? '';    
-        backSide.textContent  = isRandom ? cutTheString(runnyWords1[index], maxChar) : cutTheString(words1[index], maxChar) ?? '';
+        additionalSpan.textContent = isRandom ? cutTheString(runnyWords3[index], maxChar2) : cutTheString(words3[index], maxChar2) ?? '';    
+        backSpan.textContent  = isRandom ? cutTheString(runnyWords1[index], maxChar) : cutTheString(words1[index], maxChar) ?? '';
         counter.textContent  = isRandom ? `кількість : ${runnyWords1.length}` :`${index + 1} / ${words1.length}`;
     }
 
@@ -174,6 +175,7 @@ export const initHomePage = () => {
     });
 
     card.addEventListener('pointermove', (e) => {
+        if (e.target.closest('input, button')) return;
         if(!isDragging) return;
 
         let deltaX = e.clientX - startX;

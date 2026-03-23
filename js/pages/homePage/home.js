@@ -20,7 +20,7 @@ export const homePage =
                     <button class="checkWord r-button">${checkIcon}</button>
                 </div>
             </div>
-            <div class="back">Образ (тил)</div>
+            <div class="back"><span class="back-span">Образ (тил)</span></div>
         </div>
         <div class="buttons">
             <button class="left r-button">${leftIcon}</button>
