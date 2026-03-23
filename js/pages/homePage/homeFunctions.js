@@ -19,7 +19,7 @@ export const initHomePage = () => {
 
     let index = settings.index || 0;
     let isRandom = settings.isRandom || false;
-    const maxChar = 100;
+    const maxChar = 200;
     
     let words1 = words.words1 || [];
     let words2 = words.words2 || [];
