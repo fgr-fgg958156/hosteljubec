@@ -144,7 +144,7 @@ export function initBookFunctionality(container, updateMethod) {
             const project = await getProject(infoArray[1], infoArray[0]);
 
             navigate('/');
-            setWords(project.fileName, project.cards);
+            setWords(project.fileName, project.cards, project.tags);
 
             const settingsData = dataSettings();
             setSettings(settingsData.isRandom, 0, settingsData.isDark, settingsData.showInput);

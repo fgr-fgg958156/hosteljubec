@@ -144,9 +144,9 @@ export function initHomePage(){
         updateHomePage(words, runnyWords, index, isRandom, showInput, frontSpan, additionalSpan, backSpan, counter, lineContainer, fileName);
     }
 
-    async function loadTags(){
+    function loadTags(){
         tagsContainer.innerHTML = '';
-        const project = await getProject(dataWords().fileName, dataLogin().nickname);
+        const project = dataWords();
         const tagsList = project?.tags;
 
         if(tagsList?.length === 0 || !tagsList){
