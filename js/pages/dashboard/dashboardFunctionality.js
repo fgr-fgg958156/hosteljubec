@@ -20,12 +20,15 @@ async function getUsers(force = false) {
     return cachedUsers;
 }
 
-export function renderDashboard(users, filter, container, tags = '') {
+export function renderDashboard(users, filter, container, tags = '', currentUser = null) {
     let html = '';
 
     const tagsArray = tags.trim().toLowerCase().split(' ').filter(Boolean);
 
     users.forEach(u => {
+
+        if (filter === 'private' && currentUser && u.id !== currentUser.id) return;
+
         (u.projects || []).forEach(p => {
 
             const isPublic = p.isPublic;
@@ -33,7 +36,8 @@ export function renderDashboard(users, filter, container, tags = '') {
             if ((filter === 'public' && !isPublic) || (filter === 'private' && isPublic)) return;
 
             const projectTags = (p.tags || []).map(t => t.toLowerCase());
-            const hasTagMatch =tagsArray.length === 0 || tagsArray.every(tag => projectTags.includes(tag));
+            const hasTagMatch =
+                tagsArray.length === 0 || tagsArray.every(tag => projectTags.includes(tag));
 
             if (!hasTagMatch) return;
 
@@ -69,11 +73,12 @@ export async function initDashboardPage() {
 
     let currentFilter = 'public';
     cachedUsers = await getUsers(true);
+    let currentUser = await getCurrentUser();
 
     let lastHash = null;
 
     const update = () => {
-        renderDashboard(cachedUsers, currentFilter, container, tags.value);
+        renderDashboard(cachedUsers, currentFilter, container, tags.value, currentUser);
     };
 
     radios.forEach(radio => {
