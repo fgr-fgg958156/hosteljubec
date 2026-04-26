@@ -1,0 +1,13 @@
+.separator {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 15px;
+  align-items: center;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  height: 1px;
+  background-color: var(--additional-text-colour);
+}

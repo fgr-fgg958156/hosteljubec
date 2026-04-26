@@ -1,0 +1,43 @@
+.checkbox-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.checkbox-button {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.checkbox-container span {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius-36);
+    background-color: var(--main-button-colour);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-container:hover span {
+    background-color: var(--hover-button-colour);
+}
+
+.checkbox-container:active span {
+    background-color: var(--active-button-colour);
+}
+
+.checkbox-button:checked + span {
+    background-color: rgba(66, 85, 255, 0.15);
+    border: 2px solid rgba(66, 85, 255, 0.5);
+    box-sizing: border-box;
+}
+
+.checkbox-button:checked + span svg {
+    fill: var(--blue-button-colour);
+}

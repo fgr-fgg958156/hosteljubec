@@ -1,0 +1,25 @@
+:root{
+    --main-text-size: 1rem;
+    --main-text-font-family: 'Schibsted Grotesk', sans-serif;
+    --main-text-weight: bolder;
+    --light-text-colour:#586380;
+    --main-text-colour:#586380;/* #282e3e */
+    --additional-text-colour:#939bb4;
+    --switch-colour:#ACB1C0;
+    --main-button-colour:#f6f7fb;
+    --hover-button-colour:#edeff4;
+    --active-button-colour:#d9dde8;
+    --blue-button-colour:#4255ff;
+    --hover-blue-button-colour:#423ed8;
+    --active-blue-button-colour: #1f1c8b;
+    --red-button-colour: #F04050;
+    --active-red-button-colour: #802830;
+    --background-colour:#fff;
+    --card-colour:#fff;
+    --input-border-color: #a8b1ff;
+    --border-radius-9: 9px;
+    --border-radius-18: 18px;
+    --border-radius-27: 27px;
+    --border-radius-36: 36px;
+    --main-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+}

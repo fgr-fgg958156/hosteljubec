@@ -1,0 +1,103 @@
+html {
+  scrollbar-gutter: stable;
+}
+
+body.dark-theme{
+    --main-text-colour:#fff;
+    --light-text-colour:#fff;
+    --background-colour: #0d1117;
+    --card-colour: #1e242a;
+    --active-button-colour:#0d1117;
+    --switch-colour:#1e242a;
+    --main-button-colour: #151b23;
+    --hover-button-colour: #12161C;
+}
+
+body{
+    visibility: hidden;
+    padding: 0;
+    margin: 0;
+    font-family: var(--main-text-font-family);
+    font-size: var(--main-text-size);
+    font-weight: var(--main-text-weight);
+    color: var(--main-text-colour);
+    background-color: var(--background-colour);
+}
+
+body[data-theme-loaded="true"] {
+    visibility: visible;
+}
+
+.container{
+    width: 100%;
+}
+
+#root{
+    margin-top: 128px;
+    width: 100%;
+}
+
+.card-container{
+    width: 100%;
+    padding: 20px 0px;
+    gap: 10px;
+}
+
+.main-max-width{
+    width: 90%;
+    max-width: 640px;
+}
+
+.front-side, .back-side, .book, .prop-card{
+    box-sizing: border-box;
+}
+
+.img-box{
+    height: 124px;
+    max-width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-box img{
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+span{
+    display: inline-block;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.nav-menu-container{
+    max-height: 0;
+    padding: 0;
+    overflow: hidden;
+
+    background-color: var(--card-colour);
+    position: fixed;
+    top: 48px;
+    z-index: 900;
+    box-shadow: var(--main-shadow);
+    border-radius: 0 0 var(--border-radius-18) var(--border-radius-18);
+
+    transition:
+        max-height 0.3s ease,
+        padding 0.3s ease;
+}
+
+@media screen and (max-width: 500px) {
+    .nav-menu-container.active{
+        max-height: 500px;
+        padding: 36px 0 12px 0;
+    }
+}
+
+.file-name{
+    text-wrap: nowrap;
+}

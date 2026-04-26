@@ -1,0 +1,117 @@
+.main-button, .circle-button, .text-button, .main-square-text-button{
+    border: none;
+    background-color: var(--main-button-colour);
+}
+
+/* .main-interactive{
+    background-color: var(--main-button-colour);
+}
+
+.blue-interactive{
+    background-color: var(--blue-button-colour);
+} */
+
+.main-button{
+    width: 72px;
+    height: 48px;
+    border-radius: var(--border-radius-27);
+}
+
+.text-button{
+    width: auto;
+    height: 40px;
+    border-radius: var(--border-radius-27);
+}
+
+.blue-text-button{
+    border-radius: var(--border-radius-27);
+}
+
+.blue-square-text-button{
+    border-radius: var(--border-radius-9);
+}
+
+.main-square-text-button{
+    height: 40px;
+    border-radius: var(--border-radius-9);
+}
+
+.blue-text-button, .blue-square-text-button{
+    border: none;
+    background-color: var(--blue-button-colour);
+    height: 40px;
+}
+
+@media (hover: hover) {
+    .blue-text-button:hover, .blue-square-text-button:hover{
+        background-color: var(--hover-blue-button-colour);
+    }
+    .main-button:hover, .circle-button:hover, .text-button:hover, .main-square-text-button:hover{
+        background-color: var(--hover-button-colour);
+    }
+    .nav-button:hover{
+        background-color: var(--hover-button-colour);
+    }
+
+    /* .main-interactive:hover{
+        background-color: var(--hover-button-colour);
+    }
+    .blue-interactive:hover{
+        background-color: var(--hover-blue-button-colour);
+    } */
+}
+
+.blue-text-button:active, .blue-square-text-button:active{
+    background-color: var(--active-blue-button-colour);
+}
+/*
+.main-interactive:active{
+    background-color: var(--active-button-colour);
+}
+.blue-interactive:active{
+    background-color: var(--active-blue-button-colour);
+}
+
+@media screen and (max-width: 425px) {
+    .text-button {
+        width: 40px;
+        border-radius: var(--border-radius-27);
+    }
+    .text-button span{
+        display: none;
+    }
+    .text-button svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+*/
+
+.circle-button{
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius-36);
+}
+
+.main-button:active, .circle-button:active, .text-button:active, .main-square-text-button:active{
+    background-color: var(--active-button-colour);
+}
+
+button{
+    outline: none;
+}
+
+.nav-button{
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    height: 48px;
+}
+
+.nav-button:active{
+    background-color: var(--active-button-colour);
+}
+
+button, .save-profile-button, .delete-profile-button, .text-button, .blue-text-button, .blue-square-text-button, .main-square-text-button{
+    user-select: none;
+}

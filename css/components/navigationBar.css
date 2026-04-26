@@ -1,0 +1,9 @@
+nav{
+    position: fixed;
+    top: 12px;
+    height: 60px;
+    z-index: 1000;
+    background-color: var(--card-colour);
+    box-shadow: var(--main-shadow);
+    border-radius: var(--border-radius-36);
+}

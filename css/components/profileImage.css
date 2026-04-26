@@ -1,0 +1,21 @@
+.user-profile-image{
+    background-color: var(--hover-button-colour);
+    user-select: none;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.user-profile-container{
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+
+.party-hat{
+    display: none;
+    position: absolute;
+    top: -44px;
+    left: -18px;
+    transform: rotate(-32deg);
+}

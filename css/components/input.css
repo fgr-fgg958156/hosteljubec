@@ -1,0 +1,100 @@
+*::selection{
+    background: #a8b1ff;
+    color: white;
+}
+
+input::placeholder,
+textarea::placeholder {
+    user-select: none;
+}
+
+input{
+    min-height: 40px;
+}
+
+input, textarea{
+    caret-color: var(--text-colour);
+    font-size: var(--main-text-size);
+    border: 2px solid transparent;
+    border-radius: var(--border-radius-9);
+    padding: 10px;
+    width: 100%;
+    max-width: 384px;
+    box-sizing: border-box;
+    background: var(--main-button-colour);
+    color: var(--main-text-colour);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #a8b1ff;
+    background-color: transparent;
+    box-shadow: 0 0 0 2px rgba(168,177,255,0.3);
+}
+
+input::placeholder, textarea::placeholder{
+    opacity: 0.5;
+    color: var(--text-colour);
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px var(--main-button-colour) inset !important;
+    
+    -webkit-text-fill-color: var(--main-text-colour) !important;
+    
+    border: 2px solid transparent; 
+    border-radius: var(--border-radius-9);
+    caret-color: var(--main-text-colour) !important;
+    
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 
+        0 0 0 1000px transparent inset,
+        0 0 0 2px rgba(168,177,255,0.3) !important;
+    border-color: #a8b1ff;
+}
+
+.radio-filter-input {
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    border-radius: var(--border-radius-27);
+    background-color: var(--main-button-colour);
+    cursor: pointer;
+    user-select: none;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+}
+
+.radio-filter-input input[type="radio"]{
+    display: none;
+}
+
+.radio-filter-input:has(input:checked){
+    background-color: rgba(66, 85, 255, 0.15);
+    border: 2px solid rgba(66, 85, 255, 0.5);
+}
+
+.radio-filter-input:has(input:checked) svg {
+    fill: var(--blue-button-colour);
+}
+
+.radio-filter-input:has(input:checked) span{
+    color: var(--blue-button-colour);
+}
+
+textarea {
+    resize: none;
+    height: 148px;
+    font-family: var(--main-text-font-family);
+    scrollbar-width: none;
+}
+
+textarea::-webkit-scrollbar {
+    display: none;
+}

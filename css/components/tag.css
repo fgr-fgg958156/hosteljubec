@@ -1,0 +1,13 @@
+.display-tag{
+    min-width: 40px;
+    height: 40px;
+    user-select: none;
+    border-radius: var(--border-radius-27);
+    background-color: rgba(66, 85, 255, 0.15);
+    border: 2px solid rgba(66, 85, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue-button-colour);
+    padding: 0 12px;
+}

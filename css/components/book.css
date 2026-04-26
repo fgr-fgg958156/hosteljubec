@@ -1,0 +1,38 @@
+.book{
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius-9);
+    box-shadow: var(--main-shadow);
+    background-color: var(--card-colour);
+    
+    user-select: none;
+    touch-action: pan-y;
+}
+
+.book-container{
+    width: 100%;
+    max-width: 640px;
+    height: 82px;
+}
+
+.book-background {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    border-radius: var(--border-radius-9);
+}
+
+.delete-background, .edit-background {
+    height: 100%;
+    background-color: transparent;
+}
+
+@media (hover: hover) {
+    .book:hover{
+        background-color: var(--hover-button-colour);
+    }
+}
