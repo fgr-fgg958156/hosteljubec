@@ -64,6 +64,7 @@ export function initHomePage(){
         setSettings(freshSettings.isRandom, 0, freshSettings.isDark, freshSettings.showInput);
 
         updateNReset();
+        loadTags();
     });
 
     initCheckboxFunctionality(randomCheckbox, "isRandom", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), updateState);
