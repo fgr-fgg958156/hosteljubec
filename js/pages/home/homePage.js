@@ -4,7 +4,7 @@ export const homaPage =
 `
     <div class="card-container display-flex justify-content-center align-items-center flex-direction-column">
         <div class="main-max-width display-flex justify-content-space-between flex-direction-row margin-bottom-12px flex-wrap-wrap">
-            <span class="header-span flex-2 file-name margin-vertical-12px" data-lang="name">Назва</span>
+            <span class="header-span flex-2 file-name margin-vertical-12px" data-lang="name"></span>
             <div class="display-flex justify-content-space-between align-items-center flex-direction-row gap-12px flex-1 flex-wrap-nowrap">
                 <div class="display-flex justify-content-center align-items-center flex-direction-column">
                     <input type="file" id="fileInput" accept=".json" hidden>

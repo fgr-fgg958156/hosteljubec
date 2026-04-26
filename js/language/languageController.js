@@ -1,3 +1,4 @@
+import { dataWords } from "../utils/storage.js";
 import { languages } from "./languages.js";
 
 const defaultLang = Object.keys(languages)[0];
@@ -36,12 +37,23 @@ export function nextLang() {
 }
 
 export function updateTexts() {
+    const words = dataWords();
+    const hasWords = words && Object.keys(words).length > 0;
+
     document.querySelectorAll("[data-lang]").forEach(el => {
+        if (hasWords && (el.classList.contains("additional-span") || el.classList.contains("front-span") || el.classList.contains("back-side") || el.classList.contains("file-name"))) {
+            return;
+        }
+
         const key = el.dataset.lang;
         el.textContent = t(key);
     });
 
     document.querySelectorAll("[data-lang-placeholder]").forEach(el => {
+        if (hasWords && (el.classList.contains("additional-span") || el.classList.contains("front-span") || el.classList.contains("back-side") || el.classList.contains("file-name"))) {
+            return;
+        }
+
         const key = el.dataset.langPlaceholder;
         el.placeholder = t(key);
     });

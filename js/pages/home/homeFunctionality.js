@@ -156,7 +156,6 @@ export function initHomePage(){
                     </div>
                 `;
             updateTexts();
-            updateHomePage(words, runnyWords, index, isRandom, showInput, frontSpan, additionalSpan, backSpan, counter, lineContainer, fileName);
             return;
         }
 
