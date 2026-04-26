@@ -41,7 +41,7 @@ export function updateTexts() {
     const hasWords = words && Object.keys(words).length > 0;
 
     document.querySelectorAll("[data-lang]").forEach(el => {
-        if (hasWords && (el.classList.contains("additional-span") || el.classList.contains("front-span") || el.classList.contains("back-side") || el.classList.contains("file-name"))) {
+        if (hasWords && (el.classList.contains("additional-span") || el.classList.contains("front-span") || el.classList.contains("back-span") || el.classList.contains("file-name"))) {
             return;
         }
 
@@ -50,7 +50,7 @@ export function updateTexts() {
     });
 
     document.querySelectorAll("[data-lang-placeholder]").forEach(el => {
-        if (hasWords && (el.classList.contains("additional-span") || el.classList.contains("front-span") || el.classList.contains("back-side") || el.classList.contains("file-name"))) {
+        if (hasWords && (el.classList.contains("additional-span") || el.classList.contains("front-span") || el.classList.contains("back-span") || el.classList.contains("file-name"))) {
             return;
         }
 
