@@ -13,7 +13,7 @@ export async function getCurrentUser() {
     const users = await getUsers();
 
     return users.find(
-        u => u.nickname.toLowerCase() === data.nickname.toLowerCase()
+        u => u.nickname.toLowerCase() === data.nickname?.toLowerCase()
     );
 }
 
