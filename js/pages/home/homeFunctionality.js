@@ -101,7 +101,7 @@ export function initHomePage(){
 
     const arithmetic = (step) => {
         index = !isRandom
-            ? (index + step + words.image.length) % words.image.length
+            ? (index + step + words?.image?.length) % words?.image?.length
             : runnyRandom();
 
         card.classList.remove('is-flipped');
