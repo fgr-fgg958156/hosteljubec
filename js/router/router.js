@@ -41,7 +41,6 @@ const routes = {
 
 const render = async () => {
     const path = window.location.hash.slice(1) || "/";
-
     const route = routes[path];
 
     if (typeof currentDestroy === "function") {
@@ -56,7 +55,6 @@ const render = async () => {
     }
 
     root.innerHTML = route.page;
-
     updateTexts();
 
     if (route.init) {
