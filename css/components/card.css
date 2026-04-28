@@ -12,7 +12,6 @@
 .card{
     touch-action: pan-y;
     user-select: none;
-    touch-action: none;
     -webkit-user-drag: none;
 }
 
