@@ -11,6 +11,7 @@ import { loginPage } from "../pages/login/loginPage.js";
 import { initLoginPage } from "../pages/login/loginFunctionality.js";
 import "https://cdn.jsdelivr.net/npm/@hiseb/confetti@2.1.0/dist/confetti.min.js";
 import { updateTexts } from "../language/languageController.js";
+import { supabase } from "../services/services.js";
 
 const root = document.getElementById('root');
 let currentDestroy = null;
@@ -38,8 +39,9 @@ const routes = {
     }
 };
 
-const render = () => {
+const render = async () => {
     const path = window.location.hash.slice(1) || "/";
+
     const route = routes[path];
 
     if (typeof currentDestroy === "function") {
@@ -53,10 +55,7 @@ const render = () => {
         return;
     }
 
-    root.innerHTML =
-        typeof route.page === 'function'
-            ? route.page()
-            : route.page;
+    root.innerHTML = route.page;
 
     updateTexts();
 

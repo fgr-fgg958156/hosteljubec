@@ -1,7 +1,7 @@
 import { navigate } from "../../router/router.js";
-import { API, getProject, getUsers } from "../../services/services.js";
-import { dataLogin, dataSettings, dataWords, setSettings, setWords } from "../../utils/storage.js";
-import { renderDashboard, updateUserProjects } from "./dashboardFunctionality.js";
+import { getProject, getUsers, supabase, updateUser } from "../../services/services.js";
+import { dataSettings, setSettings, setWords } from "../../utils/storage.js";
+import { updateUserProjects } from "./dashboardFunctionality.js";
 
 export let isDraging = false;
 
@@ -12,33 +12,27 @@ export function initBookFunctionality(container, updateMethod) {
             const nickname = book.querySelector('.book-author')?.textContent;
             const projectName = book.querySelector('.book-name')?.textContent;
 
-            const userData = dataLogin();
-            if (!userData?.login) return;
-            if (nickname !== `@${userData.nickname}`) return;
-
-            const res = await fetch(API);
-            const users = await res.json();
-
-            const user = users.find(u => `@${u.nickname}` === nickname);
+            const { data: { user } } = await supabase.auth.getUser();
             if (!user) return;
 
-            const updatedProjects = user.projects.map(p =>
-                p.fileName === projectName
-                    ? { ...p, isPublic: !p.isPublic }
-                    : p
+            const users = await getUsers();
+
+            const userCurrent = users.find(
+                u => u.nickname.toLowerCase() === nickname.toLowerCase()
             );
 
-            await fetch(`${API}/${user.id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...user, projects: updatedProjects })
-            });
+            if (!userCurrent) return;
 
-            updateUserProjects(user.id, updatedProjects);
+            const updatedProjects = userCurrent.projects.map(p =>
+                p.fileName === projectName ? { ...p, isPublic: !p.isPublic } : p
+            );
+
+            await updateUser(userCurrent, ['projects'], [updatedProjects]);
+            updateUserProjects(userCurrent.id, updatedProjects);
             updateMethod();
         }
     };
-    
+
     let activeBook = null;
     let backgroundLayer = null;
     let startX = 0;
@@ -59,6 +53,7 @@ export function initBookFunctionality(container, updateMethod) {
         backgroundLayer = book.closest('.book-container').querySelector('.book-background');
         startX = e.clientX;
         startY = e.clientY;
+
         window.addEventListener('pointermove', pointerMove);
         window.addEventListener('pointerup', pointerUp);
         window.addEventListener('pointercancel', pointerUp);
@@ -74,9 +69,7 @@ export function initBookFunctionality(container, updateMethod) {
         const dx = e.clientX - startX;
         const dy = e.clientY - startY;
 
-        if (Math.abs(dx) > dragLimit || Math.abs(dy) > dragLimit) {
-            moved = true;
-        }
+        if (Math.abs(dx) > dragLimit || Math.abs(dy) > dragLimit) moved = true;
 
         const deleteZone = backgroundLayer.querySelector('.delete-background');
         const editZone = backgroundLayer.querySelector('.edit-background');
@@ -91,7 +84,7 @@ export function initBookFunctionality(container, updateMethod) {
         activeBook.style.transform = `translateX(${moveX}px)`;
     };
 
-    function cleanup(){
+    function cleanup() {
         isDraging = false;
 
         if (backgroundLayer) {
@@ -102,9 +95,7 @@ export function initBookFunctionality(container, updateMethod) {
             if (editZone) editZone.style.backgroundColor = 'transparent';
         }
 
-        if (activeBook) {
-            activeBook.style.transform = 'translateX(0px)';
-        }
+        if (activeBook) activeBook.style.transform = 'translateX(0px)';
 
         activeBook = null;
         backgroundLayer = null;
@@ -116,23 +107,16 @@ export function initBookFunctionality(container, updateMethod) {
 
     const pointerUp = (e) => {
         if (!activeBook) return;
+
         if (e.target.closest('button, input, label')) {
             cleanup();
             return;
         }
 
-        const deleteZone = backgroundLayer.querySelector('.delete-background');
-        const editZone = backgroundLayer.querySelector('.edit-background');
+        if (moveX >= threshold) openBook(activeBook);
+        else if (moveX <= -threshold) deleteBook(activeBook);
 
-        if (moveX >= threshold) {
-            openBook(activeBook);
-        }
-        else if (moveX <= -threshold) {
-            deleteBook(activeBook);
-        }
-        if (!moved) {
-            clickOnBook(activeBook);
-        }
+        if (!moved) clickOnBook(activeBook);
 
         cleanup();
     };
@@ -140,7 +124,6 @@ export function initBookFunctionality(container, updateMethod) {
     async function clickOnBook(book) {
         try {
             const infoArray = book.id.split("ѳлѧсїс");
-
             const project = await getProject(infoArray[1], infoArray[0]);
 
             navigate('/');
@@ -148,31 +131,26 @@ export function initBookFunctionality(container, updateMethod) {
 
             const settingsData = dataSettings();
             setSettings(settingsData.isRandom, 0, settingsData.isDark, settingsData.showInput);
-
         } catch (error) {
             console.error('помилка завантаження проєкту:', error);
         }
     }
 
-    async function openBook(book){
-        try{
+    async function openBook(book) {
+        try {
             const [author, projectName] = book.id.split("ѳлѧсїс");
             const project = await getProject(projectName, author);
 
             const data = {
-                fileName : project.fileName,
+                fileName: project.fileName,
                 words1: project.cards.image,
                 words2: project.cards.preimage,
                 words3: project.cards.addition,
-                tags: project.tags,
-            }
+                tags: project.tags
+            };
 
-            sessionStorage.setItem(
-                'creatorData',
-                JSON.stringify(data)
-            );
+            sessionStorage.setItem('creatorData', JSON.stringify(data));
             navigate('/creator');
-
         } catch (error) {
             console.error("помилка завантаження:", error);
         }
@@ -181,36 +159,28 @@ export function initBookFunctionality(container, updateMethod) {
     async function deleteBook(book) {
         try {
             const [author, projectName] = book.id.split("ѳлѧсїс");
-            const userData = dataLogin();
-            if (!userData?.login) return;
-
-            if (author !== userData.nickname) return;
-
-            const res = await fetch(API);
-            const users = await res.json();
-
-            const user = users.find(
-                u => u.nickname.toLowerCase() === author.toLowerCase()
-            );
-
+            const { data: { user } } = await supabase.auth.getUser();
             if (!user) return;
 
-            const updatedProjects = user.projects.filter(
+            const nickname = book.querySelector('.book-author')?.textContent;
+
+            if (author !== nickname) return;
+
+            const users = await getUsers();
+
+            const userCurrent = users.find(
+                u => u.nickname.toLowerCase() === nickname.toLowerCase()
+            );
+
+            if (!userCurrent) return;
+
+            const updatedProjects = userCurrent.projects.filter(
                 p => p.fileName !== projectName
             );
 
-            await fetch(`${API}/${user.id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    ...user,
-                    projects: updatedProjects
-                })
-            });
+            await updateUser(userCurrent, ['projects'], [updatedProjects]);
 
-            updateUserProjects(user.id, updatedProjects);
+            updateUserProjects(userCurrent.id, updatedProjects);
             updateMethod();
         } catch (error) {
             console.error("помилка видалення:", error);

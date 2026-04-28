@@ -80,12 +80,25 @@ input:-webkit-autofill:focus {
     border: 2px solid rgba(66, 85, 255, 0.5);
 }
 
+.radio-filter-input:has(input:checked).radio-block{
+    background-color: rgba(240, 64, 80, 0.15);
+    border: 2px solid rgba(240, 64, 80, 0.5);
+}
+
 .radio-filter-input:has(input:checked) svg {
     fill: var(--blue-button-colour);
 }
 
+.radio-filter-input:has(input:checked).radio-block svg {
+    fill: rgb(240, 64, 80);
+}
+
 .radio-filter-input:has(input:checked) span{
     color: var(--blue-button-colour);
+}
+
+.radio-filter-input:has(input:checked).radio-block span{
+    color: rgb(240, 64, 80);
 }
 
 textarea {

@@ -46,7 +46,8 @@ export const languages = {
         wrongStructure: "Неправильна побудова",
         differentLength: "Зворот != Лице",
         unnamed: "Безіменний",
-        dividerError: "Дільник = Різак"
+        dividerError: "Дільник = Різак",
+        registerName: "Реєстрове ім'я"
     },
     'en' : {
         lang : 'English',
@@ -95,7 +96,8 @@ export const languages = {
         wrongStructure: "Wrong file structure",
         differentLength: "Front side != back side",
         unnamed: "Unnamed",
-        dividerError: "Divider = Spliter"
+        dividerError: "Divider = Spliter",
+        registerName: "Register name"
     },
     'ky' : {
         base: 'uk',
@@ -145,55 +147,7 @@ export const languages = {
         wrongStructure: "Неправильна побꙋдова",
         differentLength: "Тил != Чоло",
         unnamed: "Безіменний",
-        dividerError: "Дільник = Закрійник"
-    },
-    'ru' : {
-        lang : 'Рассеянскийъ',
-        nickname : 'Фамилия',
-        password: 'Шифръ',
-        save: 'Препоручить',
-        or: 'или',
-        delete: 'Вьілизать',
-        public: 'Публична',
-        private: 'Приватна',
-        tags: 'Тамги',
-        error404: 'Шибиница 404',
-        dustPhrase: 'Ммм.. барахло!',
-        dust: 'Барахло',
-        name: 'Навание',
-        download: 'Вьючить',
-        front: 'Авангардъ',
-        addition: 'Приложение',
-        back: 'Курдюкъ',
-        forgotPassword: 'Изгубилъ шифръ',
-        login: 'Внедриться',
-        register : 'Аффилироваться',
-        bookname : 'Навание фолианта',
-        pages: 'Страницьі',
-        divider: 'Драбитель',
-        spliter: 'Пилитель',
-        toData: 'К данньімъ',
-        toDesktop: 'Подъ столъ',
-        create: 'Кирпичъ',
-        home: 'Башка',
-        dashboard: 'Дашбордъ',
-        account: 'Аккаутъ',
-        light: 'Чубарьійъ',
-        dark: 'Карга',
-        logout: 'Кочевать',
-        loginError: 'Шибиница',
-        serverError: 'Шибиница сервера',
-        emptyFields: 'Празньіе поля',
-        nicknameExists: 'Такая фамилия уже существуетъ',
-        registerError: 'Шибиница аффилировации',
-        forgotPasswordFunc: 'Хреново',
-        userNotFound: "Мужикъ потерянъ",
-        updateError: "Шибиница обновление",
-        deleteError: "Шибиница вьілизьівания",
-        invalidData: "Туфтовьіе данньіе",
-        wrongStructure: "Дефектная структура",
-        differentLength: "Курдюкъ != Авангардъ",
-        unnamed: "Ноунейм",
-        dividerError: "Драбитель = Пилитель"
+        dividerError: "Дільник = Закрійник",
+        registerName: "Писане ім'ѧ"
     }
 }

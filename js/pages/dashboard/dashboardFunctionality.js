@@ -1,6 +1,6 @@
 import { airIcon } from "../../../assets/icons.js";
 import { updateTexts } from "../../language/languageController.js";
-import { API, getCurrentUser } from "../../services/services.js";
+import { getUsers, getCurrentUser, supabase } from "../../services/services.js";
 import { initCard } from "./book.js";
 import { initBookFunctionality, isDraging } from "./bookFunctionality.js";
 
@@ -10,13 +10,10 @@ export function clearUsersCache() {
     cachedUsers = null;
 }
 
-async function getUsers(force = false) {
+async function loadUsers(force = false) {
     if (cachedUsers && !force) return cachedUsers;
 
-    const res = await fetch(API);
-    if (!res.ok) throw new Error('network error');
-
-    cachedUsers = await res.json();
+    cachedUsers = await getUsers();
     return cachedUsers;
 }
 
@@ -26,18 +23,18 @@ export function renderDashboard(users, filter, container, tags = '', currentUser
     const tagsArray = tags.trim().toLowerCase().split(' ').filter(Boolean);
 
     users.forEach(u => {
-
         if (filter === 'private' && currentUser && u.id !== currentUser.id) return;
 
         (u.projects || []).forEach(p => {
-
             const isPublic = p.isPublic;
 
             if ((filter === 'public' && !isPublic) || (filter === 'private' && isPublic)) return;
 
             const projectTags = (p.tags || []).map(t => t.toLowerCase());
+
             const hasTagMatch =
-                tagsArray.length === 0 || tagsArray.every(tag => projectTags.includes(tag));
+                tagsArray.length === 0 ||
+                tagsArray.every(tag => projectTags.includes(tag));
 
             if (!hasTagMatch) return;
 
@@ -60,19 +57,29 @@ export function renderDashboard(users, filter, container, tags = '', currentUser
 
 export function updateUserProjects(userId, newProjects) {
     if (!cachedUsers) return;
+
     cachedUsers = cachedUsers.map(u =>
         u.id === userId ? { ...u, projects: newProjects } : u
     );
+}
+
+async function updatePrivate() {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    document?.querySelector('.radio-block').classList.remove('radio-block');
 }
 
 export async function initDashboardPage() {
     const container = document.querySelector('.books-container');
     const radios = document.querySelectorAll('input[name="folder"]');
     const tags = document.querySelector('.tags-input');
-    let intervalId;
+    updatePrivate();
 
+    let intervalId;
     let currentFilter = 'public';
-    cachedUsers = await getUsers(true);
+
+    cachedUsers = await loadUsers(true);
     let currentUser = await getCurrentUser();
 
     let lastHash = null;
@@ -91,16 +98,18 @@ export async function initDashboardPage() {
     tags.addEventListener('input', update);
 
     update();
+
     intervalId = setInterval(async () => {
         if (document.hidden || isDraging) return;
 
-        const users = await getUsers(true);
+        const users = await loadUsers(true);
         const newHash = JSON.stringify(users);
 
         if (newHash === lastHash) return;
 
         lastHash = newHash;
         cachedUsers = users;
+
         update();
     }, 15000);
 
@@ -110,6 +119,7 @@ export async function initDashboardPage() {
         radios.forEach(radio => {
             radio.removeEventListener('change', update);
         });
+
         tags.removeEventListener('input', update);
 
         clearInterval(intervalId);

@@ -1,13 +1,14 @@
-import { partyHat } from "../../../assets/icons.js";
-import { dataLogin } from "../../utils/storage.js";
+import { loaderIcon, partyHat } from "../../../assets/icons.js";
 
 export const accountPage = `
     <div class="card-container display-flex flex-direction-column align-items-center gap-12px">
         <div class="main-max-width display-flex flex-direction-column align-items-center gap-12px">
             <div class="user-profile-container display-flex align-items-center">
-                <div class="user-profile-image display-flex justify-content-center align-items-center header-span"></div>
+                <div class="user-profile-image display-flex justify-content-center align-items-center header-span">${loaderIcon}</div>
                 ${partyHat}
             </div>
+            <span class="header-nickname header-15-span">...</span>
+            <span class="register-name additional-text-colour">@...</span>
             <div class="width-60per additional-text-colour margin-top-12px">
                 <label for="nickname" data-lang="nickname"></label>
             </div>

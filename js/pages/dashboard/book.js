@@ -9,7 +9,7 @@ export function initCard(name, author, isPublic){
         </div>
         <div id="${author}ѳлѧсїс${name}" class="book display-flex flex-direction-row align-items-center justify-content-space-between padding-12px position-relative">
                 <div class="display-flex flex-direction-column justify-content-space-between margin-horizontal-12px">
-                    <span class="additional-text-colour book-author">@${sliceString(author, 24)}</span>
+                    <span class="additional-text-colour book-author">${sliceString(author, 24)}</span>
                     <span class="header-15-span book-name">${sliceString(name, 16)}</span>
                 </div>
             <button class="display-status circle-button margin-horizontal-12px">${isPublic ? publicIcon : lockIcon}</button>

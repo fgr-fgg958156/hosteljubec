@@ -1,20 +1,23 @@
+import { loaderIcon } from "../../../assets/icons.js";
 import { loginUpdate } from "../../components/layout.js";
 import { t } from "../../language/languageController.js";
 import { navigate } from "../../router/router.js";
-import { API, getCurrentUser, hashPassword, updateUser } from "../../services/services.js";
-import { dataLogin, setLogin } from "../../utils/storage.js";
+import { getCurrentUser, updateUser, deleteCurrentUser, logoutUser, updatePassword, getCurrentEmail } from "../../services/services.js";
 import { clearUsersCache } from "../dashboard/dashboardFunctionality.js";
 
-export function initAccountPage(){
+export async function initAccountPage() {
+    const user = await getCurrentUser();
+    const email = await getCurrentEmail();
     const nicknameInput = document.querySelector('.nickname-edit-input');
     const passwordInput = document.querySelector('.password-edit-input');
-    
+
     const deleteButton = document.querySelector('.delete-profile-button');
     const logoutButton = document.querySelector('.logout-profile-button');
     const saveButton = document.querySelector('.save-profile-button');
 
     if (!nicknameInput || !passwordInput || !deleteButton || !saveButton) return;
-    updateUserProfile();
+
+    await updateUserProfile(user, email);
     checkSpecialDate();
 
     function checkSpecialDate() {
@@ -25,20 +28,25 @@ export function initAccountPage(){
         ];
 
         const today = new Date();
-
         const day = today.getDate();
         const month = today.getMonth() + 1;
 
-        const isSpecialDate = dates.some(date =>
-            date.day === day &&
-            date.month === month
+        const isSpecialDate = dates.some(d =>
+            d.day === day && d.month === month
         );
 
         if (isSpecialDate) {
             const partyHat = document.querySelector('.party-hat');
-            partyHat.style.display = 'block';
+            if (partyHat) partyHat.style.display = 'block';
+
             const rect = nicknameInput.getBoundingClientRect();
-            confetti({position: {x: rect.left + rect.width / 2,y: rect.top + rect.height / 2}});
+
+            confetti({
+                position: {
+                    x: rect.left + rect.width / 2,
+                    y: rect.top + rect.height / 2
+                }
+            });
         }
     }
 
@@ -52,21 +60,20 @@ export function initAccountPage(){
                 return;
             }
 
-            const data = dataLogin();
-            if (Object.keys(data).length === 0) return;
-
-            const user = await getCurrentUser();
-
             if (!user) {
                 alert(t('userNotFound'));
                 return;
             }
 
-            const passwordHash = password ? await hashPassword(password) : data.password;
-            await updateUser(user, ['nickname', 'password'], [nickname, passwordHash]);
+            await updateUser(user, ['nickname'], [nickname]);
 
-            setLogin(nickname, passwordHash, true);
-            updateUserProfile();
+            if (password) {
+                await updatePassword(password);
+            }
+
+            await updateUserProfile(user, email);
+            clearUsersCache();
+
         } catch (error) {
             console.error(error);
             alert(t('updateError'));
@@ -75,43 +82,27 @@ export function initAccountPage(){
 
     const deleteAccount = async () => {
         try {
-            const data = dataLogin();
-            if (Object.keys(data).length === 0) return;
+            if (!user) return;
 
-            const user = await getCurrentUser();
+            await deleteCurrentUser();
 
-            const response = await fetch(`${API}/${user.id}`,
-                {
-                    method: 'DELETE'
-                }
-            );
-
-            if (!response.ok) throw new Error();
-            setLogin("", "", false);
             navigate('/');
-            loginUpdate();
+            loginUpdate(false);
             clearUsersCache();
-        }
-        catch (error) {
+
+        } catch (error) {
             console.error(error);
             alert(t('deleteError'));
         }
-    }
+    };
 
-    function logout(){
-        setLogin("", "", false);
+    async function logout() {
+        await logoutUser();
+
         navigate('/');
-        loginUpdate();
+        loginUpdate(false);
         clearUsersCache();
     }
-
-    async function loadData(){
-        const data = dataLogin();
-        if (Object.keys(data).length === 0) return;
-        nicknameInput.value = data.nickname;
-    }
-
-    loadData();
 
     deleteButton.addEventListener('click', deleteAccount);
     saveButton.addEventListener('click', saveNewData);
@@ -121,11 +112,27 @@ export function initAccountPage(){
         deleteButton.removeEventListener('click', deleteAccount);
         saveButton.removeEventListener('click', saveNewData);
         logoutButton.removeEventListener('click', logout);
-    }
+    };
 }
 
-export function updateUserProfile(){
+export async function updateUserProfile(user, email) {
     const profile = document.querySelector(".user-profile-image");
-    if(!profile) return;
-    profile.innerHTML = dataLogin()?.nickname?.[0]?.toUpperCase() || ''
+    const profileName = document.querySelector(".header-nickname");
+    const nicknameInput = document.querySelector('.nickname-edit-input');
+    const registerName = document.querySelector('.register-name');
+
+    if (!profile || !profileName || !nicknameInput || !registerName) return;
+
+    if (!user) {
+        profile.innerHTML = `${loaderIcon}`;
+        profileName.textContent = `...`;
+        nicknameInput.value = '';
+        registerName.textContent = '@...'
+        return;
+    }
+
+    profile.innerHTML = user.nickname?.[0]?.toUpperCase() || `${loaderIcon}`;
+    profileName.textContent = user.nickname || '...';
+    nicknameInput.value = user.nickname || '';
+    registerName.textContent = email;
 }

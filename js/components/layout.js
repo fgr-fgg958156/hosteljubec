@@ -1,5 +1,5 @@
 import { cardsStackIcon, homeIcon, languageIcon, loginIcon, menuIcon, moonIcon, personIcon, whitePlusIcon } from "../../assets/icons.js";
-import { dataLogin } from "../utils/storage.js";
+import { supabase } from "../services/services.js";
 
 export function initNavBar() {
     if (document.querySelector('nav')) return;
@@ -25,10 +25,10 @@ export function initNavBar() {
     const dashboardButton = createNavButton(cardsStackIcon, ['nav-link', 'circle-button'], '#/dashboard');
     buttonStack.appendChild(dashboardButton);
 
-    const accountButton = createNavButton(personIcon, ['nav-link', 'circle-button', 'account'], '#/account');
+    const accountButton = createNavButton(personIcon, ['nav-link', 'circle-button', 'account', 'display-none'], '#/account');
     buttonStack.appendChild(accountButton);
 
-    const loginButton = createNavButton(loginIcon, ['nav-link', 'circle-button', 'login'], '#/login');
+    const loginButton = createNavButton(loginIcon, ['nav-link', 'circle-button', 'login', 'display-none'], '#/login');
     buttonStack.appendChild(loginButton);
 
     const themeButton = createNavButton(moonIcon, ['circle-button', 'theme-button']);
@@ -78,6 +78,7 @@ function createBlueTextNavButton(icon, href, key){
 function summonNavListContainer(){
     const navContainer = document.createElement('div');
     navContainer.classList.add('nav-menu-container', 'main-max-width', 'display-flex', 'align-items-center', 'flex-direction-column', 'justify-content-space-around');
+    
     const homeButton = createNavButtonContainer(homeIcon, 'home', '/');
     navContainer.appendChild(homeButton);
 
@@ -89,7 +90,7 @@ function summonNavListContainer(){
     navContainer.appendChild(accountButton);
 
     const loginButton = createNavButtonContainer(loginIcon, 'login', '#/login');
-    loginButton.classList.add('login');
+    loginButton.classList.add('display-none', 'login');
     navContainer.appendChild(loginButton);
 
     const themeButton = createNavButtonContainer(moonIcon, 'light');
@@ -113,21 +114,11 @@ function createNavButtonContainer(icon, key, href){
     return button;
 }
 
-export function loginUpdate() {
+export async function loginUpdate(isLogged) {
     const loginEl = document.querySelectorAll('.login');
     const accountEl = document.querySelectorAll('.account');
 
     if (!loginEl.length || !accountEl.length) return;
-
-    const loginData = dataLogin();
-
-    if (Object.keys(loginData).length === 0) {
-        loginEl.forEach(e => e.classList.remove('display-none'));
-        accountEl.forEach(e => e.classList.add('display-none'));
-        return;
-    }
-
-    const isLogged = loginData.login;
 
     loginEl.forEach(e => e.classList.toggle('display-none', isLogged));
     accountEl.forEach(e => e.classList.toggle('display-none', !isLogged));

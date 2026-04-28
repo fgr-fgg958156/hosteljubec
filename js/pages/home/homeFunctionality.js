@@ -1,7 +1,7 @@
 import { airIcon } from "../../../assets/icons.js";
 import { updateTexts } from "../../language/languageController.js";
 import { getProject } from "../../services/services.js";
-import { dataLogin, dataSettings, dataWords, setSettings } from "../../utils/storage.js";
+import { dataSettings, dataWords, setSettings } from "../../utils/storage.js";
 import { initCard } from "./cardFunctionality.js";
 import { initCheckboxFunctionality } from "./checkboxFunctionality.js";
 import { initFileLoader } from "./fileLoader.js";

@@ -1,6 +1,5 @@
 import { t, updateTexts } from "../../language/languageController.js";
-import { getCurrentUser, updateUser } from "../../services/services.js";
-import { dataLogin } from "../../utils/storage.js";
+import { getCurrentUser, supabase, updateUser } from "../../services/services.js";
 import { initCard } from "./card.js";
 
 export function initCreatorPage() {
@@ -239,7 +238,7 @@ export function initCreatorPage() {
     }
 
     function download(){
-        listOfCards.fileName = bookName.value.trim() || 'Безіменний';
+        listOfCards.fileName = bookName.value.trim() || t('unnamed');
         const jsonStr = JSON.stringify(listOfCards, null, 2);
 
         const blob = new Blob([jsonStr], {type: "application/json"});
@@ -263,18 +262,20 @@ export function initCreatorPage() {
         URL.revokeObjectURL(url);
     }
 
-    async function dataPush(){
-        if (!dataLogin()?.login) return;
-        listOfCards.fileName = bookName.value.trim() || 'Безіменний';
+    async function dataPush() {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) return;
+
+        listOfCards.fileName = bookName.value.trim() || t('unnamed');
         listOfCards.tags = tags.value.trim().split(/\s+/).filter(Boolean) || [];
 
-        const user = await getCurrentUser();
-        if (!user) {
+        const currentUser = await getCurrentUser();
+        if (!currentUser) {
             alert(t('userNotFound'));
             return;
         }
 
-        const projects = user.projects || [];
+        const projects = currentUser.projects || [];
 
         const updatedProjects = [
             ...projects.filter(p => p.fileName !== listOfCards.fileName),
@@ -290,7 +291,7 @@ export function initCreatorPage() {
             }
         ];
 
-        await updateUser(user, ['projects'], [updatedProjects]);
+        await updateUser(currentUser, ['projects'], [updatedProjects]);
     }
 
     function pushNewLetters(){

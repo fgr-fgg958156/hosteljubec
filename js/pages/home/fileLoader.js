@@ -1,6 +1,6 @@
 import { t } from "../../language/languageController.js";
-import { getCurrentUser, updateUser } from "../../services/services.js";
-import { dataLogin, dataSettings, setSettings } from "../../utils/storage.js";
+import { getCurrentUser, supabase, updateUser } from "../../services/services.js";
+import { dataSettings, setSettings } from "../../utils/storage.js";
 
 let handler = null;
 
@@ -45,23 +45,29 @@ export function initFileLoader(onLoad) {
         };
 
         localStorage.setItem('dataWords', JSON.stringify(normalized));
-        
+
         const settingsData = dataSettings();
-        setSettings(settingsData.isRandom, 0, settingsData.isDark, settingsData.showInput);
+        setSettings(
+            settingsData.isRandom,
+            0,
+            settingsData.isDark,
+            settingsData.showInput
+        );
 
         onLoad?.(normalized);
 
         e.target.value = '';
 
-        if (!dataLogin()?.login) return;
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) return;
 
-        const user = await getCurrentUser();
-        if (!user) {
+        const currentUser = await getCurrentUser();
+        if (!currentUser) {
             alert(t('userNotFound'));
             return;
         }
 
-        const projects = user.projects || [];
+        const projects = currentUser.projects || [];
 
         const updatedProjects = [
             ...projects.filter(p => p.fileName !== normalized.fileName),
@@ -77,7 +83,7 @@ export function initFileLoader(onLoad) {
             }
         ];
 
-        await updateUser(user, ['projects'], [updatedProjects]);
+        await updateUser(currentUser, ['projects'], [updatedProjects]);
     };
 
     fileArray.addEventListener('change', handler);

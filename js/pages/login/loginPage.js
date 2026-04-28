@@ -3,9 +3,9 @@ export const loginPage = `
         <div class="main-max-width display-flex flex-direction-column align-items-center gap-12px">
             <div class="width-60per"><span class="header-span" data-lang="login"></span></div>
             <div class="width-60per additional-text-colour margin-top-12px">
-                <label for="nickname" data-lang="nickname"></span>
+                <label for="nickname" data-lang="registerName"></span>
             </div>
-            <input type="text" id="nickname" data-lang-placeholder="nickname" class="nickname-input">
+            <input type="text" id="nickname" data-lang-placeholder="registerName" class="nickname-input">
             <div class="width-60per additional-text-colour margin-top-12px display-flex justify-content-space-between align-items-center">
                 <label for="password" data-lang="password"></label>
                 <label for="password" class="blue-interactive-text-colour forgot-password" data-lang="forgotPassword">Забув пароль</label></div>

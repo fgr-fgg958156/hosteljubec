@@ -1,6 +1,5 @@
 export const dataWords = () => safeParse('dataWords');
 export const dataSettings = () => safeParse('dataSettings');
-export const dataLogin = () => safeParse('dataLogin');
 
 export const setSettings = (isRandom, index, isDark, showInput) => {
     localStorage.setItem('dataSettings', JSON.stringify({
@@ -8,14 +7,6 @@ export const setSettings = (isRandom, index, isDark, showInput) => {
             'index': index,
             'isDark': isDark,
             'showInput': showInput
-    }));
-};
-
-export const setLogin = (nickname, passwordHash, login) => {
-    localStorage.setItem('dataLogin', JSON.stringify({
-            'nickname': nickname,
-            'passwordHash': passwordHash,
-            'login': login
     }));
 };
 

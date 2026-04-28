@@ -3,12 +3,13 @@ import { initDropMenu } from "../components/dropMenu.js";
 import { dataSettings, setSettings } from "./storage.js";
 import { moonIcon, sunIcon } from "../../assets/icons.js";
 import { nextLang, updateTexts } from "../language/languageController.js";
+import { isLoggedIn } from "../services/services.js";
 
 document.body.setAttribute('data-theme-loaded', 'true');
 
 initNavBar();
+updateTexts();
 initDropMenu();
-loginUpdate();
 
 const themeBtns = document.querySelectorAll('.theme-button');
 const languageBtns = document.querySelectorAll('.language-button');
@@ -44,3 +45,5 @@ languageBtns.forEach(btn => {
 });
 
 applyThemeUI();
+const logged = await isLoggedIn();
+loginUpdate(logged);
