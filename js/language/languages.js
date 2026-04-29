@@ -74,7 +74,7 @@ export const languages = {
         bookname : 'Book name',
         pages: 'Pages',
         divider: 'Divider',
-        spliter: 'Spliter',
+        spliter: 'Splitter',
         toData: 'To data',
         toDesktop: 'To desktop',
         create: 'Create',
