@@ -45,6 +45,8 @@ languageBtns.forEach(btn => {
 });
 
 applyThemeUI();
-const logged = await isLoggedIn();
-loginUpdate(logged);
+isLoggedIn().then(logged => {
+    loginUpdate(logged);
+    updateTexts();
+});
 updateTexts();
