@@ -136,7 +136,7 @@ export function initCreatorPage() {
             cardIdUpdate();
         }
 
-        function rerenderOneCard(id) {
+    function rerenderOneCard(id) {
         const oldCard = container.children[id];
         if (!oldCard) return;
 
@@ -152,6 +152,7 @@ export function initCreatorPage() {
         oldCard.replaceWith(wrapper.firstElementChild);
 
         cardIdUpdate();
+        updateTexts();
     }
 
     function swapRows(id) {
@@ -230,6 +231,7 @@ export function initCreatorPage() {
         }
 
         cardIdUpdate();
+        updateTexts();
     }
 
     function clearContainer(){
