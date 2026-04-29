@@ -10,7 +10,9 @@ export function initBookFunctionality(container, updateMethod) {
         if (e.target.closest('.display-status')) {
             const book = e.target.closest('.book');
             const nickname = book.querySelector('.book-author')?.textContent;
-            const projectName = book.querySelector('.book-name')?.textContent;
+            //const projectName = book.querySelector('.book-name')?.textContent;
+            const [author, projectName] = book.id.split("ѳлѧсїс");
+            const project = await getProject(projectName, author);
 
             const { data: { user } } = await supabase.auth.getUser();
             if (!user) return;
@@ -24,7 +26,7 @@ export function initBookFunctionality(container, updateMethod) {
             if (!userCurrent) return;
 
             const updatedProjects = userCurrent.projects.map(p =>
-                p.fileName === projectName ? { ...p, isPublic: !p.isPublic } : p
+                p.fileName === project.fileName ? { ...p, isPublic: !p.isPublic } : p
             );
 
             await updateUser(userCurrent, ['projects'], [updatedProjects]);
