@@ -177,7 +177,7 @@ export const languages = {
         bookname : 'Назва кнігі',
         pages: 'Лісты',
         divider: 'Дзяльнік',
-        spliter: 'Розсек',
+        spliter: 'Разак',
         toData: 'У даныя',
         toDesktop: 'На стол',
         create: 'Стварыць',
@@ -200,7 +200,7 @@ export const languages = {
         wrongStructure: "Няправільная будова",
         differentLength: "Твар != Спод",
         unnamed: "Безназоўны",
-        dividerError: "Дзяльнік = Розсек",
+        dividerError: "Дзяльнік = Разак",
         registerName: "Пісанае імя",
         confirmMessage: "Пацвердзіце ўсуненне"
     }
