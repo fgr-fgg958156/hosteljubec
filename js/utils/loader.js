@@ -45,8 +45,7 @@ languageBtns.forEach(btn => {
 });
 
 applyThemeUI();
-isLoggedIn().then(logged => {
-    loginUpdate(logged);
-    updateTexts();
-});
 updateTexts();
+requestAnimationFrame(() => {
+    isLoggedIn().then(loginUpdate);
+});
