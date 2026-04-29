@@ -1,4 +1,5 @@
 import { cardsStackIcon, homeIcon, languageIcon, loginIcon, menuIcon, moonIcon, personIcon, whitePlusIcon } from "../../assets/icons.js";
+import { updateTexts } from "../language/languageController.js";
 import { supabase } from "../services/services.js";
 
 export function initNavBar() {
@@ -25,11 +26,8 @@ export function initNavBar() {
     const dashboardButton = createNavButton(cardsStackIcon, ['nav-link', 'circle-button'], '#/dashboard');
     buttonStack.appendChild(dashboardButton);
 
-    const accountButton = createNavButton(personIcon, ['nav-link', 'circle-button', 'account', 'display-none'], '#/account');
+    const accountButton = createNavButton('', ['circle-button', 'account-toggler'], '');
     buttonStack.appendChild(accountButton);
-
-    const loginButton = createNavButton(loginIcon, ['nav-link', 'circle-button', 'login', 'display-none'], '#/login');
-    buttonStack.appendChild(loginButton);
 
     const themeButton = createNavButton(moonIcon, ['circle-button', 'theme-button']);
     buttonStack.appendChild(themeButton);
@@ -85,13 +83,9 @@ function summonNavListContainer(){
     const dashboardButton = createNavButtonContainer(cardsStackIcon, 'dashboard', '#/dashboard');
     navContainer.appendChild(dashboardButton);
 
-    const accountButton = createNavButtonContainer(personIcon, 'account', '#/account');
-    accountButton.classList.add('display-none', 'account');
+    const accountButton = createNavButtonContainer('', '', '');
+    accountButton.classList.add('account-toggler');
     navContainer.appendChild(accountButton);
-
-    const loginButton = createNavButtonContainer(loginIcon, 'login', '#/login');
-    loginButton.classList.add('display-none', 'login');
-    navContainer.appendChild(loginButton);
 
     const themeButton = createNavButtonContainer(moonIcon, 'light');
     themeButton.classList.add('theme-button');
@@ -115,11 +109,22 @@ function createNavButtonContainer(icon, key, href){
 }
 
 export async function loginUpdate(isLogged) {
-    const loginEl = document.querySelectorAll('.login');
-    const accountEl = document.querySelectorAll('.account');
+    const accountEl = document.querySelectorAll('.account-toggler');
 
-    if (!loginEl.length || !accountEl.length) return;
+    if (!accountEl.length) return;
 
-    loginEl.forEach(e => e.classList.toggle('display-none', isLogged));
-    accountEl.forEach(e => e.classList.toggle('display-none', !isLogged));
+    accountEl.forEach(e => {
+        if(isLogged){
+            e.setAttribute("href", '#/account');
+            e.innerHTML = e.querySelector('span') ? `${personIcon}<span data-lang="account"></span>` : personIcon;
+            e.classList.add('account', 'nav-link');
+        }
+        else{
+            e.setAttribute("href", '#/login');
+            e.innerHTML = e.querySelector('span') ? `${loginIcon}<span data-lang="login"></span>` : loginIcon;
+            e.classList.add('login', 'nav-link');
+        }
+    });
+
+    updateTexts();
 }

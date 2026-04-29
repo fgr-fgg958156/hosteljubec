@@ -71,9 +71,9 @@ export async function initAccountPage() {
                 await updatePassword(password);
             }
 
-            await updateUserProfile(user, email);
+            const newUser = await getCurrentUser();
+            await updateUserProfile(newUser, email);
             clearUsersCache();
-
         } catch (error) {
             console.error(error);
             alert(t('updateError'));
@@ -84,12 +84,14 @@ export async function initAccountPage() {
         try {
             if (!user) return;
 
+            const confirmed = window.confirm(t('confirmMessage'));
+            if (!confirmed) return;
+
             await deleteCurrentUser();
 
             navigate('/');
             loginUpdate(false);
             clearUsersCache();
-
         } catch (error) {
             console.error(error);
             alert(t('deleteError'));

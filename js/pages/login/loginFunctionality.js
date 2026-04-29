@@ -55,9 +55,8 @@ export function initLoginPage() {
             }
 
             await registerUser(nickname, password);
-            await loginUpdate();
+            await loginUpdate(true);
             navigate('/');
-            loginUpdate();
         } catch (error) {
             console.error(error);
             alert(t('registerError'));

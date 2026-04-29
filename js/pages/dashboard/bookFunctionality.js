@@ -1,3 +1,4 @@
+import { t } from "../../language/languageController.js";
 import { navigate } from "../../router/router.js";
 import { getProject, getUsers, supabase, updateUser } from "../../services/services.js";
 import { dataSettings, setSettings, setWords } from "../../utils/storage.js";
@@ -175,6 +176,9 @@ export function initBookFunctionality(container, updateMethod) {
             );
 
             if (!userCurrent) return;
+            
+            const confirmed = window.confirm(t('confirmMessage'));
+            if (!confirmed) return;
 
             const updatedProjects = userCurrent.projects.filter(
                 p => p.fileName !== projectName

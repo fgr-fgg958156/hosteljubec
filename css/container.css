@@ -101,3 +101,10 @@ span{
 .file-name{
     text-wrap: nowrap;
 }
+
+.text-cut {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

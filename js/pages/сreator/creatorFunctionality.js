@@ -162,7 +162,6 @@ export function initCreatorPage() {
         ];
 
         rerenderOneCard(id);
-        updateTexts();
     }
 
     function containerFunctions(e) {
@@ -212,7 +211,6 @@ export function initCreatorPage() {
         ];
 
         rerenderCards();
-        updateTexts();
     }
 
     function rerenderCards() {
@@ -239,6 +237,12 @@ export function initCreatorPage() {
         listOfCards.words2 = [];
         listOfCards.words3 = [];
         container.innerHTML = '';
+    }
+
+    function removeAllCards(){
+        const confirmed = window.confirm(t('confirmMessage'));
+        if (!confirmed) return;
+        clearContainer();
     }
 
     function download(){
@@ -325,7 +329,7 @@ export function initCreatorPage() {
     addButton.addEventListener('click', createNewCard);
     importButton.addEventListener('change', importNewBook);
     swapAllButton.addEventListener('click', swapAllRows);
-    clearButton.addEventListener('click', clearContainer);
+    clearButton.addEventListener('click', removeAllCards);
     desktopSaveButton.addEventListener('click', download);
     dataSaveButton.addEventListener('click', dataPush);
     pushLettersButton.addEventListener('click', pushNewLetters);
@@ -334,7 +338,7 @@ export function initCreatorPage() {
         pushLettersButton.removeEventListener('click', pushNewLetters);
         dataSaveButton.removeEventListener('click', dataPush);
         desktopSaveButton.removeEventListener('click', download);
-        clearButton.removeEventListener('click', clearContainer);
+        clearButton.removeEventListener('click', removeAllCards);
         swapAllButton.removeEventListener('click', swapAllRows);
         addButton.removeEventListener('click', createNewCard);
         importButton.removeEventListener('change', importNewBook);

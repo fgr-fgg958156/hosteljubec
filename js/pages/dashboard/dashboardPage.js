@@ -19,7 +19,7 @@ export const dashboardPage = `
                 <input type="text" id="tags-input" data-lang-placeholder="tags" class="tags-input max-width" value="${''}">
             </div>
         </div>
-        <div class="main-max-width display-flex flex-direction-column align-items-center gap-12px books-container">
+        <div class="main-max-width display-flex flex-direction-column align-items-center gap-12px books-container margin-bottom-36px">
             <div class="margin-top-36px">${loaderIcon}</div>
         </div>
     </div>

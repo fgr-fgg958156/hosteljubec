@@ -19,7 +19,7 @@ export function updateHomePage(words, runnyWords, index, isRandom, showInput, fr
     }   
     backSpan.textContent  = isRandom ? cutTheString(runnyWords.image[index], config.maxChar) : cutTheString(words.image[index], config.maxChar) ?? '';
     counter.textContent  = isRandom ? `кількість : ${runnyWords.image.length}` :`${index + 1} / ${words.image.length}`;
-    fileName.textContent = sliceString(words.fileName, 16);
+    fileName.textContent = words.fileName;
     if(showInput){
         lineContainer.classList.remove('display-none');
     }

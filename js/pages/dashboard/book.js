@@ -8,9 +8,9 @@ export function initCard(name, author, isPublic){
             <div class="flex-1 delete-background display-flex flex-direction-row-reverse align-items-center padding-horizontal-36px">${whiteDeleteIcon}</div>
         </div>
         <div id="${author}ѳлѧсїс${name}" class="book display-flex flex-direction-row align-items-center justify-content-space-between padding-12px position-relative">
-                <div class="display-flex flex-direction-column justify-content-space-between margin-horizontal-12px">
-                    <span class="additional-text-colour book-author">${sliceString(author, 24)}</span>
-                    <span class="header-15-span book-name">${sliceString(name, 16)}</span>
+                <div class="min-width-144px flex-1 display-flex flex-direction-column justify-content-space-between margin-horizontal-12px">
+                    <span class="additional-text-colour book-author text-cut">${author}</span>
+                    <span class="header-15-span book-name text-cut">${name}</span>
                 </div>
             <button class="display-status circle-button margin-horizontal-12px">${isPublic ? publicIcon : lockIcon}</button>
         </div>
