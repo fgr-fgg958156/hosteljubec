@@ -161,6 +161,7 @@ export function initCreatorPage() {
         ];
 
         rerenderOneCard(id);
+        updateTexts();
     }
 
     function containerFunctions(e) {
@@ -210,6 +211,7 @@ export function initCreatorPage() {
         ];
 
         rerenderCards();
+        updateTexts();
     }
 
     function rerenderCards() {
