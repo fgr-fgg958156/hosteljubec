@@ -165,14 +165,12 @@ export function initBookFunctionality(container, updateMethod) {
             const { data: { user } } = await supabase.auth.getUser();
             if (!user) return;
 
-            const nickname = book.querySelector('.book-author')?.textContent;
-
-            if (author !== nickname) return;
+            //const nickname = book.querySelector('.book-author')?.textContent;
 
             const users = await getUsers();
 
             const userCurrent = users.find(
-                u => u.nickname.toLowerCase() === nickname.toLowerCase()
+                u => u.nickname.toLowerCase() === author.toLowerCase()
             );
 
             if (!userCurrent) return;
