@@ -10,14 +10,14 @@ export function updateHomePage(words, runnyWords, index, isRandom, showInput, fr
     
     const additionalText = isRandom ? runnyWords.addition[index] : words.addition[index];
 
-    additionalSpan.textContent = cutTheString(additionalText || '', config.maxAdditionChar);
+    additionalSpan.innerHTML = additionalText || '';
 
     if(!additionalText) {
         additionalSpan.classList.add('hide');
     } else {
         additionalSpan.classList.remove('hide');
     }   
-    backSpan.textContent  = isRandom ? cutTheString(runnyWords.image[index], config.maxChar) : cutTheString(words.image[index], config.maxChar) ?? '';
+    backSpan.textContent  = isRandom ? runnyWords.image[index] : words.image[index] ?? '';
     counter.textContent  = isRandom ? `кількість : ${runnyWords.image.length}` :`${index + 1} / ${words.image.length}`;
     fileName.textContent = words.fileName;
     if(showInput){
@@ -26,11 +26,6 @@ export function updateHomePage(words, runnyWords, index, isRandom, showInput, fr
     else{
         lineContainer.classList.add('display-none');
     }
-}
-
-function cutTheString(str, lgh) {
-    if(!str) return '';
-    return(str.slice(0, lgh));
 }
 
 export function deadIconWrapper() {
@@ -64,6 +59,6 @@ function imageConverter(span, currentFront){
         span.replaceChildren(wrapper);
 
     } else {
-        span.textContent = cutTheString(currentFront, config.maxChar);
+        span.textContent = currentFront;
     }
 }

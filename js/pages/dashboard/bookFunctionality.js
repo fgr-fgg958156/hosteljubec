@@ -10,7 +10,7 @@ export function initBookFunctionality(container, updateMethod) {
     const handleClick = async (e) => {
         if (e.target.closest('.display-status')) {
             const book = e.target.closest('.book');
-            const nickname = book.querySelector('.book-author')?.textContent;
+            //const nickname = book.querySelector('.book-author')?.textContent;
             //const projectName = book.querySelector('.book-name')?.textContent;
             const [author, projectName] = book.id.split("ѳлѧсїс");
             const project = await getProject(projectName, author);
@@ -21,7 +21,7 @@ export function initBookFunctionality(container, updateMethod) {
             const users = await getUsers();
 
             const userCurrent = users.find(
-                u => u.nickname.toLowerCase() === nickname.toLowerCase()
+                u => u.nickname.toLowerCase() === author.toLowerCase()
             );
 
             if (!userCurrent) return;

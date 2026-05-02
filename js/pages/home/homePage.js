@@ -29,15 +29,15 @@ export const homaPage =
         </div>
         <div class="card main-max-width">
             <div class="front-side display-flex justify-content-center align-items-center flex-direction-column padding-12px">
-                <span class="front-span card-span" data-lang="front"></span>
-                <div class="additional-span additional-text-colour"><span>+</span><br/><span data-lang="addition"></span></div>
+                <span class="front-span card-span card-text-cut" data-lang="front"></span>
+                <div class="additional-span additional-text-colour card-text-cut card-span"><span>+</span><br/><span data-lang="addition"></span></div>
                 <div class="line-container display-flex justify-content-center align-items-center flex-direction-row">
                     <input type="text" id="checkInput" data-lang-placeholder="back" class="input-line margin-12px">
                     <button class="check circle-button">${checkmarkIcon}</button>
                 </div>
             </div>
             <div class="back-side display-flex justify-content-center align-items-center flex-direction-column padding-12px">
-                <span class="back-span card-span" span data-lang="back"></span>
+                <span class="back-span card-span card-text-cut" span data-lang="back"></span>
             </div>
         </div>
         <div class="main-max-width margin-top-12px display-flex justify-content-center align-items-center flex-direction-row padding-bottom-12px">

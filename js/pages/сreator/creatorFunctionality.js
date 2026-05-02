@@ -31,8 +31,30 @@ export function initCreatorPage() {
     loadSavedData();
 
     const paragraph = (val) => {
-        return val.toLowerCase().trim().replaceAll('!абзац', '\n').replace(/\\t/g, '\t');
-    }
+        const map = {
+            '!p2': '\n\n',
+            '!абзац2': '\n\n',
+            '!уступ2': '\n\n',
+
+            '!p': '\n',
+            '!абзац': '\n',
+            '!уступ': '\n',
+
+            '!tab': '\t',
+            '!таб': '\t',
+            '!вкладка': '\t'
+        };
+
+        let result = val.toLowerCase().trim();
+
+        Object.keys(map)
+            .sort((a, b) => b.length - a.length)
+            .forEach(key => {
+                result = result.replaceAll(key, map[key]);
+            });
+
+        return result;
+    };
 
     function cardIdUpdate() {
         [...container.children].forEach((card, index) => {
@@ -45,13 +67,13 @@ export function initCreatorPage() {
 
     function pushNewCardData(image, preimage, addition) {
         const index = listOfCards.words1.length;
-        listOfCards.words1.push(image);
-        listOfCards.words2.push(preimage);
+        listOfCards.words1.push(preimage);
+        listOfCards.words2.push(image);
         listOfCards.words3.push(addition);
 
         container.insertAdjacentHTML(
             'beforeend',
-            initCard(index, image, preimage, addition)
+            initCard(index, preimage, image, addition)
         );
 
         cardIdUpdate();
@@ -144,8 +166,8 @@ export function initCreatorPage() {
 
         wrapper.innerHTML = initCard(
             id,
-            listOfCards.words1[id] || '',
             listOfCards.words2[id] || '',
+            listOfCards.words1[id] || '',
             listOfCards.words3[id] || ''
         );
 
@@ -196,9 +218,9 @@ export function initCreatorPage() {
         if (Number.isNaN(cardId)) return;
 
         const field = e.target.classList.contains('image-input')
-            ? 'words1'
-            : e.target.classList.contains('preimage-input')
             ? 'words2'
+            : e.target.classList.contains('preimage-input')
+            ? 'words1'
             : 'words3';
 
         listOfCards[field][cardId] = e.target.value;
@@ -221,8 +243,8 @@ export function initCreatorPage() {
                 'beforeend',
                 initCard(
                     i,
-                    listOfCards.words1[i] || '',
                     listOfCards.words2[i] || '',
+                    listOfCards.words1[i] || '',
                     listOfCards.words3[i] || ''
                 )
             );
@@ -247,6 +269,7 @@ export function initCreatorPage() {
 
     function download(){
         listOfCards.fileName = bookName.value.trim() || t('unnamed');
+        listOfCards.tags = tags.value.trim().split(/\s+/).filter(Boolean);
         const jsonStr = JSON.stringify(listOfCards, null, 2);
 
         const blob = new Blob([jsonStr], {type: "application/json"});
@@ -292,8 +315,8 @@ export function initCreatorPage() {
                 isPublic: false,
                 tags: listOfCards.tags,
                 cards: {
-                    image: listOfCards.words1,
-                    preimage: listOfCards.words2,
+                    image: listOfCards.words2,
+                    preimage: listOfCards.words1,
                     addition: listOfCards.words3
                 }
             }
@@ -307,6 +330,10 @@ export function initCreatorPage() {
             alert(t('dividerError'));
             return;
         } 
+        if(spliter.value === "" || divider.value === ""){
+            alert(t('emptyFields'));
+            return;
+        }
 
         const splitValue = paragraph(spliter.value);
         const array = letters.value.split(splitValue);
@@ -317,7 +344,7 @@ export function initCreatorPage() {
         );
 
         arrayOfarrays.forEach(([w1, w2, w3 = '']) => {
-            pushNewCardData(w2, w1, w3);
+            pushNewCardData(w1, w2, w3);
         });
 
         letters.value = '';

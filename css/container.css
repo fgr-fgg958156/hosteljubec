@@ -53,25 +53,36 @@ body[data-theme-loaded="true"] {
 }
 
 .img-box{
-    height: 124px;
+    height: 242px;
     max-width: 100%;
     border-radius: 12px;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    isolation: isolate;
 }
 
-.img-box img{
+.img-box img {
     height: 100%;
     width: auto;
+    max-width: 100%;
     object-fit: contain;
+    border-radius: 12px;
 }
 
 span{
     display: inline-block;
     overflow-wrap: break-word;
     white-space: normal;
+}
+
+.card-span {
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    white-space: normal;
+    hyphens: auto;
 }
 
 .nav-menu-container{
@@ -107,4 +118,11 @@ span{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.card-text-cut {
+  display: -webkit-box;
+  -webkit-line-clamp: 12;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

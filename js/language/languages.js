@@ -48,7 +48,8 @@ export const languages = {
         unnamed: "Безіменний",
         dividerError: "Дільник = Різак",
         registerName: "Реєстрове ім'я",
-        confirmMessage: "Підтвердіть видалення"
+        confirmMessage: "Підтвердіть видалення",
+        none: "пусто"
     },
     'en' : {
         lang : 'English',
@@ -99,7 +100,8 @@ export const languages = {
         unnamed: "Unnamed",
         dividerError: "Divider = Spliter",
         registerName: "Register name",
-        confirmMessage: "Confirm deletion"
+        confirmMessage: "Confirm deletion",
+        none: "none"
     },
     'ky' : {
         base: 'uk',
@@ -151,7 +153,8 @@ export const languages = {
         unnamed: "Безіменний",
         dividerError: "Дільник = Закрійник",
         registerName: "Писане ім'ѧ",
-        confirmMessage: "Підтвердіть Ꙋсꙋненнѧ"
+        confirmMessage: "Підтвердіть Ꙋсꙋненнѧ",
+        none: "голо"
     },
     'be' : {
         lang : 'Крывіца',
@@ -202,6 +205,7 @@ export const languages = {
         unnamed: "Безназоўны",
         dividerError: "Дзяльнік = Разак",
         registerName: "Пісанае імя",
-        confirmMessage: "Пацвердзіце ўсуненне"
+        confirmMessage: "Пацвердзіце ўсуненне",
+        none: "пуста"
     }
 }

@@ -23,7 +23,10 @@ export function renderDashboard(users, filter, container, tags = '', currentUser
     const tagsArray = tags.trim().toLowerCase().split(' ').filter(Boolean);
 
     users.forEach(u => {
-        if (filter === 'private' && currentUser && u.id !== currentUser.id) return;
+        if (filter === 'private') {
+            if (!currentUser) return;
+            if (u.id !== currentUser.id) return;
+        }
 
         (u.projects || []).forEach(p => {
             const isPublic = p.isPublic;
@@ -38,7 +41,7 @@ export function renderDashboard(users, filter, container, tags = '', currentUser
 
             if (!hasTagMatch) return;
 
-            html += initCard(p.fileName, u.nickname, isPublic);
+            html += initCard(p.fileName, u.nickname, isPublic, `${p?.tags[0]} ${p.tags.length>1 ? `(+${p.tags.length})` : ``}`);
         });
     });
 
