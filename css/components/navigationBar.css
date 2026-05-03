@@ -6,4 +6,6 @@ nav{
     background-color: var(--card-colour);
     box-shadow: var(--main-shadow);
     border-radius: var(--border-radius-36);
+    border: 2px solid var(--border-colour);
+    box-sizing: border-box;
 }

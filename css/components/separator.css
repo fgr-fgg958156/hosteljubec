@@ -8,6 +8,6 @@
 .separator::before,
 .separator::after {
   content: "";
-  height: 1px;
-  background-color: var(--additional-text-colour);
+  height: 2px;
+  background-color: var(--border-colour);
 }

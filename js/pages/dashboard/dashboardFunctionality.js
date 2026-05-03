@@ -41,7 +41,7 @@ export function renderDashboard(users, filter, container, tags = '', currentUser
 
             if (!hasTagMatch) return;
 
-            html += initCard(p.fileName, u.nickname, isPublic, `${p?.tags[0]} ${p.tags.length>1 ? `(+${p.tags.length-1})` : ``}`);
+            html += initCard(p.fileName, u.nickname, isPublic, `${!p.tags[0] ? `(0)` : p.tags[0]} ${p.tags.length>1 ? `(+${p.tags.length-1})` : ``}`);
         });
     });
 

@@ -8,6 +8,7 @@
     
     user-select: none;
     touch-action: pan-y;
+    border: 2px solid var(--border-colour);
 }
 
 .book-container{

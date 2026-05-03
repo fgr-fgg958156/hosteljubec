@@ -17,9 +17,11 @@
     --background-colour:#fff;
     --card-colour:#fff;
     --input-border-color: #a8b1ff;
+    --blue-gradient: linear-gradient(45deg, var(--input-border-color) 0%, var(--blue-button-colour) 100%);
+    --border-colour: #edeff4;
     --border-radius-9: 9px;
     --border-radius-18: 18px;
     --border-radius-27: 27px;
     --border-radius-36: 36px;
-    --main-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+    --main-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.0);
 }

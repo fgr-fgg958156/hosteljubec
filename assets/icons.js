@@ -1,5 +1,5 @@
 const mainIconSize = 24;
-const smallIconSize = 16;
+const smallIconSize = 18;
 const svgMainSizeProps = `height="${mainIconSize}" width="${mainIconSize}" shape-rendering="geometricPrecision"`;
 const svgSmallSizeProps = `height="${smallIconSize}" width="${smallIconSize}" shape-rendering="geometricPrecision"`;
 
@@ -13,6 +13,10 @@ export const uploadIcon =
     </svg>`;
 export const checkmarkIcon = 
     `<svg xmlns="http://www.w3.org/2000/svg" ${svgMainSizeProps} ${mainIconFill} viewBox="0 -960 960 960">
+        <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+    </svg>`;
+export const whiteCheckmarkIcon = 
+    `<svg xmlns="http://www.w3.org/2000/svg" ${svgMainSizeProps} ${whiteIconFill} viewBox="0 -960 960 960">
         <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
     </svg>`;
 export const leftArrowIcon = 
@@ -125,6 +129,10 @@ export const languageIcon =
     </svg>`;
 export const loaderIcon = 
     `<svg xmlns="http://www.w3.org/2000/svg" ${svgMainSizeProps} ${grayIconFill} viewBox="0 -960 960 960" class="loader">
+        <path d="M325-111.5q-73-31.5-127.5-86t-86-127.5Q80-398 80-480.5t31.5-155q31.5-72.5 86-127t127.5-86Q398-880 480-880q17 0 28.5 11.5T520-840q0 17-11.5 28.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160q133 0 226.5-93.5T800-480q0-17 11.5-28.5T840-520q17 0 28.5 11.5T880-480q0 82-31.5 155t-86 127.5q-54.5 54.5-127 86T480.5-80Q398-80 325-111.5Z"/>
+    </svg>`;
+export const whiteLoaderIcon = 
+    `<svg xmlns="http://www.w3.org/2000/svg" ${svgMainSizeProps} ${whiteIconFill} viewBox="0 -960 960 960" class="loader">
         <path d="M325-111.5q-73-31.5-127.5-86t-86-127.5Q80-398 80-480.5t31.5-155q31.5-72.5 86-127t127.5-86Q398-880 480-880q17 0 28.5 11.5T520-840q0 17-11.5 28.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160q133 0 226.5-93.5T800-480q0-17 11.5-28.5T840-520q17 0 28.5 11.5T880-480q0 82-31.5 155t-86 127.5q-54.5 54.5-127 86T480.5-80Q398-80 325-111.5Z"/>
     </svg>`;
 export const partyHat = `

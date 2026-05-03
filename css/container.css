@@ -11,6 +11,7 @@ body.dark-theme{
     --switch-colour:#1e242a;
     --main-button-colour: #151b23;
     --hover-button-colour: #12161C;
+    --border-colour: #151b23;
 }
 
 body{
@@ -46,6 +47,7 @@ body[data-theme-loaded="true"] {
 .main-max-width{
     width: 90%;
     max-width: 640px;
+    min-width: 0;
 }
 
 .front-side, .back-side, .book, .prop-card{
@@ -96,6 +98,8 @@ span{
     z-index: 900;
     box-shadow: var(--main-shadow);
     border-radius: 0 0 var(--border-radius-18) var(--border-radius-18);
+    border: 2px solid var(--border-colour);
+    box-sizing: border-box;
 
     transition:
         max-height 0.3s ease,
@@ -118,6 +122,10 @@ span{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.text-cut-parent {
+    max-width: 144px;
 }
 
 .card-text-cut {

@@ -1,5 +1,5 @@
 .user-profile-image{
-    background-color: var(--hover-button-colour);
+    background: var(--blue-gradient);
     user-select: none;
     border-radius: 50%;
     width: 100%;
@@ -15,7 +15,7 @@
 .party-hat{
     display: none;
     position: absolute;
-    top: -44px;
-    left: -18px;
-    transform: rotate(-32deg);
+    top: -46px;
+    left: -16px;
+    transform: rotate(-30deg);
 }

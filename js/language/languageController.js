@@ -36,23 +36,35 @@ export function nextLang() {
     updateTexts();
 }
 
-export function updateTexts() {
+export function updateTexts(root = document) {
     const words = dataWords();
     const hasWords = words && Object.keys(words).length > 0;
 
-    document.querySelectorAll("[data-lang]").forEach(el => {
-        if (hasWords && (el.classList.contains("additional-span") || el.classList.contains("front-span") || el.classList.contains("back-span") || el.classList.contains("file-name"))) {
-            return;
-        }
+    root.querySelectorAll("[data-lang]").forEach(el => {
+        if (
+            hasWords &&
+            (
+                el.classList.contains("additional-span") ||
+                el.classList.contains("front-span") ||
+                el.classList.contains("back-span") ||
+                el.classList.contains("file-name")
+            )
+        ) return;
 
         const key = el.dataset.lang;
         el.textContent = t(key);
     });
 
-    document.querySelectorAll("[data-lang-placeholder]").forEach(el => {
-        if (hasWords && (el.classList.contains("additional-span") || el.classList.contains("front-span") || el.classList.contains("back-span") || el.classList.contains("file-name"))) {
-            return;
-        }
+    root.querySelectorAll("[data-lang-placeholder]").forEach(el => {
+        if (
+            hasWords &&
+            (
+                el.classList.contains("additional-span") ||
+                el.classList.contains("front-span") ||
+                el.classList.contains("back-span") ||
+                el.classList.contains("file-name")
+            )
+        ) return;
 
         const key = el.dataset.langPlaceholder;
         el.placeholder = t(key);

@@ -12,6 +12,7 @@ import { initLoginPage } from "../pages/login/loginFunctionality.js";
 import "https://cdn.jsdelivr.net/npm/@hiseb/confetti@2.1.0/dist/confetti.min.js";
 import { updateTexts } from "../language/languageController.js";
 import { supabase } from "../services/services.js";
+import { applyThemeUI, refreshThemeButtons } from "../utils/loader.js";
 
 const root = document.getElementById('root');
 let currentDestroy = null;
@@ -54,9 +55,14 @@ const render = async () => {
         return;
     }
 
-    root.innerHTML = route.page;
-    updateTexts();
 
+
+    root.innerHTML = route.page;
+    if(route.page === accountPage){
+        refreshThemeButtons();
+        applyThemeUI();
+    }
+    updateTexts();
     if (route.init) {
         currentDestroy = route.init();
     }

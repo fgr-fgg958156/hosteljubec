@@ -1,7 +1,7 @@
 import {editIcon, lockIcon, publicIcon, whiteDeleteIcon } from "../../../assets/icons.js";
 //import { t } from "../../language/languageController.js";
 
-export function initCard(name, author, isPublic, firstTag = '0'){
+export function initCard(name, author, isPublic, firstTag = '(0)'){
     return `
     <div class="book-container position-relative display-flex">
         <div class="book-background position-absolute display-flex">

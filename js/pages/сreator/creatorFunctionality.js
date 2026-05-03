@@ -1,3 +1,4 @@
+import { whiteCheckmarkIcon } from "../../../assets/icons.js";
 import { t, updateTexts } from "../../language/languageController.js";
 import { getCurrentUser, supabase, updateUser } from "../../services/services.js";
 import { initCard } from "./card.js";
@@ -19,6 +20,23 @@ export function initCreatorPage() {
 
     const desktopSaveButton = document.querySelector('.desktop-save');
     const dataSaveButton = document.querySelector('.data-save');
+
+    let interval = null;
+
+    function startCheckTimer() {
+        stopCheckTimer();
+
+        interval = setTimeout(() => {
+            dataSaveButton.innerHTML = `<span data-lang="toData"></span>`;
+            updateTexts(dataSaveButton);
+            interval = null;
+        }, 1000);
+    }
+
+    function stopCheckTimer() {
+        clearTimeout(interval);
+        interval = null;
+    }
 
     const listOfCards = {
         fileName: t('unnamed'),
@@ -75,9 +93,9 @@ export function initCreatorPage() {
             'beforeend',
             initCard(index, preimage, image, addition)
         );
-
         cardIdUpdate();
-        updateTexts();
+        const newCard = container.lastElementChild;
+        updateTexts(newCard);
     }
     
     function loadSavedData(){
@@ -166,8 +184,8 @@ export function initCreatorPage() {
 
         wrapper.innerHTML = initCard(
             id,
-            listOfCards.words2[id] || '',
             listOfCards.words1[id] || '',
+            listOfCards.words2[id] || '',
             listOfCards.words3[id] || ''
         );
 
@@ -243,8 +261,8 @@ export function initCreatorPage() {
                 'beforeend',
                 initCard(
                     i,
-                    listOfCards.words2[i] || '',
                     listOfCards.words1[i] || '',
+                    listOfCards.words2[i] || '',
                     listOfCards.words3[i] || ''
                 )
             );
@@ -292,37 +310,46 @@ export function initCreatorPage() {
 
         URL.revokeObjectURL(url);
     }
+    
+    let isSaving = false;
 
     async function dataPush() {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) return;
+        if (isSaving) return;
+        isSaving = true;
+        try {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) return;
 
-        listOfCards.fileName = bookName.value.trim() || t('unnamed');
-        listOfCards.tags = tags.value.trim().split(/\s+/).filter(Boolean) || [];
+            listOfCards.fileName = bookName.value.trim() || t('unnamed');
+            listOfCards.tags = tags.value.trim().split(/\s+/).filter(Boolean) || [];
 
-        const currentUser = await getCurrentUser();
-        if (!currentUser) {
-            alert(t('userNotFound'));
-            return;
-        }
-
-        const projects = currentUser.projects || [];
-
-        const updatedProjects = [
-            ...projects.filter(p => p.fileName !== listOfCards.fileName),
-            {
-                fileName: listOfCards.fileName,
-                isPublic: false,
-                tags: listOfCards.tags,
-                cards: {
-                    image: listOfCards.words2,
-                    preimage: listOfCards.words1,
-                    addition: listOfCards.words3
-                }
+            const currentUser = await getCurrentUser();
+            if (!currentUser) {
+                alert(t('userNotFound'));
+                return;
             }
-        ];
 
-        await updateUser(currentUser, ['projects'], [updatedProjects]);
+            const projects = currentUser.projects || [];
+
+            const updatedProjects = [
+                ...projects.filter(p => p.fileName !== listOfCards.fileName),
+                {
+                    fileName: listOfCards.fileName,
+                    isPublic: false,
+                    tags: listOfCards.tags,
+                    cards: {
+                        image: listOfCards.words2,
+                        preimage: listOfCards.words1,
+                        addition: listOfCards.words3
+                    }
+                }
+            ];
+            await updateUser(currentUser, ['projects'], [updatedProjects]);
+            dataSaveButton.innerHTML = `${whiteCheckmarkIcon}`;
+            startCheckTimer();
+        } finally {
+            isSaving = false;
+        }
     }
 
     function pushNewLetters(){
@@ -344,7 +371,7 @@ export function initCreatorPage() {
         );
 
         arrayOfarrays.forEach(([w1, w2, w3 = '']) => {
-            pushNewCardData(w1, w2, w3);
+            pushNewCardData(w2, w1, w3);
         });
 
         letters.value = '';

@@ -3,6 +3,7 @@ import { loginUpdate } from "../../components/layout.js";
 import { t } from "../../language/languageController.js";
 import { navigate } from "../../router/router.js";
 import { getCurrentUser, updateUser, deleteCurrentUser, logoutUser, updatePassword, getCurrentEmail } from "../../services/services.js";
+import { mainContainer } from "../../utils/loader.js";
 import { clearUsersCache } from "../dashboard/dashboardFunctionality.js";
 
 export async function initAccountPage() {
@@ -39,7 +40,7 @@ export async function initAccountPage() {
             const partyHat = document.querySelector('.party-hat');
             if (partyHat) partyHat.style.display = 'block';
 
-            const rect = nicknameInput.getBoundingClientRect();
+            const rect = mainContainer.getBoundingClientRect();
 
             confetti({
                 position: {

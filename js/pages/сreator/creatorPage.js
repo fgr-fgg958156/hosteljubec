@@ -42,8 +42,8 @@ export const creatorPage = `
         <div class="add-new-card main-square-text-button display-flex justify-content-center align-items-center main-max-width">
             ${plusIcon}
         </div>
-        <div class="data-save main-max-width display-flex flex-direction-row align-items-center gap-12px margin-top-12px margin-bottom-36px">
-            <div class="blue-square-text-button white-text-colour display-flex justify-content-center align-items-center flex-1">
+        <div class="main-max-width display-flex flex-direction-row align-items-center gap-12px margin-top-12px margin-bottom-36px">
+            <div class="data-save blue-square-text-button white-text-colour display-flex justify-content-center align-items-center flex-1">
                 <span data-lang="toData"></span>
             </div>
             <div class="desktop-save main-square-text-button display-flex justify-content-center align-items-center flex-1">

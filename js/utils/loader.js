@@ -11,41 +11,47 @@ initNavBar();
 updateTexts();
 initDropMenu();
 
-const themeBtns = document.querySelectorAll('.theme-button');
-const languageBtns = document.querySelectorAll('.language-button');
+export const mainContainer = document.querySelector('#main-container');
+let themeBtns = [];
 
-function applyThemeUI() {
-    const settings = dataSettings();
-
-    themeBtns.forEach(btn => {
-        btn.innerHTML = settings.isDark ? btn.classList.contains('circle-button') ? sunIcon : `${sunIcon}<span data-lang="light"></span>` : btn.classList.contains('circle-button') ? moonIcon : `${moonIcon}<span data-lang="dark"></span>`;
-    });
-
-    document.body.classList.toggle('dark-theme', settings.isDark);
+export function refreshThemeButtons() {
+    themeBtns = document.querySelectorAll('.theme-button');
 }
 
-themeBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+export function applyThemeUI() {
+    const settings = dataSettings();
+    const isDark = settings.isDark;
+
+    themeBtns.forEach(btn => {
+        const isCircle = btn.classList.contains('circle-button');
+
+        if (isCircle) {
+            btn.innerHTML = isDark ? sunIcon : moonIcon;
+        } else {
+            btn.innerHTML = isDark
+                ? `${sunIcon}<span data-lang="light"></span>`
+                : `${moonIcon}<span data-lang="dark"></span>`;
+        }
+    });
+
+    document.body.classList.toggle('dark-theme', isDark);
+}
+
+mainContainer.addEventListener('click', (e) => {
+    if (e.target.closest('.theme-button')) {
         const settings = dataSettings();
-
         const newDark = !document.body.classList.contains('dark-theme');
-
         document.body.classList.toggle('dark-theme', newDark);
-
         setSettings(settings.isRandom, settings.index, newDark,settings.showInput);
         applyThemeUI();
         updateTexts();
-    });
-});
-
-languageBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    }
+    
+    if (e.target.closest('.language-button')) {
         nextLang();
-    });
+    }
 });
 
 applyThemeUI();
 updateTexts();
-requestAnimationFrame(() => {
-    isLoggedIn().then(loginUpdate);
-});
+isLoggedIn().then(loginUpdate);
