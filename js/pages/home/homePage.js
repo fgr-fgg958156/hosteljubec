@@ -27,7 +27,7 @@ export const homaPage =
                 </div>
             </div>
         </div>
-        <div class="main-max-width position-relative">
+        <div class="main-max-width position-relative card-wrapper">
             <div class="sidekick-card position-absolute container"></div>
             <div class="card container">
                 <div class="front-side display-flex justify-content-center align-items-center flex-direction-column padding-12px">

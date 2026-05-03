@@ -2,7 +2,7 @@ export function initCard(card, onSwipe) {
     let startX = 0;
     const gap = 60;
     const limit = 20;
-    const maxDistance = 150;
+    const maxDistance = 80;
     let isDragging = false;
     let isMoving = false;
 
