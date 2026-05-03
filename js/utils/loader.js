@@ -34,7 +34,7 @@ export function applyThemeUI() {
         }
     });
 
-    document.body.classList.toggle('dark-theme', isDark);
+    document.documentElement.classList.toggle('dark-theme', isDark);
 }
 
 mainContainer.addEventListener('click', (e) => {

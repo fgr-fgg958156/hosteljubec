@@ -2,7 +2,7 @@ html {
   scrollbar-gutter: stable;
 }
 
-body.dark-theme{
+html.dark-theme{
     --main-text-colour:#fff;
     --light-text-colour:#fff;
     --background-colour: #0d1117;
