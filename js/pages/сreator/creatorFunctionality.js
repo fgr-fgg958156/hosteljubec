@@ -1,4 +1,4 @@
-import { whiteCheckmarkIcon, whiteLoader } from "../../../assets/icons.js";
+import { whiteCheckmarkIcon, whiteLoaderIcon } from "../../../assets/icons.js";
 import { t, updateTexts } from "../../language/languageController.js";
 import { getCurrentUser, supabase, updateUser } from "../../services/services.js";
 import { initCard } from "./card.js";
@@ -321,7 +321,7 @@ export function initCreatorPage() {
     async function dataPush() {
         if (isSaving) return;
         isSaving = true;
-        dataSaveButton.innerHTML = `${whiteLoader}`;
+        dataSaveButton.innerHTML = `${whiteLoaderIcon}`;
         try {
             const { data: { user } } = await supabase.auth.getUser();
             if (!user) {
