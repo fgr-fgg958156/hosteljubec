@@ -1,4 +1,4 @@
-import { whiteCheckmarkIcon } from "../../../assets/icons.js";
+import { whiteCheckmarkIcon, whiteLoader } from "../../../assets/icons.js";
 import { t, updateTexts } from "../../language/languageController.js";
 import { getCurrentUser, supabase, updateUser } from "../../services/services.js";
 import { initCard } from "./card.js";
@@ -27,10 +27,15 @@ export function initCreatorPage() {
         stopCheckTimer();
 
         interval = setTimeout(() => {
-            dataSaveButton.innerHTML = `<span data-lang="toData"></span>`;
-            updateTexts(dataSaveButton);
+            resetButtonData();
             interval = null;
         }, 1000);
+    }
+    
+    function resetButtonData(){
+        if(!dataSaveButton) return;
+        dataSaveButton.innerHTML = `<span data-lang="toData"></span>`;
+        updateTexts(dataSaveButton);
     }
 
     function stopCheckTimer() {
@@ -316,9 +321,13 @@ export function initCreatorPage() {
     async function dataPush() {
         if (isSaving) return;
         isSaving = true;
+        dataSaveButton.innerHTML = `${whiteLoader}`;
         try {
             const { data: { user } } = await supabase.auth.getUser();
-            if (!user) return;
+            if (!user) {
+                resetButtonData();
+                return;
+            }
 
             listOfCards.fileName = bookName.value.trim() || t('unnamed');
             listOfCards.tags = tags.value.trim().split(/\s+/).filter(Boolean) || [];
@@ -326,6 +335,7 @@ export function initCreatorPage() {
             const currentUser = await getCurrentUser();
             if (!currentUser) {
                 alert(t('userNotFound'));
+                resetButtonData();
                 return;
             }
 
