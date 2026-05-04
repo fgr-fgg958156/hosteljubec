@@ -321,13 +321,14 @@ export function initCreatorPage() {
     async function dataPush() {
         if (isSaving) return;
         isSaving = true;
-        dataSaveButton.innerHTML = `${whiteLoaderIcon}`;
+        
         try {
             const { data: { user } } = await supabase.auth.getUser();
             if (!user) {
                 resetButtonData();
                 return;
             }
+            dataSaveButton.innerHTML = `${whiteLoaderIcon}`;
 
             listOfCards.fileName = bookName.value.trim() || t('unnamed');
             listOfCards.tags = tags.value.trim().split(/\s+/).filter(Boolean) || [];
