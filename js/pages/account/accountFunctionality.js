@@ -1,4 +1,4 @@
-import { loaderIcon } from "../../../assets/icons.js";
+import { whiteLoaderIcon } from "../../../assets/icons.js";
 import { loginUpdate } from "../../components/layout.js";
 import { t } from "../../language/languageController.js";
 import { navigate } from "../../router/router.js";
@@ -127,14 +127,14 @@ export async function updateUserProfile(user, email) {
     if (!profile || !profileName || !nicknameInput || !registerName) return;
 
     if (!user) {
-        profile.innerHTML = `${loaderIcon}`;
+        profile.innerHTML = `${whiteLoaderIcon}`;
         profileName.textContent = `...`;
         nicknameInput.value = '';
         registerName.textContent = '@...'
         return;
     }
 
-    profile.innerHTML = user.nickname?.[0]?.toUpperCase() || `${loaderIcon}`;
+    profile.innerHTML = user.nickname?.[0]?.toUpperCase() || `${whiteLoaderIcon}`;
     profileName.textContent = user.nickname || '...';
     nicknameInput.value = user.nickname || '';
     registerName.textContent = email;

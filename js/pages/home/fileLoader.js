@@ -38,8 +38,8 @@ export function initFileLoader(onLoad) {
 
         const normalized = {
             fileName: data.fileName || t('unnamed'),
-            image: data.words1,
-            preimage: data.words2,
+            image: data.words2,
+            preimage: data.words1,
             addition: data.words3 || [],
             tags: data.tags || []
         };

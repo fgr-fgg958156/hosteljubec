@@ -162,14 +162,17 @@ export function initCreatorPage() {
 
         for (let i = 0; i < data.words1.length; i++) {
             pushNewCardData(
-                data.words1[i],
                 data.words2[i],
+                data.words1[i],
                 (data.words3 || [])[i] || ''
             );
         }
 
-        e.target.value = '';
         
+        bookName.value = data.fileName || '';
+        tags.value = (data.tags || []).join(' ');
+
+        e.target.value = '';
     }
 
     function deleteCard(id, card) {

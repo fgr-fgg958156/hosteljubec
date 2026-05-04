@@ -40,8 +40,8 @@ export function applyThemeUI() {
 mainContainer.addEventListener('click', (e) => {
     if (e.target.closest('.theme-button')) {
         const settings = dataSettings();
-        const newDark = !document.body.classList.contains('dark-theme');
-        document.body.classList.toggle('dark-theme', newDark);
+        const newDark = !document.documentElement.classList.contains('dark-theme');
+        document.documentElement.classList.toggle('dark-theme', newDark);
         setSettings(settings.isRandom, settings.index, newDark,settings.showInput);
         applyThemeUI();
         updateTexts();
