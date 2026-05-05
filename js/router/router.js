@@ -55,8 +55,6 @@ const render = async () => {
         return;
     }
 
-
-
     root.innerHTML = route.page;
     if(route.page === accountPage){
         refreshThemeButtons();

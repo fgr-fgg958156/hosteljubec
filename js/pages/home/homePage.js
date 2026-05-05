@@ -28,8 +28,8 @@ export const homaPage =
             </div>
         </div>
         <div class="main-max-width position-relative card-wrapper">
-            <div class="sidekick-card position-absolute container"></div>
-            <div class="card container">
+            <div class="sidekick-card position-absolute container box-sizing-border-box"></div>
+            <div class="card container box-sizing-border-box">
                 <div class="front-side display-flex justify-content-center align-items-center flex-direction-column padding-12px">
                     <span class="front-span card-span card-text-cut" data-lang="front"></span>
                     <div class="additional-span additional-text-colour card-text-cut card-span"><span>+</span><br/><span data-lang="addition"></span></div>

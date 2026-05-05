@@ -51,7 +51,8 @@ export function initFileLoader(onLoad) {
             settingsData.isRandom,
             0,
             settingsData.isDark,
-            settingsData.showInput
+            settingsData.showInput,
+            settingsData.learningMode
         );
 
         onLoad?.(normalized);

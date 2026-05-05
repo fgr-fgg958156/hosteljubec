@@ -43,13 +43,13 @@ export const accountPage = `
             <div class="display-flex flex-direction-column align-items-center container">
                 <div class="display-flex flex-direction-row align-items-center container border-bottom justify-content-space-between padding-12px box-sizing-border-box">
                     <div class="additional-text-colour flex-1">
-                        <label for="theme" data-lang="theme"></label>
+                        <span data-lang="theme"></span>
                     </div>
                     <div id="theme" class="theme-button display-flex flex-1 main-square-text-button justify-content-center gap-12px align-items-center padding-10px box-sizing-border-box"></div>
                 </div>  
                 <div class="display-flex flex-direction-row align-items-center container justify-content-space-between padding-12px box-sizing-border-box">
                     <div class="additional-text-colour flex-1">
-                        <label for="language" data-lang="language"></label>
+                        <span data-lang="language"></span>
                     </div>
                     <div id="language" class="language-button display-flex flex-1 main-square-text-button justify-content-space-around align-items-center padding-10px box-sizing-border-box">
                         <span data-lang="lang"></span>
@@ -57,7 +57,41 @@ export const accountPage = `
                 </div>
             </div>
         </div>
-        <div class="main-max-width display-flex flex-direction-row align-items-center gap-12px justify-content-space-between margin-top-36px">
+        <div class="main-max-width display-flex flex-direction-row align-items-center margin-top-36px">
+            <span class="additional-text-colour" data-lang="settings"></span>
+        </div>
+        <div class="main-max-width display-flex flex-direction-column align-items-stretch border-radius-18px border">
+            <div class="display-flex flex-direction-column align-items-center container">
+                <div class="display-flex flex-direction-row align-items-center container border-bottom justify-content-space-between padding-12px box-sizing-border-box">
+                    <div class="additional-text-colour flex-1">
+                        <label for="isRandom" data-lang="isRandom"></label>
+                    </div>
+                    <label class="switch margin-12px">
+                        <input type="checkbox" id="isRandom" name="isRandom" />
+                        <span class="slider"></span>
+                    </label>
+                </div>  
+                 <div class="display-flex flex-direction-row align-items-center container border-bottom justify-content-space-between padding-12px box-sizing-border-box">
+                    <div class="additional-text-colour flex-1">
+                        <span data-lang="learning"></span>
+                    </div>
+                    <label class="switch margin-12px">
+                        <input type="checkbox" id="learningMode" name="learningMode" />
+                        <span class="slider"></span>
+                    </label>
+                </div> 
+                <div class="display-flex flex-direction-row align-items-center container justify-content-space-between padding-12px box-sizing-border-box">
+                    <div class="additional-text-colour flex-1">
+                        <label for="keyboard" data-lang="keyboard"></label>
+                    </div>
+                    <label class="switch margin-12px">
+                        <input type="checkbox" id="keyboard" name="keyboard" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="main-max-width display-flex flex-direction-row align-items-center gap-12px justify-content-space-between margin-top-36px margin-bottom-36px">
             <div class="logout-profile-button main-square-text-button display-flex justify-content-space-around align-items-center flex-1">
                 <span data-lang="logout"></span>
             </div>

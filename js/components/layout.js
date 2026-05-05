@@ -62,7 +62,7 @@ function createNavButton(icon, classList, href){
 }
 
 function createBlueTextNavButton(icon, href, key){
-    const button = document.createElement('label');
+    const button = document.createElement('div');
     button.innerHTML = `${icon}<span data-lang="${key}"></span>`;
     button.classList.add('blue-text-button', 'padding-horizontal-12px', 'gap-12px', 'white-text-colour', 'display-flex', 'justify-content-space-around', 'align-items-center');
     if(href){

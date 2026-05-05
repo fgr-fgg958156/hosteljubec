@@ -41,6 +41,7 @@ export function initHomePage(){
 
     let index = safeWords.image.length > (settings.index ?? 0) ? (settings.index ?? 0) : 0;
     let isRandom = settings.isRandom ?? false;
+    let learningMode = settings.learningMode ?? false;
     let showInput = settings.showInput ?? false;
 
     randomCheckbox.checked = isRandom;
@@ -61,7 +62,7 @@ export function initHomePage(){
         index = 0;
 
         const freshSettings = dataSettings();
-        setSettings(freshSettings.isRandom, 0, freshSettings.isDark, freshSettings.showInput);
+        setSettings(freshSettings.isRandom, 0, freshSettings.isDark, freshSettings.showInput, freshSettings.learningMode);
 
         updateNReset();
         loadTags();
@@ -102,12 +103,12 @@ export function initHomePage(){
     const arithmetic = (step) => {
         index = !isRandom
             ? (index + step + words?.image?.length) % words?.image?.length
-            : runnyRandom();
+            : !learningMode ? runnyRandom() : step === -1 ? runnyRandom() : Math.floor(Math.random() * runnyWords.image.length);
 
         card.classList.remove('is-flipped');
 
         const freshSettings = dataSettings();
-        setSettings(isRandom, index, freshSettings.isDark, freshSettings.showInput);
+        setSettings(isRandom, index, freshSettings.isDark, freshSettings.showInput, freshSettings.learningMode);
 
         updateHomePage(words, runnyWords, index, isRandom, showInput, frontSpan, additionalSpan, backSpan, counter, lineContainer, fileName);
     };

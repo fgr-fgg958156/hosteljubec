@@ -16,6 +16,8 @@
   cursor: pointer;
   background: var(--switch-colour);
   border-radius: var(--border-radius-36);
+
+  transition: background 0.25s ease;
 }
 
 .slider::before {
@@ -27,12 +29,15 @@
   height: 20px;
   background: #fff;
   border-radius: 50%;
-  box-shadow: var(--main-shadow);
+  box-shadow: 0 2px 2px 0 var(--switch-colour);
+
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
 input:checked + .slider::before {
   transform: translateX(20px);
   background: var(--blue-button-colour);
+  box-shadow: none;
 }
 
 input:checked + .slider {

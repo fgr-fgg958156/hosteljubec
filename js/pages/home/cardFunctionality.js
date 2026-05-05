@@ -1,8 +1,10 @@
+import { dataSettings } from "../../utils/storage.js";
+
 export function initCard(card, onSwipe) {
     let startX = 0;
     const gap = 60;
     const limit = 20;
-    const maxDistance = 80;
+    const maxDistance = 100;
     let isDragging = false;
     let isMoving = false;
 
@@ -13,6 +15,7 @@ export function initCard(card, onSwipe) {
         isMoving = false;
         card.style.transition = 'none';
         card.style.opacity = '1';
+        card.style.borderColor = 'var(--border-colour)';
         card.setPointerCapture(e.pointerId);
     };
 
@@ -31,6 +34,18 @@ export function initCard(card, onSwipe) {
 
         const opacity = Math.max(0, 1 - Math.abs(deltaX) / maxDistance);
 
+        const { isRandom, learningMode } = dataSettings();
+
+        if (learningMode && isRandom) {
+            const progress = Math.min(1, Math.abs(deltaX) / maxDistance);
+
+            let colour = deltaX > 0
+                ? `rgba(153, 241, 205, ${progress})`
+                : `rgba(255, 147, 70, ${progress})`;
+
+            card.style.borderColor = colour;
+        }
+
         card.style.transform = `translateX(${deltaX}px) rotateZ(${deltaX * 0.08}deg)`;
         card.style.opacity = opacity;
     };
@@ -42,9 +57,15 @@ export function initCard(card, onSwipe) {
 
         card.style.transform = '';
         card.style.opacity = '1';
+        card.style.borderColor = 'var(--border-colour)';
 
-        if (isMoving && Math.abs(deltaX) >= gap) {
-            onSwipe(deltaX > 0 ? -1 : 1);
+        if (isMoving) {
+            if (Math.abs(deltaX) >= gap) {
+                onSwipe(deltaX > 0 ? -1 : 1);
+            } else {
+                card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                card.style.transform = '';
+            }
         } else {
             card.style.transition = 'transform 0.5s ease';
             card.classList.toggle('is-flipped');

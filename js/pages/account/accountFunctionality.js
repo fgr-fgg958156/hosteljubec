@@ -4,7 +4,9 @@ import { t } from "../../language/languageController.js";
 import { navigate } from "../../router/router.js";
 import { getCurrentUser, updateUser, deleteCurrentUser, logoutUser, updatePassword, getCurrentEmail } from "../../services/services.js";
 import { mainContainer } from "../../utils/loader.js";
+import { dataSettings } from "../../utils/storage.js";
 import { clearUsersCache } from "../dashboard/dashboardFunctionality.js";
+import { initCheckboxFunctionality } from "../home/checkboxFunctionality.js";
 
 export async function initAccountPage() {
     const user = await getCurrentUser();
@@ -16,10 +18,28 @@ export async function initAccountPage() {
     const logoutButton = document.querySelector('.logout-profile-button');
     const saveButton = document.querySelector('.save-profile-button');
 
+    const randomSwitch = document.querySelector('#isRandom');
+    const inputSwitch = document.querySelector('#keyboard');
+    const learningSwitch = document.querySelector('#learningMode');
+    
+    const settings = dataSettings();
+
+    let isRandom = settings.isRandom ?? false;
+    let showInput = settings.showInput ?? false;
+    let learningMode = settings.learningMode ?? false;
+
+    randomSwitch.checked = isRandom;
+    inputSwitch.checked = showInput;
+    learningSwitch.checked = learningMode;
+
     if (!nicknameInput || !passwordInput || !deleteButton || !saveButton) return;
 
     await updateUserProfile(user, email);
     checkSpecialDate();
+
+    initCheckboxFunctionality(randomSwitch, "isRandom", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), null);
+    initCheckboxFunctionality(inputSwitch, "showInput", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), null);
+    initCheckboxFunctionality(learningSwitch, "learningMode", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), null);
 
     function checkSpecialDate() {
         const dates = [

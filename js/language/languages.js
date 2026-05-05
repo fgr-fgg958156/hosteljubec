@@ -53,7 +53,11 @@ export const languages = {
         theme: "Тема",
         language: "Мова",
         appearance: "Оформлення",
-        information: "Особиста інформація"
+        information: "Особиста інформація",
+        isRandom: "Рандом",
+        learning: "Заучування",
+        keyboard: "Клавіатура",
+        settings: "Налаштування картки"
     },
     'en' : {
         lang : 'English',
@@ -109,7 +113,11 @@ export const languages = {
         theme: "Theme",
         language: "Language",
         appearance: "Appearance",
-        information: "Personal Information"
+        information: "Personal Information",
+        isRandom: "Random",
+        learning: "Learning",
+        keyboard: "Keyboard",
+        settings: "Card settings"
     },
     'ky' : {
         base: 'uk',
@@ -166,7 +174,11 @@ export const languages = {
         theme: "Вигляд",
         language: "Мова",
         appearance: "Ꙋзір",
-        information: "Особисті вісті"
+        information: "Особисті вісті",
+        isRandom: "Випадковість",
+        learning: "Заучування",
+        keyboard: "Рядок",
+        settings: "Налаштування бирки"
     },
     'be' : {
         lang : 'Крывіца',
@@ -222,6 +234,10 @@ export const languages = {
         theme: "Выгляд",
         language: "Мова",
         appearance: "Ўзор",
-        information: "Асабістыя звесткі"
+        information: "Асабістыя звесткі",
+        isRandom: "Выпадковасць",
+        learning: "Завучванне",
+        keyboard: "Радок",
+        settings: "Налады біркі"
     }
 }
