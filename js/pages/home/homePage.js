@@ -4,7 +4,7 @@ export const homaPage =
 `
     <div class="card-container display-flex justify-content-center align-items-center flex-direction-column">
         <div class="main-max-width display-flex justify-content-space-between flex-direction-row margin-bottom-12px flex-wrap-wrap">
-            <div class="flex-2 min-width-144px">
+            <div class="flex-2 min-width-144px margin-right-12px">
                 <span class="header-span file-name margin-vertical-12px text-cut" data-lang="name"></span>
             </div>
             <div class="display-flex justify-content-space-between align-items-center flex-direction-row gap-12px flex-1 flex-wrap-nowrap">
@@ -30,6 +30,7 @@ export const homaPage =
         <div class="main-max-width position-relative card-wrapper">
             <div class="sidekick-card position-absolute container box-sizing-border-box"></div>
             <div class="card container box-sizing-border-box">
+                <span class="swipe-indicator">asdad</span>
                 <div class="front-side display-flex justify-content-center align-items-center flex-direction-column padding-12px">
                     <span class="front-span card-span card-text-cut" data-lang="front"></span>
                     <div class="additional-span additional-text-colour card-text-cut card-span"><span>+</span><br/><span data-lang="addition"></span></div>

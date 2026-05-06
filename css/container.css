@@ -42,6 +42,8 @@ body[data-theme-loaded="true"] {
     width: 100%;
     padding: 20px 0px;
     gap: 10px;
+    overflow: hidden;
+    position: relative;
 }
 
 .main-max-width{

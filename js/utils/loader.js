@@ -42,7 +42,7 @@ mainContainer.addEventListener('click', (e) => {
         const settings = dataSettings();
         const newDark = !document.documentElement.classList.contains('dark-theme');
         document.documentElement.classList.toggle('dark-theme', newDark);
-        setSettings(settings.isRandom, settings.index, newDark,settings.showInput);
+        setSettings(settings.isRandom, settings.index, newDark, settings.showInput, settings.learningMode);
         applyThemeUI();
         updateTexts();
     }

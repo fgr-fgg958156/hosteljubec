@@ -21,6 +21,20 @@
     box-shadow: var(--main-shadow);
     background-color: var(--card-colour);
     border: 2px solid var(--border-colour);
+    transform: scale(0.98);
+}
+
+.swipe-indicator{
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    text-align: center;
 }
 
 .card{

@@ -23,6 +23,7 @@ export function renderDashboard(users, filter, container, tags = '', currentUser
     const tagsArray = tags.trim().toLowerCase().split(' ').filter(Boolean);
 
     users.forEach(u => {
+        
         if (filter === 'private') {
             if (!currentUser) return;
             if (u.id !== currentUser.id) return;
