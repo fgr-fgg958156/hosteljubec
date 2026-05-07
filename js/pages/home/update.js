@@ -1,6 +1,7 @@
 import { deadIcon } from "../../../assets/icons.js";
 import { config } from "../../components/config.js";
 import { sliceString } from "../dashboard/book.js";
+import { t } from "../../language/languageController.js";
 
 export function updateHomePage(words, runnyWords, index, isRandom, showInput, frontSpan, additionalSpan, backSpan, counter, lineContainer, fileName){
     if(!words.image?.length) return;
@@ -18,7 +19,7 @@ export function updateHomePage(words, runnyWords, index, isRandom, showInput, fr
         additionalSpan.classList.remove('hide');
     }   
     backSpan.textContent  = isRandom ? runnyWords.image[index] : words.image[index] ?? '';
-    counter.textContent  = isRandom ? `кількість : ${runnyWords.image.length}` :`${index + 1} / ${words.image.length}`;
+    counter.textContent  = isRandom ? `${t('quantity')} : ${runnyWords.image.length}` :`${index + 1} / ${words.image.length}`;
     fileName.textContent = words.fileName;
     if(showInput){
         lineContainer.classList.remove('display-none');
@@ -31,7 +32,7 @@ export function updateHomePage(words, runnyWords, index, isRandom, showInput, fr
 export function deadIconWrapper() {
     const wrapper = document.createElement('div');
     wrapper.className = 'upload-container max-img-height';
-    wrapper.innerHTML = `${deadIcon}</br><span>гепнуте покликання</span>`;
+    wrapper.innerHTML = `${deadIcon}</br><span data-lang="urlError">гепнуте покликання</span>`;
     return wrapper;
 }
 
