@@ -59,7 +59,9 @@ export const languages = {
         keyboard: "Клавіатура",
         settings: "Налаштування картки",
         know: "УЖЕ ЗНАЮ",
-        learning: "ЩЕ ВЧУ"
+        learning: "ЩЕ ВЧУ",
+        quantity: "кількість",
+        urlError: "Помилкове посилання"
     },
     'en' : {
         lang : 'English',
@@ -121,7 +123,9 @@ export const languages = {
         keyboard: "Keyboard",
         settings: "Card settings",
         know: "KNOW",
-        learning: "LEARNING"
+        learning: "LEARNING",
+        quantity: "quantity",
+        urlError: "URL error"
     },
     'ky' : {
         base: 'uk',
@@ -184,7 +188,9 @@ export const languages = {
         keyboard: "Рядок",
         settings: "Налаштування бирки",
         know: "ꙊЖЕ ЗНАЮ",
-        learning: "ЩЕ ВЧꙊ"
+        learning: "ЩЕ ВЧꙊ",
+        quantity: "кількість",
+        urlError: "Гепнуте покликання"
     },
     'be' : {
         lang : 'Крывіца',
@@ -246,6 +252,8 @@ export const languages = {
         keyboard: "Клавіятура",
         settings: "Налады карткі",
         know: "УЖО ВЕДАЮ",
-        learning: "ЯШЧЭ ВУЧУ"
+        learning: "ЯШЧЭ ВУЧУ",
+        quantity: "колькасць",
+        urlError: "Памылковая спасылка"
     }
 }
