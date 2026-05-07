@@ -4,7 +4,7 @@ import { sliceString } from "../dashboard/book.js";
 import { t } from "../../language/languageController.js";
 
 export function updateHomePage(words, runnyWords, index, isRandom, showInput, frontSpan, additionalSpan, backSpan, counter, lineContainer, fileName){
-    if(!words.image?.length) return;
+    if(!words.image?.length || !additionalSpan || !backSpan || !frontSpan) return;
     const currentFront = isRandom ? runnyWords.preimage[index] : words.preimage[index] ?? '';
 
     imageConverter(frontSpan, currentFront);
@@ -22,10 +22,10 @@ export function updateHomePage(words, runnyWords, index, isRandom, showInput, fr
     counterUpdate(counter, {isRandom, index}, runnyWords, words);
     fileName.textContent = words.fileName;
     if(showInput){
-        lineContainer.classList.remove('display-none');
+        lineContainer?.classList.remove('display-none');
     }
     else{
-        lineContainer.classList.add('display-none');
+        lineContainer?.classList.add('display-none');
     }
 }
 
@@ -65,6 +65,7 @@ function imageConverter(span, currentFront){
         span.replaceChildren(wrapper);
 
     } else {
-        span.textContent = currentFront;
+        if(!span) return;
+        span.textContent = currentFront || "";
     }
 }

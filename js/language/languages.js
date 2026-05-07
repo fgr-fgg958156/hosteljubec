@@ -61,7 +61,11 @@ export const languages = {
         know: "УЖЕ ЗНАЮ",
         learning: "ЩЕ ВЧУ",
         quantity: "кількість",
-        urlError: "Помилкове посилання"
+        urlError: "Помилкове посилання",
+        fileAlreadyExists: 'Книга вже існує, переписати її?',
+        testMode: 'Режим тестування',
+        choosePhrase: 'Оберіть відповідь',
+        term: 'Термін'
     },
     'en' : {
         lang : 'English',
@@ -125,7 +129,11 @@ export const languages = {
         know: "KNOW",
         learning: "LEARNING",
         quantity: "quantity",
-        urlError: "URL error"
+        urlError: "URL error",
+        fileAlreadyExists: 'File already exists. Overwrite it?',
+        testMode: 'Test mode',
+        choosePhrase: 'Choose an answer',
+        term: 'Term'
     },
     'ky' : {
         base: 'uk',
@@ -134,7 +142,7 @@ export const languages = {
         password: 'Вгадка',
         save: 'Зберегти',
         or: 'або',
-        delete: 'Ꙋсунути',
+        delete: 'Усунути',
         public: 'Прилюдно',
         private: 'Особисто',
         tags: 'Мітки',
@@ -147,13 +155,13 @@ export const languages = {
         addition: 'Додаток',
         back: 'Тил',
         forgotPassword: 'Забув вгадку',
-        login: 'Ꙋвійти',
-        register : 'Ꙋписати',
+        login: 'Увійти',
+        register : 'Уписати',
         bookname : 'Назва книги',
         pages: 'Листи',
         divider: 'Дільник',
         spliter: 'Закрійник',
-        toData: 'Ꙋ дані',
+        toData: 'У дані',
         toDesktop: 'На стіл',
         create: 'Створити',
         home: 'Голова',
@@ -177,20 +185,24 @@ export const languages = {
         unnamed: "Безіменний",
         dividerError: "Дільник = Закрійник",
         registerName: "Писане ім'я",
-        confirmMessage: "Підтвердіть Ꙋсунення",
+        confirmMessage: "Підтвердіть усунення",
         none: "голо",
         theme: "Вигляд",
         language: "Мова",
-        appearance: "Ꙋзір",
+        appearance: "Узір",
         information: "Особисті вісті",
         isRandom: "Випадковість",
         learningMode: "Заучування",
         keyboard: "Рядок",
         settings: "Налаштування бирки",
-        know: "ꙊЖЕ ЗНАЮ",
-        learning: "ЩЕ ВЧꙊ",
+        know: "УЖЕ ЗНАЮ",
+        learning: "ЩЕ ВЧУ",
         quantity: "кількість",
-        urlError: "Гепнуте покликання"
+        urlError: "Гепнуте покликання",
+        fileAlreadyExists: 'Книга вже існує, переписати її?',
+        testMode: 'Випробувальний хід',
+        choosePhrase: 'Оберіть відповідь',
+        term: 'Вираз'
     },
     'be' : {
         lang : 'Крывіца',
@@ -254,6 +266,10 @@ export const languages = {
         know: "УЖО ВЕДАЮ",
         learning: "ЯШЧЭ ВУЧУ",
         quantity: "колькасць",
-        urlError: "Памылковая спасылка"
+        urlError: "Памылковая спасылка",
+        fileAlreadyExists: 'Кніга ўжо існуе, перапісаць яе?',
+        testMode: 'Тэставы рэжым',
+        choosePhrase: 'Выберыце адказ',
+        term: 'Тэрмін'
     }
 }

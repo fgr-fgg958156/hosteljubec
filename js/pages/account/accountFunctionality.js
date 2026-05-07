@@ -21,16 +21,19 @@ export async function initAccountPage() {
     const randomSwitch = document.querySelector('#isRandom');
     const inputSwitch = document.querySelector('#keyboard');
     const learningSwitch = document.querySelector('#learningMode');
+    const testSwitch = document.querySelector('#testMode');
     
     const settings = dataSettings();
 
     let isRandom = settings.isRandom ?? false;
     let showInput = settings.showInput ?? false;
     let learningMode = settings.learningMode ?? false;
+    let testMode = settings.testMode ?? false;
 
     randomSwitch.checked = isRandom;
     inputSwitch.checked = showInput;
     learningSwitch.checked = learningMode;
+    testSwitch.checked = testMode;
 
     if (!nicknameInput || !passwordInput || !deleteButton || !saveButton) return;
 
@@ -40,6 +43,7 @@ export async function initAccountPage() {
     initCheckboxFunctionality(randomSwitch, "isRandom", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), null);
     initCheckboxFunctionality(inputSwitch, "showInput", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), null);
     initCheckboxFunctionality(learningSwitch, "learningMode", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), null);
+    initCheckboxFunctionality(testSwitch, "testMode", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), null);
 
     function checkSpecialDate() {
         const dates = [

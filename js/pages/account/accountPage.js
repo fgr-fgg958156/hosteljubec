@@ -71,7 +71,7 @@ export const accountPage = `
                         <span class="slider"></span>
                     </label>
                 </div>  
-                 <div class="display-flex flex-direction-row align-items-center container border-bottom justify-content-space-between padding-12px box-sizing-border-box">
+                <div class="display-flex flex-direction-row align-items-center container border-bottom justify-content-space-between padding-12px box-sizing-border-box">
                     <div class="additional-text-colour flex-1">
                         <span data-lang="learningMode"></span>
                     </div>
@@ -80,12 +80,21 @@ export const accountPage = `
                         <span class="slider"></span>
                     </label>
                 </div> 
-                <div class="display-flex flex-direction-row align-items-center container justify-content-space-between padding-12px box-sizing-border-box">
+               <div class="display-flex flex-direction-row align-items-center container border-bottom justify-content-space-between padding-12px box-sizing-border-box">
                     <div class="additional-text-colour flex-1">
                         <label for="keyboard" data-lang="keyboard"></label>
                     </div>
                     <label class="switch margin-12px">
                         <input type="checkbox" id="keyboard" name="keyboard" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="display-flex flex-direction-row align-items-center container justify-content-space-between padding-12px box-sizing-border-box">
+                    <div class="additional-text-colour flex-1">
+                        <label for="testMode" data-lang="testMode"></label>
+                    </div>
+                    <label class="switch margin-12px">
+                        <input type="checkbox" id="testMode" name="testMode" />
                         <span class="slider"></span>
                     </label>
                 </div>

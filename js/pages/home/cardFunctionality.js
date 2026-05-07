@@ -2,6 +2,7 @@ import { t } from "../../language/languageController.js";
 import { dataSettings } from "../../utils/storage.js";
 
 export function initCard(card, onSwipe) {
+    if(!card) return;
     const indicator = card.querySelector('.swipe-indicator');
     let startX = 0;
     const gap = 60;
@@ -46,19 +47,19 @@ export function initCard(card, onSwipe) {
                 indicator.style.opacity = progress;
 
                 indicator.style.color = deltaX > 0
-                    ? 'rgb(153, 241, 205)'
-                    : 'rgb(255, 147, 70)';
+                    ? 'rgb(24, 174, 121)'
+                    : 'rgb(240, 64, 80)';
             } else {
                 indicator.style.opacity = '0';
             }
             const shadowProgress = Math.min(0.3, Math.abs(deltaX) / maxDistance);
 
             let colour = deltaX > 0
-                ? `rgba(153, 241, 205, ${progress})`
-                : `rgba(255, 147, 70, ${progress})`;
+                ? `rgba(24, 174, 121, ${progress})`
+                : `rgba(240, 64, 80, ${progress})`;
             let shadowColour = deltaX > 0
-                ? `rgba(153, 241, 205, ${shadowProgress})`
-                : `rgba(255, 147, 70, ${shadowProgress})`;
+                ? `rgba(24, 174, 121, ${shadowProgress})`
+                : `rgba(240, 64, 80, ${shadowProgress})`;
 
             card.style.borderColor = colour;
             card.style.boxShadow = `0 0 0 4px ${shadowColour}`;

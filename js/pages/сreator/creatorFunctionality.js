@@ -55,10 +55,6 @@ export function initCreatorPage() {
 
     const paragraph = (val) => {
         const map = {
-            '!p2': '\n\n',
-            '!абзац2': '\n\n',
-            '!уступ2': '\n\n',
-
             '!p': '\n',
             '!абзац': '\n',
             '!уступ': '\n',
@@ -344,6 +340,27 @@ export function initCreatorPage() {
             }
 
             const projects = currentUser.projects || [];
+
+            const existingProject = projects.find(
+                p => p.fileName === listOfCards.fileName
+            );
+
+            if (existingProject) {
+                const confirmed = window.confirm(
+                    t('fileAlreadyExists')
+                );
+
+                if (!confirmed) {
+                    let baseName = listOfCards.fileName.replace(/\s\(\d+\)$/, '')
+                    let count = 1;
+
+                    while (projects.find(p => p.fileName === `${baseName} (${count})`)) {
+                        count++;
+                    }
+                    listOfCards.fileName = `${baseName} (${count})`;
+                    bookName.value = listOfCards.fileName;
+                }
+            }
 
             const updatedProjects = [
                 ...projects.filter(p => p.fileName !== listOfCards.fileName),

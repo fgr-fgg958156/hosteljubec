@@ -1,7 +1,7 @@
 import { dashboardPage } from "../pages/dashboard/dashboardPage.js";
 import { initDashboardPage } from "../pages/dashboard/dashboardFunctionality.js";
 import { errorPage } from "../pages/error/errorPage.js";
-import { homaPage } from "../pages/home/homePage.js";
+import { homePage } from "../pages/home/homePage.js";
 import { initHomePage } from "../pages/home/homeFunctionality.js";
 import { creatorPage } from "../pages/сreator/creatorPage.js";
 import { initCreatorPage } from "../pages/сreator/creatorFunctionality.js";
@@ -19,7 +19,7 @@ let currentDestroy = null;
 
 const routes = {
     "/": {
-        page: homaPage,
+        page: homePage,
         init: initHomePage
     },
     "/creator": {

@@ -4,6 +4,8 @@ import { dataSettings, setSettings } from "./storage.js";
 import { moonIcon, sunIcon } from "../../assets/icons.js";
 import { nextLang, updateTexts } from "../language/languageController.js";
 import { isLoggedIn } from "../services/services.js";
+import { counterUpdate } from "../pages/home/update.js";
+import { runnyWords, words } from "../pages/home/homeFunctionality.js";
 
 document.body.setAttribute('data-theme-loaded', 'true');
 
@@ -42,13 +44,15 @@ mainContainer.addEventListener('click', (e) => {
         const settings = dataSettings();
         const newDark = !document.documentElement.classList.contains('dark-theme');
         document.documentElement.classList.toggle('dark-theme', newDark);
-        setSettings(settings.isRandom, settings.index, newDark, settings.showInput, settings.learningMode);
+        setSettings(settings.isRandom, settings.index, newDark, settings.showInput, settings.learningMode, settings.testMode);
         applyThemeUI();
         updateTexts();
     }
     
     if (e.target.closest('.language-button')) {
         nextLang();
+        const settings = dataSettings();
+        counterUpdate(document.querySelector('.counter'), settings, runnyWords, words);
     }
 });
 

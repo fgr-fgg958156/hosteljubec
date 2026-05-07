@@ -133,7 +133,7 @@ export function initBookFunctionality(container, updateMethod) {
             setWords(project.fileName, project.cards, project.tags);
 
             const settingsData = dataSettings();
-            setSettings(settingsData.isRandom, 0, settingsData.isDark, settingsData.showInput, settingsData.learningMode);
+            setSettings(settingsData.isRandom, 0, settingsData.isDark, settingsData.showInput, settingsData.learningMode, settingsData.testMode);
         } catch (error) {
             console.error('помилка завантаження проєкту:', error);
         }

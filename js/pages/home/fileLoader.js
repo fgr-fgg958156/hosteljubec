@@ -44,7 +44,6 @@ export function initFileLoader(onLoad) {
             tags: data.tags || []
         };
 
-        localStorage.setItem('dataWords', JSON.stringify(normalized));
 
         const settingsData = dataSettings();
         setSettings(
@@ -52,10 +51,9 @@ export function initFileLoader(onLoad) {
             0,
             settingsData.isDark,
             settingsData.showInput,
-            settingsData.learningMode
+            settingsData.learningMode,
+            settingsData.testMode
         );
-
-        onLoad?.(normalized);
 
         e.target.value = '';
 
@@ -69,6 +67,29 @@ export function initFileLoader(onLoad) {
         }
 
         const projects = currentUser.projects || [];
+
+        const existingProject = projects.find(
+            p => p.fileName === normalized.fileName
+        );
+
+        if (existingProject) {
+            const confirmed = window.confirm(
+                t('fileAlreadyExists')
+            );
+
+            if (!confirmed) {
+                let baseName = normalized.fileName.replace(/\s\(\d+\)$/, '')
+                let count = 1;
+
+                while (projects.find(p => p.fileName === `${baseName} (${count})`)) {
+                    count++;
+                }
+                normalized.fileName = `${baseName} (${count})`;
+            }
+        }
+
+        localStorage.setItem('dataWords', JSON.stringify(normalized));
+        onLoad?.(normalized);
 
         const updatedProjects = [
             ...projects.filter(p => p.fileName !== normalized.fileName),
