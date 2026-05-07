@@ -135,6 +135,8 @@ export function initHomePage(){
             el.dataset.value = text;
             el.dataset.correct = isCorrect;
         });
+        
+        updateTexts();
     }
 
     const arithmetic = (step) => {
