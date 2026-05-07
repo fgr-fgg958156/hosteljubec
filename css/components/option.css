@@ -1,7 +1,6 @@
 .option{
     min-width: 288px;
     min-height: 60px;
-    text-align: center;
     display: flex;
     align-items: center;
     padding: 12px;
@@ -10,7 +9,6 @@
     background-color: var(--card-colour);
     
     user-select: none;
-    touch-action: pan-y;
     border: 2px solid var(--border-colour);
 }
 
