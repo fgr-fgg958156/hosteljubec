@@ -19,7 +19,7 @@ export function updateHomePage(words, runnyWords, index, isRandom, showInput, fr
         additionalSpan.classList.remove('hide');
     }   
     backSpan.textContent  = isRandom ? runnyWords.image[index] : words.image[index] ?? '';
-    counter.textContent  = isRandom ? `${t('quantity')} : ${runnyWords.image.length}` :`${index + 1} / ${words.image.length}`;
+    counterUpdate(counter, {isRandom, index}, runnyWords, words);
     fileName.textContent = words.fileName;
     if(showInput){
         lineContainer.classList.remove('display-none');
@@ -27,6 +27,11 @@ export function updateHomePage(words, runnyWords, index, isRandom, showInput, fr
     else{
         lineContainer.classList.add('display-none');
     }
+}
+
+export function counterUpdate(counter, {isRandom, index}, runnyWords, words){
+    if(!counter) return;
+    counter.textContent  = isRandom ? `${t('quantity')} : ${runnyWords.image.length}` : `${index + 1} / ${words.image.length}`;
 }
 
 export function deadIconWrapper() {
