@@ -39,6 +39,7 @@ export function initHomePage(){
     const fileName = document.querySelector('.file-name');
     
     const tagsContainer = document.querySelector('.tags-container');
+    const coolDownMS = settings.cooldown || 2000;
 
     const safeWords = {
         image: wordsData?.image ?? [],
@@ -68,7 +69,7 @@ export function initHomePage(){
         index = 0;
 
         const freshSettings = dataSettings();
-        setSettings(freshSettings.isRandom, 0, freshSettings.isDark, freshSettings.showInput, freshSettings.learningMode, freshSettings.testMode);
+        setSettings({...freshSettings, index: 0});
 
         updateNReset();
         loadTags();
@@ -150,7 +151,7 @@ export function initHomePage(){
         card?.classList.remove('is-flipped');
 
         const freshSettings = dataSettings();
-        setSettings(isRandom, index, freshSettings.isDark, freshSettings.showInput, freshSettings.learningMode, freshSettings.testMode);
+        setSettings(isRandom, index, freshSettings.isDark, freshSettings.showInput, freshSettings.learningMode, freshSettings.testMode, freshSettings.cooldown);
 
         updateHomePage(words, runnyWords, index, isRandom, showInput, frontSpan, additionalSpan, backSpan, counter, lineContainer, fileName);
     };
@@ -235,7 +236,7 @@ export function initHomePage(){
                 coolDown = false;
                 arithmetic(learningMode && isRandom ? -1 : 1);
                 loadOptions();
-            }, 1000);
+            }, coolDownMS);
         } else {
             const correctOption = optionsContainer.querySelector('[data-correct="true"]');
             option.style.height = `${height}px`;
@@ -250,7 +251,7 @@ export function initHomePage(){
                 coolDown = false;
                 arithmetic(1);
                 loadOptions();
-            }, 1000);
+            }, coolDownMS);
         }
     });
 

@@ -65,7 +65,8 @@ export const languages = {
         fileAlreadyExists: 'Книга вже існує, переписати її?',
         testMode: 'Режим тестування',
         choosePhrase: 'Оберіть відповідь',
-        term: 'Термін'
+        term: 'Термін',
+        cooldown: 'Кулдаун мс'
     },
     'en' : {
         lang : 'English',
@@ -133,7 +134,8 @@ export const languages = {
         fileAlreadyExists: 'File already exists. Overwrite it?',
         testMode: 'Test mode',
         choosePhrase: 'Choose an answer',
-        term: 'Term'
+        term: 'Term',
+        cooldown: 'Сooldown ms'
     },
     'ky' : {
         base: 'uk',
@@ -202,7 +204,8 @@ export const languages = {
         fileAlreadyExists: 'Книга вже існує, переписати її?',
         testMode: 'Випробувальний хід',
         choosePhrase: 'Оберіть відповідь',
-        term: 'Вираз'
+        term: 'Вираз',
+        cooldown: 'Заминка о/т мит'
     },
     'be' : {
         lang : 'Крывіца',
@@ -270,6 +273,7 @@ export const languages = {
         fileAlreadyExists: 'Кніга ўжо існуе, перапісаць яе?',
         testMode: 'Тэставы рэжым',
         choosePhrase: 'Выберыце адказ',
-        term: 'Тэрмін'
+        term: 'Тэрмін',
+        cooldown: 'Кулдаўн мс'
     }
 }

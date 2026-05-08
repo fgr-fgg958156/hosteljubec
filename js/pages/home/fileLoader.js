@@ -46,14 +46,7 @@ export function initFileLoader(onLoad) {
 
 
         const settingsData = dataSettings();
-        setSettings(
-            settingsData.isRandom,
-            0,
-            settingsData.isDark,
-            settingsData.showInput,
-            settingsData.learningMode,
-            settingsData.testMode
-        );
+        setSettings({...settingsData, index: 0});
 
         e.target.value = '';
 

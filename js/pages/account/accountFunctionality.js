@@ -4,15 +4,14 @@ import { t } from "../../language/languageController.js";
 import { navigate } from "../../router/router.js";
 import { getCurrentUser, updateUser, deleteCurrentUser, logoutUser, updatePassword, getCurrentEmail } from "../../services/services.js";
 import { mainContainer } from "../../utils/loader.js";
-import { dataSettings } from "../../utils/storage.js";
+import { dataSettings, setSettings } from "../../utils/storage.js";
 import { clearUsersCache } from "../dashboard/dashboardFunctionality.js";
 import { initCheckboxFunctionality } from "../home/checkboxFunctionality.js";
 
 export async function initAccountPage() {
-    const user = await getCurrentUser();
-    const email = await getCurrentEmail();
     const nicknameInput = document.querySelector('.nickname-edit-input');
     const passwordInput = document.querySelector('.password-edit-input');
+    const cooldownInput = document.querySelector('.cooldown-edit-input');
 
     const deleteButton = document.querySelector('.delete-profile-button');
     const logoutButton = document.querySelector('.logout-profile-button');
@@ -34,8 +33,12 @@ export async function initAccountPage() {
     inputSwitch.checked = showInput;
     learningSwitch.checked = learningMode;
     testSwitch.checked = testMode;
+    cooldownInput.value = settings.cooldown || 2000;
 
     if (!nicknameInput || !passwordInput || !deleteButton || !saveButton) return;
+    
+    const user = await getCurrentUser();
+    const email = await getCurrentEmail();
 
     await updateUserProfile(user, email);
     checkSpecialDate();
@@ -74,6 +77,13 @@ export async function initAccountPage() {
             });
         }
     }
+
+    function saveCoolDown(){
+        const settingsData = dataSettings();
+        setSettings({...settingsData, cooldown: +cooldownInput.value});
+    }
+
+    cooldownInput.addEventListener('input', () => saveCoolDown());
 
     const saveNewData = async () => {
         try {
@@ -139,6 +149,7 @@ export async function initAccountPage() {
         deleteButton.removeEventListener('click', deleteAccount);
         saveButton.removeEventListener('click', saveNewData);
         logoutButton.removeEventListener('click', logout);
+        cooldownInput.removeEventListener('input', () => saveCoolDown());
     };
 }
 
