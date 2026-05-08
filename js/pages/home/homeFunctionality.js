@@ -234,11 +234,15 @@ export function initHomePage(){
                 loadOptions();
             }, 1000);
         } else {
+            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
             option.style.height = `${height}px`;
             option.innerHTML = whiteCross;
             option.style.borderColor = 'rgb(240, 64, 80)';
             option.querySelector('svg').style.fill = 'rgb(240, 64, 80)';
             option.style.backgroundColor = `rgb(240, 64, 80, 0.3)`;
+            if(correctOption){
+                correctOption.style.border = '2px dashed rgb(24, 174, 121)';
+            }
             setTimeout(() => {
                 coolDown = false;
                 arithmetic(1);
