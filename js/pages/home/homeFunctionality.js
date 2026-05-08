@@ -112,30 +112,33 @@ export function initHomePage(){
 
     function loadOptions() {
         if (!optionsContainer || !words?.image?.length) return;
-
+    
         optionsContainer.innerHTML = '';
-
-        const currentWords = isRandom ? runnyWords.image : words.image;
-
-        const correct = currentWords[index];
-
-        const wrong = currentWords.filter((_, i) => i !== index).sort(() => Math.random() - 0.5).slice(0, 3);
-
+    
+        const correctWords = isRandom ? runnyWords.image : words.image;
+    
+        const correct = correctWords[index];
+    
+        const wrong = words.image.filter(word => word !== correct).sort(() => Math.random() - 0.5).slice(0, 3);
+    
         const options = [...wrong, correct];
-
+    
         const shuffled = shuffle(options);
-
+    
         shuffled.forEach((text, i) => {
             const isCorrect = text === correct;
-
-            optionsContainer.insertAdjacentHTML('beforeend', initOption(i + 1, isCorrect ? 'back-span' : 'wrong', text));
-
+    
+            optionsContainer.insertAdjacentHTML(
+                'beforeend',
+                initOption(i + 1, isCorrect ? 'back-span' : 'wrong', text)
+            );
+    
             const el = optionsContainer.lastElementChild;
-
+    
             el.dataset.value = text;
             el.dataset.correct = isCorrect;
         });
-        
+    
         updateTexts();
     }
 
