@@ -21,6 +21,7 @@ export function initHomePage(){
     const container = document.querySelector('.mode-container');
     container.innerHTML = settings.testMode ? testMode : cardMode;
     const card = container.querySelector('.card');
+    updateTexts(card);
 
     const randomCheckbox = document.querySelector('.random');
     const inputCheckbox = document.querySelector('.keyboard');
