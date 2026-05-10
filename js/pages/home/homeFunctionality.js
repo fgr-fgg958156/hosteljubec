@@ -154,7 +154,7 @@ export function initHomePage(){
         index = !isRandom
             ? (index + step + words?.image?.length) % words?.image?.length
             : !learningMode ? runnyRandom() : step === -1 ? runnyRandom() : Math.floor(Math.random() * runnyWords.image.length);
-        if ((isRandom && runnyWords.image.length <= 1) || (!isRandom && index === 0)) {
+        if ((isRandom && runnyWords?.image.length <= 1) || (!isRandom && index === 0) || (isRandom && words?.image.length === runnyWords?.image.length) {
             rightCounter = 0;
             wrongCounter = 0;
 
