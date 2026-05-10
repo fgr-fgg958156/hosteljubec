@@ -37,6 +37,9 @@ export function nextLang() {
 }
 
 export function updateTexts(root = document) {
+
+    if(!root) return;
+    
     const words = dataWords();
     const hasWords = words && Object.keys(words).length > 0;
 

@@ -1,15 +1,28 @@
-import { checkmarkIcon, keyboardIcon, leftArrowIcon, publishIcon, righArrowIcon, shuffleIcon, uploadIcon } from "../../../assets/icons.js";
+import { checkmarkIcon, keyboardIcon, leftArrowIcon, publishIcon, righArrowIcon, shuffleIcon, uploadIcon, whiteCross } from "../../../assets/icons.js";
 
 export const testMode = `
     <div class="test-container main-max-width display-flex justify-content-center align-items-center flex-direction-column">
         <div class="container display-flex gap-12px flex-direction-column min-height-240">
-            <div class="additional-text-colour">
-                <span data-lang="term"></span>
+            <div class="display-flex flex-direction-row justify-content-space-between gap-12px container align-items-center">
+                <span class="additional-text-colour" data-lang="term"></span>
+                <div class="display-flex flex-direction-row gap-12px">
+                    <div class="red-container">
+                        ${whiteCross}
+                        <span class="wrong-answers">0</span>
+                    </div>
+                    <div class="green-container">
+                        ${checkmarkIcon}
+                        <span class="right-answers">0</span>
+                    </div>
+                </div>
             </div>
             <span class="front-span card-text-cut" data-lang="front"></span>
-            <div class="display-flex flex-direction-column justify-content-center additional-span additional-text-colour card-text-cut gap-12px"><span>+</span><span data-lang="addition"></span></div>
+            <div class="display-flex flex-direction-column justify-content-center additional-span additional-text-colour card-text-cut gap-12px">
+                <span>+</span>
+                <span data-lang="addition"></span>
+            </div>
         </div>
-        <div class="additional-text-colour container">
+        <div class="additional-text-colour container margin-top-36px">
             <span data-lang="choosePhrase"></span>
         </div>
         <div class="container options-container margin-top-12px display-flex gap-12px flex-wrap-wrap flex-direction-row">

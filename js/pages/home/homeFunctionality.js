@@ -23,6 +23,12 @@ export function initHomePage(){
     const card = container.querySelector('.card');
     updateTexts(card);
 
+    const wrongCounterSpan = document.querySelector('.wrong-answers');
+    const rightCounterSpan = document.querySelector('.right-answers');
+
+    let wrongCounter = 0;
+    let rightCounter = 0;
+
     const randomCheckbox = document.querySelector('.random');
     const inputCheckbox = document.querySelector('.keyboard');
 
@@ -148,11 +154,21 @@ export function initHomePage(){
         index = !isRandom
             ? (index + step + words?.image?.length) % words?.image?.length
             : !learningMode ? runnyRandom() : step === -1 ? runnyRandom() : Math.floor(Math.random() * runnyWords.image.length);
+        if ((isRandom && runnyWords.image.length <= 1) || (!isRandom && index === 0)) {
+            rightCounter = 0;
+            wrongCounter = 0;
+
+            if (rightCounterSpan)
+                rightCounterSpan.textContent = rightCounter;
+
+            if (wrongCounterSpan)
+                wrongCounterSpan.textContent = wrongCounter;
+        }
 
         card?.classList.remove('is-flipped');
 
         const freshSettings = dataSettings();
-        setSettings(isRandom, index, freshSettings.isDark, freshSettings.showInput, freshSettings.learningMode, freshSettings.testMode, freshSettings.cooldown);
+        setSettings({...freshSettings, isRandom: isRandom, index: index});
 
         updateHomePage(words, runnyWords, index, isRandom, showInput, frontSpan, additionalSpan, backSpan, counter, lineContainer, fileName);
     };
@@ -225,6 +241,9 @@ export function initHomePage(){
             option.style.borderColor = 'rgb(24, 174, 121)';
             option.querySelector('svg').style.fill = 'rgb(24, 174, 121)';
             option.style.backgroundColor = `rgb(24, 174, 121, 0.3)`;
+            rightCounter++;
+            if(rightCounterSpan)
+                rightCounterSpan.textContent = rightCounter;
 
             const rect = container?.getBoundingClientRect();
             confetti({
@@ -245,6 +264,10 @@ export function initHomePage(){
             option.style.borderColor = 'rgb(240, 64, 80)';
             option.querySelector('svg').style.fill = 'rgb(240, 64, 80)';
             option.style.backgroundColor = `rgb(240, 64, 80, 0.3)`;
+            wrongCounter++;
+            if(wrongCounterSpan)
+                wrongCounterSpan.textContent = wrongCounter;
+
             if(correctOption){
                 correctOption.style.border = '2px dashed rgb(24, 174, 121)';
             }

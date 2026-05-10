@@ -40,6 +40,8 @@ export async function initAccountPage() {
     const user = await getCurrentUser();
     const email = await getCurrentEmail();
 
+    if(!user || !email) navigate('/');
+
     await updateUserProfile(user, email);
     checkSpecialDate();
 

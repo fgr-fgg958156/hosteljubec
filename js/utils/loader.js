@@ -36,7 +36,8 @@ export function applyThemeUI() {
         }
     });
 
-    document.documentElement.classList.toggle('dark-theme', isDark);
+    if(isDark) document.documentElement.classList.add('dark-theme');
+    else document.documentElement.classList.remove('dark-theme');
 }
 
 mainContainer.addEventListener('click', (e) => {
@@ -57,6 +58,7 @@ mainContainer.addEventListener('click', (e) => {
     }
 });
 
+refreshThemeButtons();
 applyThemeUI();
 updateTexts();
 isLoggedIn().then(loginUpdate);

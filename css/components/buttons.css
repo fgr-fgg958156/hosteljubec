@@ -87,10 +87,13 @@
 }
 */
 
-.circle-button{
+.circle-button {
     width: 40px;
     height: 40px;
-    border-radius: var(--border-radius-36);
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
 .main-button:active, .circle-button:active, .text-button:active, .main-square-text-button:active{

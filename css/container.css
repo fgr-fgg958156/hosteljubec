@@ -138,3 +138,36 @@ span{
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.red-container{
+    border-radius: var(--border-radius-36);
+    background-color: rgba(240, 64, 80, 0.15);
+    border: 2px solid rgba(240, 64, 80, 0.5);
+    color: rgb(240, 64, 80);
+}
+
+.green-container{
+    border-radius: var(--border-radius-36);
+    background-color: rgba(24, 174, 121, 0.15);
+    border: 2px solid rgba(24, 174, 121, 0.5);
+    color: rgb(24, 174, 121);
+}
+
+.red-container svg {
+    fill: rgb(240, 64, 80);
+}
+
+.green-container svg {
+    fill: rgb(24, 174, 121);
+}
+
+.green-container, .red-container{
+    min-width: 72px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-sizing: border-box;
+    user-select: none;
+}

@@ -37,7 +37,7 @@ export function counterUpdate(counter, {isRandom, index}, runnyWords, words){
 export function deadIconWrapper() {
     const wrapper = document.createElement('div');
     wrapper.className = 'upload-container max-img-height';
-    wrapper.innerHTML = `${deadIcon}</br><span data-lang="urlError">гепнуте покликання</span>`;
+    wrapper.innerHTML = `${deadIcon}</br><span data-lang="urlError"></span>`;
     return wrapper;
 }
 
