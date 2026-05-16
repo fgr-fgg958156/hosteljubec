@@ -17,7 +17,7 @@
     height: 100%;
     user-select: none;
     touch-action: pan-y;
-    background-color: var(--card-colour);
+    background-color: var(--background-colour);
 }
 
 .book-container{
