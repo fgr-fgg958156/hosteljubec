@@ -122,10 +122,11 @@ span{
 }
 
 .text-cut {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    flex: 1; 
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .text-cut-parent {
@@ -133,10 +134,10 @@ span{
 }
 
 .card-text-cut {
-  display: -webkit-box;
-  -webkit-line-clamp: 12;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 12;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .red-container{
@@ -170,4 +171,8 @@ span{
     gap: 12px;
     box-sizing: border-box;
     user-select: none;
+}
+
+.min-width-256px{
+    min-width: 256px;
 }

@@ -2,7 +2,15 @@ import { deleteIcon, plusIcon, pushIcon, swapIcon, uploadIcon } from "../../../a
 
 export const creatorPage = `
     <div class="card-container display-flex flex-direction-column align-items-center gap-12px">
-        <div class="main-max-width additional-text-colour margin-top-12px display-flex justify-content-space-between align-items-center">
+        <div class="main-max-width display-flex flex-direction-row align-items-center gap-12px">
+            <div class="data-save blue-square-text-button white-text-colour display-flex justify-content-center align-items-center flex-1">
+                <span data-lang="toData"></span>
+            </div>
+            <div class="desktop-save main-square-text-button display-flex justify-content-center align-items-center flex-1">
+                <span data-lang="toDesktop"></span>
+            </div>
+        </div>
+        <div class="main-max-width additional-text-colour display-flex justify-content-space-between align-items-center">
             <label for="bookname" data-lang="bookname"></label>
         </div>
         <div class="main-max-width display-flex flex-direction-row align-items-center gap-12px">
@@ -18,7 +26,7 @@ export const creatorPage = `
             <textarea id="message" name="message" data-lang-placeholder="pages" class="letters flex-2"></textarea>
             <div class="display-flex flex-direction-column align-items-center gap-12px flex-1">
                 <input type="text" id="divider" data-lang-placeholder="divider" class="divider"> 
-                <input type="text" id="spliter" data-lang-placeholder="spliter" class="spliter">
+                <input type="text" id="splitter" data-lang-placeholder="splitter" class="splitter">
                 <div class="push-letters blue-square-text-button gap-12px display-flex justify-content-center align-items-center container">
                     ${pushIcon}
                 </div>

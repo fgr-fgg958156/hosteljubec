@@ -14,7 +14,7 @@ import { updateTexts } from "../language/languageController.js";
 import { supabase } from "../services/services.js";
 import { applyThemeUI, refreshThemeButtons } from "../utils/loader.js";
 
-const root = document.getElementById('root');
+export const root = document.getElementById('root');
 let currentDestroy = null;
 
 const routes = {

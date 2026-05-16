@@ -1,6 +1,7 @@
-import { airIcon } from "../../../assets/icons.js";
+import { airIcon, folderIcon, cardIcon, openFolderIcon, editIcon, whiteDeleteIcon} from "../../../assets/icons.js";
 import { updateTexts } from "../../language/languageController.js";
 import { getUsers, getCurrentUser, supabase } from "../../services/services.js";
+import { dataSettings } from "../../utils/storage.js";
 import { initCard } from "./book.js";
 import { initBookFunctionality, isDraging } from "./bookFunctionality.js";
 
@@ -17,13 +18,73 @@ async function loadUsers(force = false) {
     return cachedUsers;
 }
 
-export function renderDashboard(users, filter, container, tags = '', currentUser = null) {
+function getOpenFolders() {
+    return [...document.querySelectorAll('details[open]')]
+        .map(d => d.querySelector('summary')?.textContent?.trim());
+}
+
+function restoreOpenFolders(openNames) {
+    document.querySelectorAll('details').forEach(d => {
+        const name = d.querySelector('summary')?.textContent?.trim();
+        if (openNames.includes(name)) {
+            d.open = true;
+        }
+    });
+}
+
+function renderTree(tree, level = 1.5, author) {
+    let html = '<ul>';
+
+    for (const key in tree) {
+        if (key === 'children') {
+            tree[key].forEach(project => {
+                html += `
+                <li class="book-container">
+                    <div class="book-background position-absolute display-flex">
+                        <div class="flex-1 edit-background display-flex flex-direction-row align-items-center padding-horizontal-36px">${editIcon}</div>
+                        <div class="flex-1 delete-background display-flex flex-direction-row-reverse align-items-center padding-horizontal-36px">${whiteDeleteIcon}</div>
+                    </div>
+                    <summary id="${author}ѳлѧсїс${project.fileName}" style="--level:${level}" class="book book-style-folder">${cardIcon}<span class="text-cut">${project.fileName}</span>
+                    </summary>
+                </li>`;
+            });
+
+            continue;
+        }
+
+        html += `
+            <li>
+                <details>
+                    <summary style="--level:${level}">
+                        <span class="folder-icons">
+                            <span class="folder-closed">${folderIcon}</span>
+                            <span class="folder-open">${openFolderIcon}</span>
+                        </span>
+                        <span class="text-cut">${key}</span>
+                    </summary>
+                    ${renderTree(tree[key], level+1, author)}
+                </details>
+            </li>
+        `;
+    }
+
+    html += '</ul>';
+
+    return html;
+}
+
+export function renderDashboard(users, container, tags = '', currentUser = null, foldersMode = false) {
     let html = '';
 
     const tagsArray = tags.trim().toLowerCase().split(' ').filter(Boolean);
+    const filter = document.querySelector('input[name="folder"]:checked')?.value || 'public';
+    const tree = {};
+
+    if(foldersMode){
+        html += `<ul class="tree container box-sizing-border-box">`;
+    }
 
     users.forEach(u => {
-        
         if (filter === 'private') {
             if (!currentUser) return;
             if (u.id !== currentUser.id) return;
@@ -36,15 +97,51 @@ export function renderDashboard(users, filter, container, tags = '', currentUser
 
             const projectTags = (p.tags || []).map(t => t.toLowerCase());
 
-            const hasTagMatch =
-                tagsArray.length === 0 ||
-                tagsArray.every(tag => projectTags.includes(tag));
+            const hasTagMatch = tagsArray.length === 0 || tagsArray.every(tag => projectTags.includes(tag)) || tagsArray.includes(u.nickname);
 
             if (!hasTagMatch) return;
 
-            html += initCard(p.fileName, u.nickname, isPublic, `${!p.tags[0] ? `(0)` : p.tags[0]} ${p.tags.length>1 ? `(+${p.tags.length-1})` : ``}`);
+            if(!foldersMode){
+                html += initCard(p.fileName, u.nickname, isPublic, `${!p.tags[0] ? `(0)` : p.tags[0]} ${p.tags.length>1 ? `(+${p.tags.length-1})` : ``}`);
+                return;
+            }
+                
+            let current = tree;
+            projectTags.forEach(tag => {
+                if (!current[tag]) {
+                    current[tag] = {};
+                }
+
+                current = current[tag];
+            });
+
+            if (!current.children) {
+                current.children = [];
+            }
+
+            current.children.push(p);
         });
+        if (foldersMode) {
+            html += `
+                <li>
+                    <details>
+                        <summary style="--level:${0.5}">
+                            <span class="folder-icons">
+                                <span class="folder-closed">${folderIcon}</span>
+                                <span class="folder-open">${openFolderIcon}</span>
+                            </span>
+                            <span class="text-cut">${u.nickname}</span>
+                        </summary>
+                        ${renderTree(tree ,1.5, u.nickname)}
+                    </details>
+                </li>
+            `;
+        }
     });
+
+    if(foldersMode){
+        html += `</ul>`;
+    }
 
     if (!html) {
         container.innerHTML = `
@@ -78,10 +175,10 @@ export async function initDashboardPage() {
     const container = document.querySelector('.books-container');
     const radios = document.querySelectorAll('input[name="folder"]');
     const tags = document.querySelector('.tags-input');
+    const foldersMode = dataSettings().foldersMode;
     updatePrivate();
 
-    let intervalId;
-    let currentFilter = 'public';
+    //let intervalId;
 
     cachedUsers = await loadUsers(true);
     let currentUser = await getCurrentUser();
@@ -89,33 +186,34 @@ export async function initDashboardPage() {
     let lastHash = null;
 
     const update = () => {
-        renderDashboard(cachedUsers, currentFilter, container, tags.value, currentUser);
+        const openFolders = getOpenFolders();
+
+        renderDashboard(cachedUsers, container, tags.value, currentUser, foldersMode);
+
+        restoreOpenFolders(openFolders);
     };
 
     radios.forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            currentFilter = e.target.value;
-            update();
-        });
+        radio.addEventListener('change', update);
     });
 
     tags.addEventListener('input', update);
 
     update();
 
-    intervalId = setInterval(async () => {
-        if (document.hidden || isDraging) return;
+    // intervalId = setInterval(async () => {
+    //     if (document.hidden || isDraging) return;
 
-        const users = await loadUsers(true);
-        const newHash = JSON.stringify(users);
+    //     const users = await loadUsers(true);
+    //     const newHash = JSON.stringify(users);
 
-        if (newHash === lastHash) return;
+    //     if (newHash === lastHash) return;
 
-        lastHash = newHash;
-        cachedUsers = users;
+    //     lastHash = newHash;
+    //     cachedUsers = users;
 
-        update();
-    }, 15000);
+    //     update();
+    // }, 15000);
 
     initBookFunctionality(container, update);
 
@@ -126,6 +224,6 @@ export async function initDashboardPage() {
 
         tags.removeEventListener('input', update);
 
-        clearInterval(intervalId);
+        //clearInterval(intervalId);
     };
 }

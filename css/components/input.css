@@ -54,12 +54,12 @@ input:-webkit-autofill:focus {
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-  appearance: none;
-  margin: 0;
+    appearance: none;
+    margin: 0;
 }
 
 input[type="number"] {
-  appearance: textfield;
+    appearance: textfield;
 }
 
 input:-webkit-autofill:focus {
@@ -70,6 +70,7 @@ input:-webkit-autofill:focus {
 }
 
 .radio-filter-input {
+    min-width: 0;
     display: inline-flex;
     align-items: center;
     height: 40px;
@@ -79,6 +80,10 @@ input:-webkit-autofill:focus {
     user-select: none;
     border: 2px solid transparent;
     box-sizing: border-box;
+}
+
+.radio-filter-input svg{
+    flex-shrink: 0;
 }
 
 .radio-filter-input input[type="radio"]{

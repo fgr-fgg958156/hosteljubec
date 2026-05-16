@@ -1,4 +1,4 @@
-.book{
+.book-style{
     z-index: 2;
     width: 100%;
     height: 100%;
@@ -11,10 +11,23 @@
     border: 2px solid var(--border-colour);
 }
 
+.book-style-folder{
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    touch-action: pan-y;
+    background-color: var(--card-colour);
+}
+
 .book-container{
     width: 100%;
     max-width: 640px;
     height: 82px;
+}
+
+li .book-container{
+    height: 32px;
 }
 
 .book-background {
@@ -25,6 +38,10 @@
     z-index: 1;
     overflow: hidden;
     border-radius: var(--border-radius-9);
+}
+
+li .book-background{
+    border-radius: 0;
 }
 
 .delete-background, .edit-background {

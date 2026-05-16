@@ -1,5 +1,6 @@
 import { whiteCheckmarkIcon, whiteLoaderIcon } from "../../../assets/icons.js";
 import { t, updateTexts } from "../../language/languageController.js";
+import { root } from "../../router/router.js";
 import { getCurrentUser, supabase, updateUser } from "../../services/services.js";
 import { initCard } from "./card.js";
 
@@ -15,11 +16,9 @@ export function initCreatorPage() {
 
     const letters = document.querySelector('.letters');
     const divider = document.querySelector('.divider');
-    const spliter = document.querySelector('.spliter');
+    const splitter = document.querySelector('.splitter');
     const pushLettersButton = document.querySelector('.push-letters');
-
-    const desktopSaveButton = document.querySelector('.desktop-save');
-    const dataSaveButton = document.querySelector('.data-save');
+    const dataSaveButtons = root.querySelectorAll('.data-save')
 
     let interval = null;
 
@@ -33,9 +32,8 @@ export function initCreatorPage() {
     }
     
     function resetButtonData(){
-        if(!dataSaveButton) return;
-        dataSaveButton.innerHTML = `<span data-lang="toData"></span>`;
-        updateTexts(dataSaveButton);
+        if(dataSaveButtons.length === 0) return;
+        dataSaveButtons.forEach(e => {e.innerHTML = `<span data-lang="toData"></span>`; updateTexts(e);});
     }
 
     function stopCheckTimer() {
@@ -73,6 +71,15 @@ export function initCreatorPage() {
             });
 
         return result;
+    };
+
+    const escapeRegex = (str) =>
+        str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    const createSplitterRegex = (value) => {
+        const parts = value.split('&&').map(v => paragraph(v.trim())).filter(Boolean).map(escapeRegex);
+
+        return new RegExp(parts.join('|'));
     };
 
     function cardIdUpdate() {
@@ -318,6 +325,8 @@ export function initCreatorPage() {
     let isSaving = false;
 
     async function dataPush() {
+        if(letters.value)
+            pushNewLetters(false);
         if (isSaving) return;
         isSaving = true;
         
@@ -327,7 +336,8 @@ export function initCreatorPage() {
                 resetButtonData();
                 return;
             }
-            dataSaveButton.innerHTML = `${whiteLoaderIcon}`;
+            
+            dataSaveButtons.forEach(e => {e.innerHTML = `${whiteLoaderIcon}`;});
 
             listOfCards.fileName = bookName.value.trim() || t('unnamed');
             listOfCards.tags = tags.value.trim().split(/\s+/).filter(Boolean) || [];
@@ -376,53 +386,61 @@ export function initCreatorPage() {
                 }
             ];
             await updateUser(currentUser, ['projects'], [updatedProjects]);
-            dataSaveButton.innerHTML = `${whiteCheckmarkIcon}`;
+            dataSaveButtons.forEach(e => {e.innerHTML = `${whiteCheckmarkIcon}`;});
             startCheckTimer();
         } finally {
             isSaving = false;
         }
     }
 
-    function pushNewLetters(){
-        if(spliter.value === divider.value){
-            alert(t('dividerError'));
-            return;
-        } 
-        if(spliter.value === "" || divider.value === ""){
-            alert(t('emptyFields'));
+    function pushNewLetters(dropAlert = true) {
+        if (splitter.value === divider.value) {
+            if(dropAlert) alert(t('dividerError'));
             return;
         }
 
-        const splitValue = paragraph(spliter.value);
-        const array = letters.value.split(splitValue);
+        if (splitter.value === "" || divider.value === "") {
+            if(dropAlert) alert(t('emptyFields'));
+            return;
+        }
 
-        const divideValue = paragraph(divider.value);
-        const arrayOfarrays = array.map(e => 
-            e.split(divideValue).map(i => i.trim())
+        const splitRegex = createSplitterRegex(splitter.value);
+        const divideRegex = createSplitterRegex(divider.value);
+
+        const array = letters.value.split(splitRegex);
+
+        const arrayOfarrays = array.map(e =>
+            e.split(divideRegex).map(i => i.trim())
         );
 
-        arrayOfarrays.forEach(([w1, w2, w3 = '']) => {
+        arrayOfarrays.forEach(([w1, w2 = '', w3 = '']) => {
             pushNewCardData(w2, w1, w3);
         });
 
         letters.value = '';
     }
 
+    function saveUp(e){
+        if (e.target.closest('.desktop-save')) {
+            download();
+        }
+        if (e.target.closest('.data-save')) {
+            dataPush();
+        }
+    }
 
     container.addEventListener('input', inputChange);
     container.addEventListener('click', containerFunctions);
+    root.addEventListener('click', saveUp);
     addButton.addEventListener('click', createNewCard);
     importButton.addEventListener('change', importNewBook);
     swapAllButton.addEventListener('click', swapAllRows);
     clearButton.addEventListener('click', removeAllCards);
-    desktopSaveButton.addEventListener('click', download);
-    dataSaveButton.addEventListener('click', dataPush);
     pushLettersButton.addEventListener('click', pushNewLetters);
 
     return () => {
         pushLettersButton.removeEventListener('click', pushNewLetters);
-        dataSaveButton.removeEventListener('click', dataPush);
-        desktopSaveButton.removeEventListener('click', download);
+        root.removeEventListener('click', saveUp);
         clearButton.removeEventListener('click', removeAllCards);
         swapAllButton.removeEventListener('click', swapAllRows);
         addButton.removeEventListener('click', createNewCard);

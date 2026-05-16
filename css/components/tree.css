@@ -1,0 +1,69 @@
+.tree li {
+    display: block;
+    position: relative;
+}
+
+.tree summary {
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    padding-left: calc(var(--level, 0) * var(--spacing));
+    -webkit-tap-highlight-color: transparent;
+}
+
+.folder-open {
+    display: none;
+}
+
+.folder-icons, .tree summary svg {
+    flex-shrink: 0;
+}
+
+.tree details[open] > summary .folder-closed {
+    display: none;
+}
+
+.tree details[open] > summary .folder-open {
+    display: inline;
+}
+
+.tree summary::-webkit-details-marker {
+    display: none;
+}
+
+@media (hover: hover) {
+    .tree summary:hover {
+        background-color: var(--main-button-colour);
+    }
+}
+
+.tree summary:active {
+    background-color: var(--hover-button-colour);
+}
+
+.tree ul {
+    padding-left: 0px;
+}
+
+.tree {
+    padding: 0;
+    --spacing: 1.5rem;
+    --radius: 12px;
+    border-radius: var(--border-radius-9);
+    overflow: hidden;
+}
+
+.tree summary:focus,
+.tree summary:focus-visible {
+    outline: none;
+}
+
+.tree summary {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}

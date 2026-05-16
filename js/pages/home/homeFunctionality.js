@@ -213,7 +213,7 @@ export function initHomePage(){
         if(tagsList?.length === 0 || !tagsList){
             tagsContainer.innerHTML = `
                     <div class="display-flex flex-direction-row align-items-center additional-text-colour">
-                        <span data-lang="dust"></span> ${airIcon}
+                        <span data-lang="none"></span> ${airIcon}
                     </div>
                 `;
             updateTexts();

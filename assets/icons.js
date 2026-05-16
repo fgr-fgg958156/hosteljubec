@@ -139,6 +139,18 @@ export const whiteCross =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ${svgMainSizeProps} ${whiteIconFill} >
         <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
     </svg>`;
+export const folderIcon = 
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ${svgMainSizeProps} ${grayIconFill}>
+        <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H447l-80-80H160v480Zm0 0v-480 480Z"/>
+    </svg>`;
+export const openFolderIcon = 
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ${svgMainSizeProps} ${grayIconFill}>
+        <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640H447l-80-80H160v480l96-320h684L837-217q-8 26-29.5 41.5T760-160H160Zm84-80h516l72-240H316l-72 240Zm0 0 72-240-72 240Zm-84-400v-80 80Z"/>
+    </svg>`;
+export const cardIcon = 
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ${svgMainSizeProps} ${grayIconFill}>
+        <path d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h360l200 200v520q0 33-23.5 56.5T720-80H240Zm0-80h480v-480H560v-160H240v640Zm0-640v160-160 640-640Z"/>
+    </svg>`;
 export const partyHat = `
     <svg width="42" height="60" viewBox="0 0 42 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="party-hat">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M21 18L42 60H0L21 18Z" fill="#A8B1FF"/>

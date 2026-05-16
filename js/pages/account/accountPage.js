@@ -47,13 +47,22 @@ export const accountPage = `
                     </div>
                     <div id="theme" class="theme-button display-flex flex-1 main-square-text-button justify-content-center gap-12px align-items-center padding-10px box-sizing-border-box"></div>
                 </div>  
-                <div class="display-flex flex-direction-row align-items-center container justify-content-space-between padding-12px box-sizing-border-box">
+                <div class="display-flex flex-direction-row align-items-center container border-bottom justify-content-space-between padding-12px box-sizing-border-box">
                     <div class="additional-text-colour flex-1">
                         <span data-lang="language"></span>
                     </div>
                     <div id="language" class="language-button display-flex flex-1 main-square-text-button justify-content-space-around align-items-center padding-10px box-sizing-border-box">
                         <span data-lang="lang"></span>
                     </div>
+                </div>
+                <div class="display-flex flex-direction-row align-items-center container justify-content-space-between padding-12px box-sizing-border-box">
+                    <div class="additional-text-colour flex-1">
+                        <span data-lang="foldersMode"></span>
+                    </div>
+                    <label class="switch margin-12px">
+                        <input type="checkbox" id="foldersMode" name="foldersMode" />
+                        <span class="slider"></span>
+                    </label>
                 </div>
             </div>
         </div>

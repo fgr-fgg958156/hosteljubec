@@ -1,7 +1,7 @@
 export const dataWords = () => safeParse('dataWords');
 export const dataSettings = () => safeParse('dataSettings');
 
-export const setSettings = ({isRandom, index, isDark, showInput, learningMode = false, testMode = false, cooldown = 2000}) => {
+export const setSettings = ({isRandom, index, isDark, showInput, learningMode = false, testMode = false, cooldown = 2000, foldersMode = false}) => {
     localStorage.setItem('dataSettings', JSON.stringify({
             'isRandom': isRandom,
             'index': index,
@@ -9,7 +9,8 @@ export const setSettings = ({isRandom, index, isDark, showInput, learningMode = 
             'showInput': showInput,
             'learningMode': learningMode,
             'testMode' : testMode,
-            'cooldown' : cooldown
+            'cooldown' : cooldown,
+            'foldersMode' : foldersMode
     }));
 };
 
