@@ -5,7 +5,7 @@ export const accountPage = `
         <div class="main-max-width display-flex flex-direction-row align-items-center">
             <span class="additional-text-colour" data-lang="information">Особиста інформація</span>
         </div>
-        <div class="main-max-width display-flex flex-direction-column align-items-stretch border-radius-18px border">
+        <div class="main-max-width display-flex flex-direction-column align-items-stretch border-radius-18px border box-sizing-border-box">
             <div class="container display-flex flex-direction-row align-items-center justify-content-space-between border-bottom padding-12px box-sizing-border-box">
                 <div class="display-flex align-items-center gap-12px flex-1 min-width-0">
                     <div class="user-profile-container display-flex align-items-center">
@@ -39,7 +39,7 @@ export const accountPage = `
         <div class="main-max-width display-flex flex-direction-row align-items-center margin-top-36px">
             <span class="additional-text-colour" data-lang="appearance"></span>
         </div>
-        <div class="main-max-width display-flex flex-direction-column align-items-stretch border-radius-18px border">
+        <div class="main-max-width display-flex flex-direction-column align-items-stretch border-radius-18px border box-sizing-border-box">
             <div class="display-flex flex-direction-column align-items-center container">
                 <div class="display-flex flex-direction-row align-items-center container border-bottom justify-content-space-between padding-12px box-sizing-border-box">
                     <div class="additional-text-colour flex-1">
@@ -69,7 +69,7 @@ export const accountPage = `
         <div class="main-max-width display-flex flex-direction-row align-items-center margin-top-36px">
             <span class="additional-text-colour" data-lang="settings"></span>
         </div>
-        <div class="main-max-width display-flex flex-direction-column align-items-stretch border-radius-18px border">
+        <div class="main-max-width display-flex flex-direction-column align-items-stretch border-radius-18px border box-sizing-border-box">
             <div class="display-flex flex-direction-column align-items-center container">
                 <div class="display-flex flex-direction-row align-items-center container border-bottom justify-content-space-between padding-12px box-sizing-border-box">
                     <div class="additional-text-colour flex-1">

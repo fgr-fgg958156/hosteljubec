@@ -250,6 +250,10 @@
     min-width: 144px;
 }
 
+.width-225px{
+    min-width: 225px;
+}
+
 .min-width-236px{
     min-width: 236px;
 }
@@ -284,4 +288,8 @@
 
 .font-weight-normal{
     font-weight: normal;
+}
+
+.visibility-hidden{
+    visibility: hidden;
 }

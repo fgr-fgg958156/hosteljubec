@@ -103,8 +103,12 @@ export const deleteIcon =
     `<svg xmlns="http://www.w3.org/2000/svg" ${svgMainSizeProps} ${mainIconFill} viewBox="0 -960 960 960">
         <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
     </svg>`;
-export const editIcon = 
+export const whiteEditIcon = 
     `<svg xmlns="http://www.w3.org/2000/svg" ${svgMainSizeProps} ${whiteIconFill} viewBox="0 -960 960 960">
+        <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/>
+    </svg>`;
+export const editIcon = 
+    `<svg xmlns="http://www.w3.org/2000/svg" ${svgMainSizeProps} ${mainIconFill} viewBox="0 -960 960 960">
         <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/>
     </svg>`;
 export const airIcon = 
@@ -150,6 +154,10 @@ export const openFolderIcon =
 export const cardIcon = 
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ${svgMainSizeProps} ${grayIconFill}>
         <path d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h360l200 200v520q0 33-23.5 56.5T720-80H240Zm0-80h480v-480H560v-160H240v640Zm0-640v160-160 640-640Z"/>
+    </svg>`;
+export const openCardIcon = 
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ${svgMainSizeProps} ${mainIconFill}>
+        <path d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v240h-80v-200H520v-200H240v640h360v80H240Zm638 15L760-183v89h-80v-226h226v80h-90l118 118-56 57Zm-638-95v-640 640Z"/>
     </svg>`;
 export const partyHat = `
     <svg width="42" height="60" viewBox="0 0 42 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="party-hat">

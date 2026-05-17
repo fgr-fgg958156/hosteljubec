@@ -1,0 +1,69 @@
+body {
+    touch-action: none;
+}
+
+.hostja {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    cursor: grab;
+    width: 24px;
+    height: 60px;
+}
+
+.part {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    transform-origin: top center;
+}
+
+.head {
+    top: -23px;
+    width: 28px;
+    height: 29px;
+}
+
+.body{
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 36px;
+}
+
+.left-arm {
+    width: 13px;
+    height: 31px;
+    left: -2px;
+    top: 4px;
+    transform: rotate(30deg);
+}
+
+.right-arm {
+    width: 13px;
+    height: 31px;
+    right: -6px;
+    top: 4px;
+    transform: rotate(-30deg) scaleX(-1);
+}
+
+.left-leg {
+    width: 11px;
+    height: 27px;
+    left: 15px;
+    top: 31px;
+}
+
+.right-leg {
+    width: 11px;
+    height: 27px;
+    right: 11px;
+    top: 31px;
+    transform: scaleX(-1);
+}
+
+.shadow{
+    left: -7px;
+    top: 52px;
+    z-index: -1;
+}

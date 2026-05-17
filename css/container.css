@@ -176,3 +176,18 @@ span{
 .min-width-256px{
     min-width: 256px;
 }
+
+.file-book {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.folders-menu{
+    z-index: 100;
+    position:fixed;
+    background-color: var(--background-colour);
+    visibility: hidden;
+}

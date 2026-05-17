@@ -4,6 +4,7 @@ import { getUsers, getCurrentUser, supabase } from "../../services/services.js";
 import { dataSettings } from "../../utils/storage.js";
 import { initCard } from "./book.js";
 import { initBookFunctionality, isDraging } from "./bookFunctionality.js";
+import { initFolderBookFunctionality } from "./folderBookFunctionality.js";
 
 let cachedUsers = null;
 
@@ -40,11 +41,8 @@ function renderTree(tree, level = 1.5, author) {
             tree[key].forEach(project => {
                 html += `
                 <li class="book-container">
-                    <div class="book-background position-absolute display-flex">
-                        <div class="flex-1 edit-background display-flex flex-direction-row align-items-center padding-horizontal-36px">${editIcon}</div>
-                        <div class="flex-1 delete-background display-flex flex-direction-row-reverse align-items-center padding-horizontal-36px">${whiteDeleteIcon}</div>
-                    </div>
-                    <summary id="${author}ѳлѧсїс${project.fileName}" style="--level:${level}" class="book book-style-folder">${cardIcon}<span class="text-cut">${project.fileName}</span>
+                    <summary id="${author}ѳлѧсїс${project.fileName}" style="--level:${level}" class="${project.isPublic ? 'isPublic' : ''} file-book book-style-folder">
+                        ${cardIcon}<span class="text-cut">${project.fileName}</span>
                     </summary>
                 </li>`;
             });
@@ -143,7 +141,7 @@ export function renderDashboard(users, container, tags = '', currentUser = null,
         html += `</ul>`;
     }
 
-    if (!html) {
+    if (!html || html === '<ul class="tree container box-sizing-border-box"></ul>') {
         container.innerHTML = `
             <div class="display-flex flex-direction-row align-items-center margin-top-36px additional-text-colour">
                 <span data-lang="dust"></span> ${airIcon}
@@ -216,6 +214,7 @@ export async function initDashboardPage() {
     // }, 15000);
 
     initBookFunctionality(container, update);
+    initFolderBookFunctionality(container, update);
 
     return () => {
         radios.forEach(radio => {

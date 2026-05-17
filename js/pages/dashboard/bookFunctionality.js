@@ -7,34 +7,6 @@ import { updateUserProjects } from "./dashboardFunctionality.js";
 export let isDraging = false;
 
 export function initBookFunctionality(container, updateMethod) {
-    const handleClick = async (e) => {
-        if (e.target.closest('.display-status')) {
-            const book = e.target.closest('.book');
-            //const nickname = book.querySelector('.book-author')?.textContent;
-            //const projectName = book.querySelector('.book-name')?.textContent;
-            const [author, projectName] = book.id.split("ѳлѧсїс");
-            const project = await getProject(projectName, author);
-
-            const { data: { user } } = await supabase.auth.getUser();
-            if (!user) return;
-
-            const users = await getUsers();
-
-            const userCurrent = users.find(
-                u => u.nickname.toLowerCase() === author.toLowerCase()
-            );
-
-            if (!userCurrent) return;
-
-            const updatedProjects = userCurrent.projects.map(p =>
-                p.fileName === project.fileName ? { ...p, isPublic: !p.isPublic } : p
-            );
-
-            await updateUser(userCurrent, ['projects'], [updatedProjects]);
-            updateUserProjects(userCurrent.id, updatedProjects);
-            updateMethod();
-        }
-    };
 
     let activeBook = null;
     let backgroundLayer = null;
@@ -124,78 +96,109 @@ export function initBookFunctionality(container, updateMethod) {
         cleanup();
     };
 
-    async function clickOnBook(book) {
-        try {
-            const infoArray = book.id.split("ѳлѧсїс");
-            const project = await getProject(infoArray[1], infoArray[0]);
-
-            navigate('/');
-            setWords(project.fileName, project.cards, project.tags);
-
-            const settingsData = dataSettings();
-            setSettings({...settingsData, index: 0});
-        } catch (error) {
-            console.error('помилка завантаження проєкту:', error);
-        }
+    const changeStatus = (e) => {
+        handleClick(e.target.closest('.book'), updateMethod)
     }
 
-    async function openBook(book) {
-        try {
-            const [author, projectName] = book.id.split("ѳлѧсїс");
-            const project = await getProject(projectName, author);
-
-            const data = {
-                fileName: project.fileName,
-                words1: project.cards.image,
-                words2: project.cards.preimage,
-                words3: project.cards.addition,
-                tags: project.tags
-            };
-
-            sessionStorage.setItem('creatorData', JSON.stringify(data));
-            navigate('/creator');
-        } catch (error) {
-            console.error("помилка завантаження:", error);
-        }
-    }
-
-    async function deleteBook(book) {
-        try {
-            const [author, projectName] = book.id.split("ѳлѧсїс");
-            const { data: { user } } = await supabase.auth.getUser();
-            if (!user) return;
-
-            //const nickname = book.querySelector('.book-author')?.textContent;
-
-            const users = await getUsers();
-
-            const userCurrent = users.find(
-                u => u.nickname.toLowerCase() === author.toLowerCase()
-            );
-
-            if (!userCurrent) return;
-            
-            const confirmed = window.confirm(t('confirmMessage'));
-            if (!confirmed) return;
-
-            const updatedProjects = userCurrent.projects.filter(
-                p => p.fileName !== projectName
-            );
-
-            await updateUser(userCurrent, ['projects'], [updatedProjects]);
-
-            updateUserProjects(userCurrent.id, updatedProjects);
-            updateMethod();
-        } catch (error) {
-            console.error("помилка видалення:", error);
-        }
-    }
-
-    container.addEventListener('click', handleClick);
+    container.addEventListener('click', changeStatus);
     container.addEventListener('pointerdown', pointerDown);
 
     return () => {
-        container.removeEventListener('click', handleClick);
+        container.removeEventListener('click', changeStatus);
         container.removeEventListener('pointerdown', pointerDown);
     };
 }
+
+export async function clickOnBook(book) {
+    try {
+        const infoArray = book.id.split("ѳлѧсїс");
+        const project = await getProject(infoArray[1], infoArray[0]);
+
+        navigate('/');
+        setWords(project.fileName, project.cards, project.tags);
+
+        const settingsData = dataSettings();
+        setSettings({...settingsData, index: 0});
+    } catch (error) {
+        console.error('помилка завантаження проєкту:', error);
+    }
+}
+
+export async function openBook(book) {
+    try {
+        const [author, projectName] = book.id.split("ѳлѧсїс");
+        const project = await getProject(projectName, author);
+
+        const data = {
+            fileName: project.fileName,
+            words1: project.cards.image,
+            words2: project.cards.preimage,
+            words3: project.cards.addition,
+            tags: project.tags
+        };
+
+        sessionStorage.setItem('creatorData', JSON.stringify(data));
+        navigate('/creator');
+    } catch (error) {
+        console.error("помилка завантаження:", error);
+    }
+}
+
+export async function deleteBook(book, updateMethod) {
+    try {
+        if(!book) return;
+        const [author, projectName] = book.id.split("ѳлѧсїс");
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) return;
+
+        //const nickname = book.querySelector('.book-author')?.textContent;
+
+        const users = await getUsers();
+
+        const userCurrent = users.find(
+            u => u.nickname.toLowerCase() === author.toLowerCase()
+        );
+
+        if (!userCurrent) return;
+        
+        const confirmed = window.confirm(t('confirmMessage'));
+        if (!confirmed) return;
+
+        const updatedProjects = userCurrent.projects.filter(
+            p => p.fileName !== projectName
+        );
+
+        await updateUser(userCurrent, ['projects'], [updatedProjects]);
+
+        updateUserProjects(userCurrent.id, updatedProjects);
+        updateMethod();
+    } catch (error) {
+        console.error("помилка видалення:", error);
+    }
+}
+
+export async function handleClick(book, updateMethod) {
+    if(!book) return;
+
+    const [author, projectName] = book.id.split("ѳлѧсїс");
+    const project = await getProject(projectName, author);
+
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const users = await getUsers();
+
+    const userCurrent = users.find(
+        u => u.nickname.toLowerCase() === author.toLowerCase()
+    );
+
+    if (!userCurrent) return;
+
+    const updatedProjects = userCurrent.projects.map(p =>
+        p.fileName === project.fileName ? { ...p, isPublic: !p.isPublic } : p
+    );
+
+    await updateUser(userCurrent, ['projects'], [updatedProjects]);
+    updateUserProjects(userCurrent.id, updatedProjects);
+    updateMethod();
+};
