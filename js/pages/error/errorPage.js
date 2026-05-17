@@ -9,14 +9,14 @@ export const errorPage = `
         </div>
     </div>
     <div class="hostja" id="hostja">
-        <img src="../../../assets/hostja/body.png" class="part body">
-        <img src="../../../assets/hostja/head.png" class="part head">
+        <img src="/assets/hostja/body.png" class="part body">
+        <img src="/assets/hostja/head.png" class="part head">
 
-        <img src="../../../assets/hostja/arm.png" class="part left-arm">
-        <img src="../../../assets/hostja/arm.png" class="part right-arm">
+        <img src="/assets/hostja/arm.png" class="part left-arm">
+        <img src="/assets/hostja/arm.png" class="part right-arm">
 
-        <img src="../../../assets/hostja/leg.png" class="part left-leg">
-        <img src="../../../assets/hostja/leg.png" class="part right-leg">
-        <img src="../../../assets/hostja/shadow.png" class="part shadow">
+        <img src="/assets/hostja/leg.png" class="part left-leg">
+        <img src="/assets/hostja/leg.png" class="part right-leg">
+        <img src="/assets/hostja/shadow.png" class="part shadow">
     </div>
 `;
