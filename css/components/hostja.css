@@ -1,8 +1,5 @@
-body {
-    touch-action: none;
-}
-
 .hostja {
+    touch-action: none;
     position: absolute;
     left: 50%;
     top: 50%;
