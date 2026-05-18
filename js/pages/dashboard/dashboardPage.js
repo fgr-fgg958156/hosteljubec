@@ -23,11 +23,11 @@ export const dashboardPage = `
             <div class="margin-top-36px">${loaderIcon}</div>
         </div>
  
-        <div id="folders-menu" class="folders-menu display-flex align-items-center border-radius-18px border flex-direction-column padding-vertical-12px width-225px box-sizing-border-box">
-            <button class="file-open container main-text-settings nav-button light-text-colour display-flex align-items-center gap-12px padding-12px">${openCardIcon}<span data-lang="open"></span></button>
-            <button class="file-edit container main-text-settings nav-button light-text-colour display-flex align-items-center gap-12px padding-12px">${editIcon}<span data-lang="edit"></span></button>
-            <button class="file-status container main-text-settings nav-button light-text-colour display-flex align-items-center gap-12px padding-12px">${publicIcon}<span data-lang="publish"></span></button>
-            <button class="file-delete container main-text-settings nav-button light-text-colour display-flex align-items-center gap-12px padding-12px">${deleteIcon}<span data-lang="delete"></span></button>
+        <div id="folders-menu" class="folders-menu display-flex align-items-center border-radius-9px border flex-direction-column padding-vertical-12px width-225px box-sizing-border-box">
+            <button class="file-open container main-text-settings menu-option-style light-text-colour display-flex align-items-center gap-12px padding-12px">${openCardIcon}<span data-lang="open"></span></button>
+            <button class="file-edit container main-text-settings menu-option-style light-text-colour display-flex align-items-center gap-12px padding-12px">${editIcon}<span data-lang="edit"></span></button>
+            <button class="file-status container main-text-settings menu-option-style light-text-colour display-flex align-items-center gap-12px padding-12px">${publicIcon}<span data-lang="publish"></span></button>
+            <button class="file-delete container main-text-settings menu-option-style light-text-colour display-flex align-items-center gap-12px padding-12px">${deleteIcon}<span data-lang="delete"></span></button>
         </div>
     </div>
 `;

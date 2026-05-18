@@ -3,6 +3,7 @@ import { deleteIcon, whiteSwapIcon } from "../../../assets/icons.js";
 export function initCard(index, front, back, addition) {
     return `
         <div class="prop-card display-flex justify-content-center align-items-center flex-direction-column padding-12px main-max-width" data-index="${index}">
+            <span class="card-number-span additional-text-colour">#${index + 1}</span>
             <div class="display-flex justify-content-center align-items-center flex-direction-column gap-12px">
                 <input type="text" id="front-input-${index}" data-lang-placeholder="front" class="input-line preimage-input" value="${front}">
                 <input type="text" id="back-input-${index}" data-lang-placeholder="back" class="input-line image-input" value="${back}">

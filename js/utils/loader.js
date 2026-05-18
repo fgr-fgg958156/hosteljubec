@@ -6,6 +6,8 @@ import { nextLang, updateTexts } from "../language/languageController.js";
 import { isLoggedIn } from "../services/services.js";
 import { counterUpdate } from "../pages/home/update.js";
 import { runnyWords, words } from "../pages/home/homeFunctionality.js";
+import { initHostja } from "../components/hotja.js";
+import { initHostjaMovement } from "../components/hostjaMovement.js";
 
 document.body.setAttribute('data-theme-loaded', 'true');
 
@@ -62,3 +64,8 @@ refreshThemeButtons();
 applyThemeUI();
 updateTexts();
 isLoggedIn().then(loginUpdate);
+
+if(dataSettings().hostjaMode){
+    initHostja();
+    initHostjaMovement();
+}

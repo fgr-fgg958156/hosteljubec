@@ -73,7 +73,8 @@ export const languages = {
         publish: "Опублікувати",
         hide: "Приховати",
         air: 'Повітря: ',
-        sec: '(сек)'
+        sec: '(сек)',
+        hostjaMode: `Режим гостя`
     },
     'en' : {
         lang : 'English',
@@ -149,7 +150,8 @@ export const languages = {
         publish: "Publish",
         hide: "Hide",
         air: 'Air: ',
-        sec: '(sec)'
+        sec: '(sec)',
+        hostjaMode: `Guest mode`
     },
     'tt' : {
         base: 'uk',
@@ -226,7 +228,8 @@ export const languages = {
         publish: "Оголосити",
         hide: "Захатати",
         air: 'Повітря: ',
-        sec: '(мит)'
+        sec: '(мит)',
+        hostjaMode: `Хід Гості`
     },
     'be' : {
         lang : 'Крывіца',
@@ -302,6 +305,7 @@ export const languages = {
         publish: "Апублікаваць",
         hide: "Схаваць",
         air: 'Паветра: ',
-        sec: '(сек)'
+        sec: '(сек)',
+        hostjaMode: `Рэжым госця`
     }
 }

@@ -85,9 +85,9 @@ export function initCreatorPage() {
     function cardIdUpdate() {
         [...container.children].forEach((card, index) => {
             card.dataset.index = index;
-
-            const num = card.querySelector('.number');
-            if (num) num.textContent = index + 1;
+            //.number
+            const num = card.querySelector('.card-number-span'); 
+            if (num) num.textContent = `#${index + 1}`; 
         });
     }
 

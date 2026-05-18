@@ -52,6 +52,9 @@
     .nav-button:hover{
         background-color: var(--hover-button-colour);
     }
+    .menu-option-style:hover{
+        background-color: var(--main-button-colour);
+    }
 
     /* .main-interactive:hover{
         background-color: var(--hover-button-colour);
@@ -115,6 +118,16 @@ button{
     background-color: var(--active-button-colour);
 }
 
-button, .save-profile-button, .delete-profile-button, .text-button, .blue-text-button, .blue-square-text-button, .main-square-text-button{
+button, .menu-option-style, .save-profile-button, .delete-profile-button, .text-button, .blue-text-button, .blue-square-text-button, .main-square-text-button{
     user-select: none;
+}
+
+.menu-option-style{
+    border: none;
+    height: 32px;
+    background-color: var(--background-colour);
+}
+
+.menu-option-style:active{
+    background-color: var(--hover-button-colour);
 }

@@ -13,7 +13,6 @@ import "https://cdn.jsdelivr.net/npm/@hiseb/confetti@2.1.0/dist/confetti.min.js"
 import { updateTexts } from "../language/languageController.js";
 import { supabase } from "../services/services.js";
 import { applyThemeUI, refreshThemeButtons } from "../utils/loader.js";
-import { initErrorPage } from "../pages/error/errorFunctionality.js";
 
 export const root = document.getElementById('root');
 let currentDestroy = null;
@@ -38,10 +37,6 @@ const routes = {
     "/login": {
         page: loginPage,
         init: initLoginPage
-    },
-    "/error": {
-        page: errorPage,
-        init: initErrorPage
     }
 };
 
@@ -55,7 +50,7 @@ const render = async () => {
     }
 
     if (!route) {
-        navigate('/error');
+        root.innerHTML = errorPage;
         updateTexts();
         return;
     }

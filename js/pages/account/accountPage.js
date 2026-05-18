@@ -55,12 +55,21 @@ export const accountPage = `
                         <span data-lang="lang"></span>
                     </div>
                 </div>
-                <div class="display-flex flex-direction-row align-items-center container justify-content-space-between padding-12px box-sizing-border-box">
+                <div class="display-flex flex-direction-row align-items-center container border-bottom justify-content-space-between padding-12px box-sizing-border-box">
                     <div class="additional-text-colour flex-1">
                         <span data-lang="foldersMode"></span>
                     </div>
                     <label class="switch margin-12px">
                         <input type="checkbox" id="foldersMode" name="foldersMode" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="display-flex flex-direction-row align-items-center container justify-content-space-between padding-12px box-sizing-border-box">
+                    <div class="additional-text-colour flex-1">
+                        <span data-lang="hostjaMode"></span>
+                    </div>
+                    <label class="switch margin-12px">
+                        <input type="checkbox" id="hostjaMode" name="hostjaMode" />
                         <span class="slider"></span>
                     </label>
                 </div>

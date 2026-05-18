@@ -6,6 +6,7 @@
     cursor: grab;
     width: 24px;
     height: 60px;
+    z-index: 1024;
 }
 
 .part {

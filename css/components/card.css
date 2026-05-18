@@ -58,3 +58,9 @@
 .back-side {
     transform: rotateY(180deg);
 }
+
+.card-number-span{
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
