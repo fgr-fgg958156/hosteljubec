@@ -74,7 +74,9 @@ export const languages = {
         hide: "Приховати",
         air: 'Повітря: ',
         sec: '(сек)',
-        hostjaMode: `Режим гостя`
+        hostjaMode: `Режим гостя`,
+        index: "#",
+        tableMode: "Режим таблиці"
     },
     'en' : {
         lang : 'English',
@@ -151,7 +153,9 @@ export const languages = {
         hide: "Hide",
         air: 'Air: ',
         sec: '(sec)',
-        hostjaMode: `Guest mode`
+        hostjaMode: `Guest mode`,
+        index: "#",
+        tableMode: "Table mode"
     },
     'tt' : {
         base: 'uk',
@@ -229,7 +233,9 @@ export const languages = {
         hide: "Захатати",
         air: 'Повітря: ',
         sec: '(мит)',
-        hostjaMode: `Хід Гості`
+        hostjaMode: `Хід Гості`,
+        index: "#",
+        tableMode: "Стільниковий хід"
     },
     'be' : {
         lang : 'Крывіца',
@@ -306,6 +312,8 @@ export const languages = {
         hide: "Схаваць",
         air: 'Паветра: ',
         sec: '(сек)',
-        hostjaMode: `Рэжым госця`
+        hostjaMode: `Рэжым госця`,
+        index: "#",
+        tableMode: "Рэжым табліцы"
     }
 }

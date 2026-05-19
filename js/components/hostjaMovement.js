@@ -21,8 +21,6 @@ export function initHostjaMovement() {
 
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    
-    let rafId;
 
     let dragging = false;
 
@@ -71,7 +69,7 @@ export function initHostjaMovement() {
             animateLegs();
         }
         else{
-            speed *= 0.98;
+            speed *= 0.8;
             if (speed < 0.05) {
                 throwing = false;
                 speed = 0;
@@ -118,10 +116,10 @@ export function initHostjaMovement() {
 
     function loop() {
         walking();
-        rafId = requestAnimationFrame(loop);
+        requestAnimationFrame(loop);
     }
 
-    rafId = requestAnimationFrame(loop);
+    requestAnimationFrame(loop);
     changeDirectionInterval = setInterval(changeDirection, 3000);
 
     updateCounter();
@@ -293,7 +291,5 @@ export function initHostjaMovement() {
         hostja.removeEventListener("pointerup", onUp);
 
         clearInterval(airInterval);
-        clearInterval(changeDirectionInterval);
-        cancelAnimationFrame(rafId);
     };
 }

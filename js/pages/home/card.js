@@ -24,3 +24,5 @@ export const cardMode = `
         <button class="move-right main-button">${righArrowIcon}</button>
     </div>
 `;
+//<div class="circle-button front-speaker display-flex align-items-center justify-content-center">${speakerIcon}</div>
+//<div class="circle-button back-speaker display-flex align-items-center justify-content-center">${speakerIcon}</div>

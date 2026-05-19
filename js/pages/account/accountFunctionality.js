@@ -23,6 +23,7 @@ export async function initAccountPage() {
     const testSwitch = document.querySelector('#testMode');
     const foldersSwitch = document.querySelector('#foldersMode');
     const hostjaSwitch = document.querySelector('#hostjaMode');
+    const tableSwitch = document.querySelector('#tableMode');
     
     const settings = dataSettings();
 
@@ -32,6 +33,7 @@ export async function initAccountPage() {
     let testMode = settings.testMode ?? false;
     let foldersMode = settings.foldersMode ?? false;
     let hostjaMode = settings.hostjaMode ?? false;
+    let tableMode = settings.tableMode ?? false;
 
     randomSwitch.checked = isRandom;
     inputSwitch.checked = showInput;
@@ -40,6 +42,7 @@ export async function initAccountPage() {
     foldersSwitch.checked = foldersMode;
     hostjaSwitch.checked = hostjaMode;
     cooldownInput.value = settings.cooldown || 2000;
+    tableSwitch.checked = tableMode;
 
     if (!nicknameInput || !passwordInput || !deleteButton || !saveButton) return;
     
@@ -57,6 +60,7 @@ export async function initAccountPage() {
     initCheckboxFunctionality(testSwitch, "testMode", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), null);
     initCheckboxFunctionality(foldersSwitch, "foldersMode", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), null);
     initCheckboxFunctionality(hostjaSwitch, "hostjaMode", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), null);
+    initCheckboxFunctionality(tableSwitch, "tableMode", dataSettings, (settings) => localStorage.setItem("dataSettings", JSON.stringify(settings)), null);
 
     function checkSpecialDate() {
         const dates = [

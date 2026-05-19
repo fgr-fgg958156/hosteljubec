@@ -116,11 +116,20 @@ export const accountPage = `
                         <span class="slider"></span>
                     </label>
                 </div>
-                <div class="display-flex flex-direction-row align-items-center container justify-content-space-between padding-12px box-sizing-border-box">
+                <div class="display-flex flex-direction-row align-items-center container border-bottom justify-content-space-between padding-12px box-sizing-border-box">
                     <div class="additional-text-colour flex-1">
                         <label for="cooldown" data-lang="cooldown"></label>
                     </div>
                     <input type="number" id="cooldown" data-lang-placeholder="cooldown" class="cooldown-edit-input flex-1" value="${''}">
+                </div>
+                <div class="display-flex flex-direction-row align-items-center container justify-content-space-between padding-12px box-sizing-border-box">
+                    <div class="additional-text-colour flex-1">
+                        <label for="tableMode" data-lang="tableMode"></label>
+                    </div>
+                    <label class="switch margin-12px">
+                        <input type="checkbox" id="tableMode" name="tableMode" />
+                        <span class="slider"></span>
+                    </label>
                 </div>
             </div>
         </div>

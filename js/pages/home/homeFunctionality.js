@@ -8,6 +8,7 @@ import { initCheckboxFunctionality } from "./checkboxFunctionality.js";
 import { initFileLoader } from "./fileLoader.js";
 import { initOption } from "./option.js";
 import { resetRunnyWords } from "./resetRunnyWords.js";
+import { tableMode } from "./table.js";
 import { initTag } from "./tag.js";
 import { testMode } from "./test.js";
 import { updateHomePage } from "./update.js";
@@ -19,7 +20,16 @@ export function initHomePage(){
     const settings = dataSettings();
     const wordsData = dataWords();
     const container = document.querySelector('.mode-container');
-    container.innerHTML = settings.testMode ? testMode : cardMode;
+    if(settings.testMode){
+        container.innerHTML = testMode;
+    }
+    else if(settings.tableMode){
+        container.prepend(tableMode(wordsData));
+        updateTexts();
+    }
+    else{
+        container.innerHTML = cardMode;
+    }
     const card = container.querySelector('.card');
     updateTexts(card);
 

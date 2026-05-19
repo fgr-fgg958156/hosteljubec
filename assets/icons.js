@@ -159,6 +159,11 @@ export const openCardIcon =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ${svgMainSizeProps} ${mainIconFill}>
         <path d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v240h-80v-200H520v-200H240v640h360v80H240Zm638 15L760-183v89h-80v-226h226v80h-90l118 118-56 57Zm-638-95v-640 640Z"/>
     </svg>`;
+export const speakerIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ${svgMainSizeProps} ${mainIconFill}>
+        <path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"/>
+    </svg>
+`;
 export const partyHat = `
     <svg width="42" height="60" viewBox="0 0 42 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="party-hat">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M21 18L42 60H0L21 18Z" fill="#A8B1FF"/>

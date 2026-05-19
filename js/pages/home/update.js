@@ -1,13 +1,16 @@
-import { deadIcon } from "../../../assets/icons.js";
+import { deadIcon, loaderIcon } from "../../../assets/icons.js";
 import { config } from "../../components/config.js";
 import { sliceString } from "../dashboard/book.js";
-import { t } from "../../language/languageController.js";
+import { t, updateTexts } from "../../language/languageController.js";
 
 export function updateHomePage(words, runnyWords, index, isRandom, showInput, frontSpan, additionalSpan, backSpan, counter, lineContainer, fileName){
+    fileName.textContent = words.fileName;
     if(!words.image?.length || !additionalSpan || !backSpan || !frontSpan) return;
     const currentFront = isRandom ? runnyWords.preimage[index] : words.preimage[index] ?? '';
+    const currentFront1 = isRandom ? runnyWords.image[index] : words.image[index] ?? '';
 
     imageConverter(frontSpan, currentFront);
+    imageConverter(backSpan, currentFront1);
     
     const additionalText = isRandom ? runnyWords.addition[index] : words.addition[index];
 
@@ -17,10 +20,9 @@ export function updateHomePage(words, runnyWords, index, isRandom, showInput, fr
         additionalSpan.classList.add('hide');
     } else {
         additionalSpan.classList.remove('hide');
-    }   
-    backSpan.textContent  = isRandom ? runnyWords.image[index] : words.image[index] ?? '';
+    }
+
     counterUpdate(counter, {isRandom, index}, runnyWords, words);
-    fileName.textContent = words.fileName;
     if(showInput){
         lineContainer?.classList.remove('display-none');
     }
@@ -38,34 +40,39 @@ export function deadIconWrapper() {
     const wrapper = document.createElement('div');
     wrapper.className = 'upload-container max-img-height';
     wrapper.innerHTML = `${deadIcon}</br><span data-lang="urlError"></span>`;
+    updateTexts(wrapper);
     return wrapper;
 }
 
-function imageConverter(span, currentFront){
+export function imageConverter(span, currentFront){
     if (!currentFront) {
-        span.textContent = '';
+        span.innerHTML = '';
         return;
     }
-    if(currentFront.startsWith('http://') || currentFront.startsWith('https://')){
+
+    if (currentFront.startsWith('http://') || currentFront.startsWith('https://')) {
+        span.innerHTML = loaderIcon;
+
         const wrapper = document.createElement('div');
         wrapper.className = 'img-box';
 
         const img = document.createElement('img');
-        img.src = currentFront;
+
         img.alt = 'Прообраз';
-        img.loading = 'lazy';
         img.draggable = false;
 
-        img.onerror = function() {
-            wrapper.replaceWith(deadIconWrapper());
+        img.onload = function () {
+            wrapper.appendChild(img);
+            span.replaceChildren(wrapper);
         };
 
-        wrapper.appendChild(img);
+        img.onerror = function () {
+            span.replaceChildren(deadIconWrapper());
+        };
 
-        span.replaceChildren(wrapper);
+        img.src = currentFront;
 
     } else {
-        if(!span) return;
-        span.textContent = currentFront || "";
+        span.innerHTML = currentFront || "";
     }
 }
